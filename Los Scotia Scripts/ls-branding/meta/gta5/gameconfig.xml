@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDataFileMgr__ContentsOfDataFileXml>
+  <disabledFiles />
+  <includedXmlFiles />
+  <includedDataFiles />
+  <dataFiles>
+    <!-- This XML file replaces Rockstar logos with Millz902Games logos -->
+    <Item>
+      <filename>platform:/data/cdimages/scaleform_generic.rpf</filename>
+      <fileType>RPF_FILE</fileType>
+      <overlay value="false" />
+      <disabled value="true" /> <!-- Disable original Rockstar logos -->
+      <persistent value="false" />
+    </Item>
+    <Item>
+      <filename>platform:/textures/millz902_logos</filename>
+      <fileType>GENERIC_FILE</fileType>
+      <overlay value="true" />
+      <disabled value="false" /> <!-- Enable Millz902Games logos -->
+      <persistent value="true" />
+    </Item>
+  </dataFiles>
+  <contentChangeSets>
+    <Item>
+      <changeSetName>LS_BRANDING_CHANGES</changeSetName>
+      <filesToDisable>
+        <!-- Disable original menu assets -->
+        <Item>platform:/textures/web/rockstarlogo.png</Item>
+        <Item>platform:/textures/web/rockstarlogosmall.png</Item>
+      </filesToDisable>
+      <filesToEnable>
+        <!-- Enable our custom replacements -->
+        <Item>stream/pausemenu.gfx</Item>
+        <Item>stream/pausemenumap.gfx</Item>
+        <Item>stream/frontend.gfx</Item>
+        <Item>stream/mpentry.gfx</Item>
+      </filesToEnable>
+      <txdToLoad />
+      <txdToUnload />
+      <residentResources />
+      <unregisterResources />
+    </Item>
+  </contentChangeSets>
+  <patchFiles />
+</CDataFileMgr__ContentsOfDataFileXml>

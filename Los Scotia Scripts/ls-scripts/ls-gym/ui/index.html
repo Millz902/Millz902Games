@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Gym</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Workout Interface -->
+    <div id="workout-container" class="hidden">
+        <div class="workout-panel">
+            <div class="workout-header">
+                <i class="fas fa-dumbbell"></i>
+                <h2 id="equipment-name">Equipment Name</h2>
+                <button id="close-workout" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="workout-content">
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Workout Progress</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <i class="fas fa-fist-raised"></i>
+                        <span>Strength Gain</span>
+                        <span id="strength-gain">+2-5</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-running"></i>
+                        <span>Stamina Gain</span>
+                        <span id="stamina-gain">+1-3</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-battery-half"></i>
+                        <span>Energy Cost</span>
+                        <span id="energy-cost">-15</span>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <p><i class="fas fa-info-circle"></i> Stay near the equipment to complete your workout</p>
+                    <p><i class="fas fa-clock"></i> <span id="workout-duration">30</span> seconds remaining</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Nutrition Panel -->
+    <div id="nutrition-panel" class="hidden">
+        <div class="nutrition-container">
+            <div class="nutrition-header">
+                <i class="fas fa-apple-alt"></i>
+                <h3>Nutrition Status</h3>
+            </div>
+            
+            <div class="nutrition-bars">
+                <div class="nutrition-item">
+                    <span>Energy</span>
+                    <div class="nutrition-bar energy">
+                        <div id="energy-fill" class="nutrition-fill"></div>
+                    </div>
+                    <span id="energy-value">100%</span>
+                </div>
+                
+                <div class="nutrition-item">
+                    <span>Hunger</span>
+                    <div class="nutrition-bar hunger">
+                        <div id="hunger-fill" class="nutrition-fill"></div>
+                    </div>
+                    <span id="hunger-value">100%</span>
+                </div>
+                
+                <div class="nutrition-item">
+                    <span>Thirst</span>
+                    <div class="nutrition-bar thirst">
+                        <div id="thirst-fill" class="nutrition-fill"></div>
+                    </div>
+                    <span id="thirst-value">100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stats Display -->
+    <div id="stats-display" class="hidden">
+        <div class="stats-container">
+            <div class="stats-header">
+                <i class="fas fa-chart-line"></i>
+                <h3>Gym Statistics</h3>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-fist-raised"></i>
+                    <h4>Strength</h4>
+                    <span id="strength-stat">0</span>
+                    <div class="stat-bar">
+                        <div id="strength-bar" class="stat-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-running"></i>
+                    <h4>Stamina</h4>
+                    <span id="stamina-stat">0</span>
+                    <div class="stat-bar">
+                        <div id="stamina-bar" class="stat-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h4>Total Workouts</h4>
+                    <span id="total-workouts">0</span>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h4>Favorite Equipment</h4>
+                    <span id="favorite-equipment">None</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Achievement Notification -->
+    <div id="achievement-notification" class="hidden">
+        <div class="achievement-content">
+            <i class="fas fa-trophy"></i>
+            <h3>Achievement Unlocked!</h3>
+            <h4 id="achievement-name">Achievement Name</h4>
+            <p id="achievement-description">Achievement description</p>
+            <span id="achievement-reward">+$500</span>
+        </div>
+    </div>
+    
+    <!-- Membership Status -->
+    <div id="membership-status" class="hidden">
+        <div class="membership-container">
+            <div class="membership-header">
+                <i class="fas fa-id-card"></i>
+                <h3>Membership Status</h3>
+            </div>
+            
+            <div class="membership-info">
+                <div class="membership-type">
+                    <span>Type:</span>
+                    <span id="membership-type-text">Premium</span>
+                </div>
+                <div class="membership-expires">
+                    <span>Expires:</span>
+                    <span id="membership-expires-text">30 days</span>
+                </div>
+                <div class="membership-benefits">
+                    <h4>Benefits:</h4>
+                    <ul id="membership-benefits-list">
+                        <li>Access to all equipment</li>
+                        <li>Nutrition bar discounts</li>
+                        <li>Competition entry</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

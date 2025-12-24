@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Racing Advanced</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="racing-panel">
+            <div class="header">
+                <h1>Los Scotia Racing Advanced</h1>
+                <button id="closeBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="racing-stats">
+                    <h3>Racing Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalRaces">0</div>
+                            <div class="stat-label">Total Races</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="wins">0</div>
+                            <div class="stat-label">Wins</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="bestTime">--:--</div>
+                            <div class="stat-label">Best Time</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="ranking">#--</div>
+                            <div class="stat-label">Ranking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-races">
+                    <h3>Available Races</h3>
+                    <div id="racesList" class="races-list">
+                        <!-- Races will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="race-creation">
+                    <h3>Create Race</h3>
+                    <div class="creation-form">
+                        <div class="form-group">
+                            <label for="raceName">Race Name</label>
+                            <input type="text" id="raceName" placeholder="Enter race name">
+                        </div>
+                        <div class="form-group">
+                            <label for="raceType">Race Type</label>
+                            <select id="raceType">
+                                <option value="circuit">Circuit</option>
+                                <option value="sprint">Sprint</option>
+                                <option value="drag">Drag Race</option>
+                                <option value="drift">Drift</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxRacers">Max Racers</label>
+                            <input type="number" id="maxRacers" min="2" max="16" value="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="entryFee">Entry Fee ($)</label>
+                            <input type="number" id="entryFee" min="0" value="500">
+                        </div>
+                        <button id="createRaceBtn" class="action-btn">Create Race</button>
+                    </div>
+                </div>
+                
+                <div class="leaderboard">
+                    <h3>Leaderboard</h3>
+                    <div id="leaderboardList" class="leaderboard-list">
+                        <!-- Leaderboard will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Business Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="business-panel">
+            <div class="header">
+                <h1>Los Scotia Business Management</h1>
+                <button id="close-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="employees">Employees</button>
+                    <button class="tab-btn" data-tab="finances">Finances</button>
+                    <button class="tab-btn" data-tab="settings">Settings</button>
+                </div>
+                
+                <div id="overview" class="tab-content active">
+                    <div class="business-info">
+                        <h3>Business Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Business Name:</label>
+                                <span id="business-name">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Owner:</label>
+                                <span id="business-owner">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Type:</label>
+                                <span id="business-type">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Status:</label>
+                                <span id="business-status" class="status-open">Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="employees" class="tab-content">
+                    <div class="employees-section">
+                        <h3>Employee Management</h3>
+                        <div class="employee-list">
+                            <!-- Employee list will be populated by JavaScript -->
+                        </div>
+                        <button id="hire-btn" class="action-btn">Hire Employee</button>
+                    </div>
+                </div>
+                
+                <div id="finances" class="tab-content">
+                    <div class="finances-section">
+                        <h3>Financial Overview</h3>
+                        <div class="finance-stats">
+                            <div class="stat-card">
+                                <h4>Daily Revenue</h4>
+                                <span id="daily-revenue">$0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Monthly Profit</h4>
+                                <span id="monthly-profit">$0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Total Balance</h4>
+                                <span id="total-balance">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="settings" class="tab-content">
+                    <div class="settings-section">
+                        <h3>Business Settings</h3>
+                        <div class="setting-item">
+                            <label for="business-hours">Business Hours:</label>
+                            <select id="business-hours">
+                                <option value="24/7">24/7</option>
+                                <option value="day">Day Time Only</option>
+                                <option value="night">Night Time Only</option>
+                                <option value="custom">Custom Hours</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="tax-rate">Tax Rate (%):</label>
+                            <input type="number" id="tax-rate" min="0" max="100" value="5">
+                        </div>
+                        <button id="save-settings" class="action-btn">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

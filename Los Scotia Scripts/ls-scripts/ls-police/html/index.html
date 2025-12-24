@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Police System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="police-panel">
+            <div class="header">
+                <h1>Los Scotia Police System</h1>
+                <button id="close-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="actions">Actions</button>
+                    <button class="tab-btn" data-tab="evidence">Evidence</button>
+                    <button class="tab-btn" data-tab="dispatch">Dispatch</button>
+                    <button class="tab-btn" data-tab="reports">Reports</button>
+                </div>
+                
+                <div id="actions" class="tab-content active">
+                    <div class="actions-section">
+                        <h3>Police Actions</h3>
+                        <div class="action-grid">
+                            <button class="action-card" data-action="handcuff">
+                                <i class="icon-handcuffs"></i>
+                                <span>Handcuff</span>
+                            </button>
+                            <button class="action-card" data-action="arrest">
+                                <i class="icon-arrest"></i>
+                                <span>Arrest</span>
+                            </button>
+                            <button class="action-card" data-action="search">
+                                <i class="icon-search"></i>
+                                <span>Search</span>
+                            </button>
+                            <button class="action-card" data-action="fine">
+                                <i class="icon-fine"></i>
+                                <span>Issue Fine</span>
+                            </button>
+                            <button class="action-card" data-action="impound">
+                                <i class="icon-impound"></i>
+                                <span>Impound Vehicle</span>
+                            </button>
+                            <button class="action-card" data-action="backup">
+                                <i class="icon-backup"></i>
+                                <span>Request Backup</span>
+                            </button>
+                            <button class="action-card" data-action="breathalyzer">
+                                <i class="icon-breathalyzer"></i>
+                                <span>Breathalyzer</span>
+                            </button>
+                            <button class="action-card" data-action="spike-strips">
+                                <i class="icon-spike"></i>
+                                <span>Spike Strips</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="evidence" class="tab-content">
+                    <div class="evidence-section">
+                        <h3>Evidence Management</h3>
+                        <div class="evidence-list">
+                            <!-- Evidence list will be populated by JavaScript -->
+                        </div>
+                        <div class="evidence-actions">
+                            <button id="collect-evidence" class="action-btn">Collect Evidence</button>
+                            <button id="analyze-evidence" class="action-btn secondary">Analyze Evidence</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="dispatch" class="tab-content">
+                    <div class="dispatch-section">
+                        <h3>Dispatch Center</h3>
+                        <div class="call-list">
+                            <!-- Active calls will be populated by JavaScript -->
+                        </div>
+                        <div class="dispatch-actions">
+                            <button id="respond-call" class="action-btn">Respond to Call</button>
+                            <button id="backup-request" class="action-btn">Request Backup</button>
+                            <button id="panic-button" class="action-btn danger">Panic Button</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="reports" class="tab-content">
+                    <div class="reports-section">
+                        <h3>Police Reports</h3>
+                        <div class="report-list">
+                            <!-- Reports will be populated by JavaScript -->
+                        </div>
+                        <button id="create-report" class="action-btn">Create Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

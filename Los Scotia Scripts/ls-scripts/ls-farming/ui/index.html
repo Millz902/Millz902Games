@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Farming</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="farming-container" class="hidden">
+        <div class="farming-header">
+            <h1>Los Scotia Farming</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="farming-content">
+            <div class="farm-info">
+                <h2>Your Farm</h2>
+                <div class="farm-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Crop Type</span>
+                        <span class="stat-value" id="crop-type">None</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Growth Progress</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="growth-progress"></div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Ready to Harvest</span>
+                        <span class="stat-value" id="harvest-ready">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="farming-actions">
+                <div class="action-group">
+                    <h3>Plant Crops</h3>
+                    <select id="crop-select">
+                        <option value="wheat">Wheat ($50)</option>
+                        <option value="corn">Corn ($75)</option>
+                        <option value="tomato">Tomato ($100)</option>
+                        <option value="potato">Potato ($60)</option>
+                    </select>
+                    <button id="plant-btn">Plant Seeds</button>
+                </div>
+                <div class="action-group">
+                    <h3>Farm Management</h3>
+                    <button id="water-btn">Water Crops</button>
+                    <button id="fertilize-btn">Fertilize</button>
+                    <button id="harvest-btn">Harvest</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

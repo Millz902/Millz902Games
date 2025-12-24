@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Housing Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="housing-panel">
+            <div class="header">
+                <h1>Los Scotia Housing Management</h1>
+                <button id="close-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="properties">Properties</button>
+                    <button class="tab-btn" data-tab="rentals">Rentals</button>
+                    <button class="tab-btn" data-tab="management">Management</button>
+                    <button class="tab-btn" data-tab="market">Market</button>
+                </div>
+                
+                <div id="properties" class="tab-content active">
+                    <div class="properties-section">
+                        <h3>Your Properties</h3>
+                        <div class="property-list">
+                            <!-- Property list will be populated by JavaScript -->
+                        </div>
+                        <button id="buy-property" class="action-btn">Buy Property</button>
+                    </div>
+                </div>
+                
+                <div id="rentals" class="tab-content">
+                    <div class="rentals-section">
+                        <h3>Rental Properties</h3>
+                        <div class="rental-list">
+                            <!-- Rental list will be populated by JavaScript -->
+                        </div>
+                        <div class="rental-actions">
+                            <button id="rent-property" class="action-btn">Rent Property</button>
+                            <button id="pay-rent" class="action-btn secondary">Pay Rent</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="management" class="tab-content">
+                    <div class="management-section">
+                        <h3>Property Management</h3>
+                        <div class="management-options">
+                            <div class="option-card">
+                                <h4>Property Access</h4>
+                                <p>Manage who can access your properties</p>
+                                <button class="option-btn">Manage Access</button>
+                            </div>
+                            <div class="option-card">
+                                <h4>Furniture & Decor</h4>
+                                <p>Customize your property interior</p>
+                                <button class="option-btn">Furniture</button>
+                            </div>
+                            <div class="option-card">
+                                <h4>Security Systems</h4>
+                                <p>Install cameras and alarms</p>
+                                <button class="option-btn">Security</button>
+                            </div>
+                            <div class="option-card">
+                                <h4>Utilities</h4>
+                                <p>Manage electricity, water, and internet</p>
+                                <button class="option-btn">Utilities</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="market" class="tab-content">
+                    <div class="market-section">
+                        <h3>Property Market</h3>
+                        <div class="market-stats">
+                            <div class="stat-card">
+                                <h4>Available Properties</h4>
+                                <span id="available-properties">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Average Price</h4>
+                                <span id="average-price">$0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Market Trend</h4>
+                                <span id="market-trend" class="trend-up">Rising</span>
+                            </div>
+                        </div>
+                        <div class="property-search">
+                            <input type="text" id="search-input" placeholder="Search properties...">
+                            <select id="price-filter">
+                                <option value="">All Prices</option>
+                                <option value="low">Under $100,000</option>
+                                <option value="medium">$100,000 - $500,000</option>
+                                <option value="high">Over $500,000</option>
+                            </select>
+                            <button id="search-btn" class="action-btn">Search</button>
+                        </div>
+                        <div class="available-properties">
+                            <!-- Available properties will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

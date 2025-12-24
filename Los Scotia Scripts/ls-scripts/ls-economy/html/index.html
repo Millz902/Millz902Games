@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Millz902Games">
+    <meta name="description" content="Los Scotia Economic Management Dashboard - Created by Millz902Games">
+    <title>Los Scotia Economic Management</title>YPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Economy Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="economy-panel">
+            <div class="header">
+                <h1 id="panel-title">Los Scotia Economy System</h1>
+                <button class="close-btn" onclick="closePanel()">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                    <button class="tab-btn" onclick="switchTab('markets')">Markets</button>
+                    <button class="tab-btn" onclick="switchTab('trade')">Trade</button>
+                    <button class="tab-btn" onclick="switchTab('jobs')">Jobs</button>
+                    <button class="tab-btn" onclick="switchTab('settings')">Settings</button>
+                </div>
+
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content active">
+                    <div class="economy-overview">
+                        <h3>Economic Overview</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h4>Total Money in Circulation</h4>
+                                <span id="total-money">$0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Active Businesses</h4>
+                                <span id="active-businesses">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Daily Transactions</h4>
+                                <span id="daily-transactions">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Average Player Wealth</h4>
+                                <span id="avg-wealth">$0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Unemployment Rate</h4>
+                                <span id="unemployment-rate">0%</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Market Stability</h4>
+                                <span id="market-stability">Stable</span>
+                            </div>
+                        </div>
+                        
+                        <div class="economic-indicators">
+                            <h4>Economic Health Indicators</h4>
+                            <div class="indicator-item">
+                                <label>Inflation Rate:</label>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 15%"></div>
+                                </div>
+                                <span>1.5%</span>
+                            </div>
+                            <div class="indicator-item">
+                                <label>Economic Growth:</label>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                                <span>8.5%</span>
+                            </div>
+                            <div class="indicator-item">
+                                <label>Market Confidence:</label>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%"></div>
+                                </div>
+                                <span>70%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Markets Tab -->
+                <div id="markets-tab" class="tab-content">
+                    <div class="markets-section">
+                        <h3>Market Prices & Trends</h3>
+                        <div class="market-actions">
+                            <button class="action-btn" onclick="updatePrices()">Update Prices</button>
+                            <button class="action-btn" onclick="resetMarket()">Reset Market</button>
+                            <button class="action-btn danger" onclick="crashMarket()">Trigger Recession</button>
+                        </div>
+                        
+                        <div class="market-items">
+                            <div class="market-category">
+                                <h4>Food & Beverages</h4>
+                                <div class="item-list">
+                                    <div class="market-item">
+                                        <span class="item-name">Sandwich</span>
+                                        <span class="item-price">$15</span>
+                                        <span class="price-change positive">+2%</span>
+                                    </div>
+                                    <div class="market-item">
+                                        <span class="item-name">Coffee</span>
+                                        <span class="item-price">$8</span>
+                                        <span class="price-change negative">-1%</span>
+                                    </div>
+                                    <div class="market-item">
+                                        <span class="item-name">Beer</span>
+                                        <span class="item-price">$12</span>
+                                        <span class="price-change positive">+5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="market-category">
+                                <h4>Automotive</h4>
+                                <div class="item-list">
+                                    <div class="market-item">
+                                        <span class="item-name">Fuel Price</span>
+                                        <span class="item-price">$3.2/L</span>
+                                        <span class="price-change positive">+8%</span>
+                                    </div>
+                                    <div class="market-item">
+                                        <span class="item-name">Repair Costs</span>
+                                        <span class="item-price">$250</span>
+                                        <span class="price-change neutral">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="market-category">
+                                <h4>Real Estate</h4>
+                                <div class="item-list">
+                                    <div class="market-item">
+                                        <span class="item-name">House Prices</span>
+                                        <span class="item-price">$125K</span>
+                                        <span class="price-change positive">+3%</span>
+                                    </div>
+                                    <div class="market-item">
+                                        <span class="item-name">Apartment Rent</span>
+                                        <span class="item-price">$800</span>
+                                        <span class="price-change negative">-2%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trade Tab -->
+                <div id="trade-tab" class="tab-content">
+                    <div class="trade-section">
+                        <h3>Trade Management</h3>
+                        <div class="trade-controls">
+                            <div class="control-group">
+                                <label>Import Tax Rate:</label>
+                                <input type="range" id="import-tax" min="0" max="50" value="15">
+                                <span id="import-tax-value">15%</span>
+                            </div>
+                            <div class="control-group">
+                                <label>Export Bonus:</label>
+                                <input type="range" id="export-bonus" min="0" max="25" value="10">
+                                <span id="export-bonus-value">10%</span>
+                            </div>
+                            <div class="control-group">
+                                <label>Trade Volume Limit:</label>
+                                <input type="number" id="trade-limit" value="1000000" min="100000" max="10000000">
+                            </div>
+                        </div>
+                        
+                        <div class="trade-routes">
+                            <h4>Active Trade Routes</h4>
+                            <div class="route-list">
+                                <div class="trade-route">
+                                    <span class="route-name">Los Santos → Vice City</span>
+                                    <span class="route-profit">+15%</span>
+                                    <span class="route-status active">Active</span>
+                                </div>
+                                <div class="trade-route">
+                                    <span class="route-name">Los Santos → Liberty City</span>
+                                    <span class="route-profit">+8%</span>
+                                    <span class="route-status active">Active</span>
+                                </div>
+                                <div class="trade-route">
+                                    <span class="route-name">International Markets</span>
+                                    <span class="route-profit">+25%</span>
+                                    <span class="route-status inactive">Blocked</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jobs Tab -->
+                <div id="jobs-tab" class="tab-content">
+                    <div class="jobs-section">
+                        <h3>Employment System</h3>
+                        <div class="job-stats">
+                            <div class="job-category">
+                                <h4>Government Jobs</h4>
+                                <div class="job-item">
+                                    <span>Police Officers:</span>
+                                    <span id="police-count">12/20</span>
+                                    <span class="salary">$2,500/week</span>
+                                </div>
+                                <div class="job-item">
+                                    <span>EMS Paramedics:</span>
+                                    <span id="ems-count">8/15</span>
+                                    <span class="salary">$2,200/week</span>
+                                </div>
+                                <div class="job-item">
+                                    <span>Government Officials:</span>
+                                    <span id="gov-count">3/8</span>
+                                    <span class="salary">$3,000/week</span>
+                                </div>
+                            </div>
+                            
+                            <div class="job-category">
+                                <h4>Private Sector</h4>
+                                <div class="job-item">
+                                    <span>Business Owners:</span>
+                                    <span id="business-count">25/50</span>
+                                    <span class="salary">Variable</span>
+                                </div>
+                                <div class="job-item">
+                                    <span>Taxi Drivers:</span>
+                                    <span id="taxi-count">15/30</span>
+                                    <span class="salary">$1,800/week</span>
+                                </div>
+                                <div class="job-item">
+                                    <span>Mechanics:</span>
+                                    <span id="mechanic-count">10/20</span>
+                                    <span class="salary">$2,000/week</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="employment-controls">
+                            <button class="action-btn" onclick="createJobFair()">Create Job Fair</button>
+                            <button class="action-btn" onclick="adjustWages()">Adjust Base Wages</button>
+                            <button class="action-btn" onclick="unemploymentBenefit()">Toggle Unemployment Benefits</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="settings-section">
+                        <h3>Economy Settings</h3>
+                        <div class="setting-group">
+                            <h4>Global Economic Controls</h4>
+                            <div class="setting-item">
+                                <label>Interest Rate:</label>
+                                <input type="number" id="interest-rate" value="3.5" min="0" max="15" step="0.1">
+                                <span>%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Tax Rate:</label>
+                                <input type="number" id="tax-rate" value="12" min="0" max="50" step="1">
+                                <span>%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Minimum Wage:</label>
+                                <input type="number" id="min-wage" value="1500" min="500" max="5000" step="50">
+                                <span>/week</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h4>Market Regulations</h4>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="price-controls" checked>
+                                <label for="price-controls">Enable Price Controls</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="monopoly-prevention">
+                                <label for="monopoly-prevention">Anti-Monopoly Laws</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="market-volatility" checked>
+                                <label for="market-volatility">Dynamic Market Prices</label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-actions">
+                            <button class="action-btn" onclick="saveSettings()">Save Settings</button>
+                            <button class="action-btn" onclick="resetEconomy()">Reset Economy</button>
+                            <button class="action-btn danger" onclick="economicEmergency()">Emergency Controls</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 20px; background: #1a1a1a; color: #888; margin-top: 30px;">
+        <p>&copy; 2025 Los Scotia Economic Management Dashboard</p>
+        <p><strong>Created by Millz902Games</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

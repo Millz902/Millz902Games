@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Millz902Games">
+    <meta name="description" content="Los Scotia Government Dashboard - Created by Millz902Games">
+    <title>Los Scotia City Government</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="government-app" class="government-container">
+        <!-- Header -->
+        <header class="government-header">
+            <div class="header-content">
+                <div class="city-logo">
+                    <i class="fas fa-landmark"></i>
+                    <h1>Los Scotia City Government</h1>
+                </div>
+                <div class="header-info">
+                    <div class="current-date" id="current-date"></div>
+                    <div class="current-time" id="current-time"></div>
+                    <div class="user-info">
+                        <span id="current-user">System Administrator</span>
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="government-nav">
+            <div class="nav-container">
+                <button class="nav-btn active" data-section="dashboard" onclick="showSection('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-btn" data-section="mayor" onclick="showSection('mayor')">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Mayor's Office</span>
+                </button>
+                <button class="nav-btn" data-section="council" onclick="showSection('council')">
+                    <i class="fas fa-users"></i>
+                    <span>City Council</span>
+                </button>
+                <button class="nav-btn" data-section="departments" onclick="showSection('departments')">
+                    <i class="fas fa-building"></i>
+                    <span>Departments</span>
+                </button>
+                <button class="nav-btn" data-section="services" onclick="showSection('services')">
+                    <i class="fas fa-handshake"></i>
+                    <span>Public Services</span>
+                </button>
+                <button class="nav-btn" data-section="permits" onclick="showSection('permits')">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Permits & Licenses</span>
+                </button>
+                <button class="nav-btn" data-section="budget" onclick="showSection('budget')">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>City Budget</span>
+                </button>
+                <button class="nav-btn" data-section="elections" onclick="showSection('elections')">
+                    <i class="fas fa-vote-yea"></i>
+                    <span>Elections</span>
+                </button>
+                <button class="nav-btn" data-section="planning" onclick="showSection('planning')">
+                    <i class="fas fa-city"></i>
+                    <span>City Planning</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="government-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Government Dashboard</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="refreshDashboard()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- City Statistics -->
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="city-population">45,328</div>
+                            <div class="stat-label">City Population</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="city-budget">$12.4M</div>
+                            <div class="stat-label">City Budget</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="pending-permits">23</div>
+                            <div class="stat-label">Pending Permits</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="active-issues">7</div>
+                            <div class="stat-label">Active Issues</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-section">
+                    <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                    <div class="activity-list" id="recent-activity">
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-file-plus"></i></div>
+                            <div class="activity-content">
+                                <div class="activity-title">New Business License Application</div>
+                                <div class="activity-desc">Los Scotia Auto Repair submitted application</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-gavel"></i></div>
+                            <div class="activity-content">
+                                <div class="activity-title">City Council Meeting Scheduled</div>
+                                <div class="activity-desc">Weekly meeting scheduled for Thursday 7 PM</div>
+                                <div class="activity-time">4 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-money-bill"></i></div>
+                            <div class="activity-content">
+                                <div class="activity-title">Budget Amendment Approved</div>
+                                <div class="activity-desc">Public Works budget increased by $250K</div>
+                                <div class="activity-time">1 day ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="dashboard-section">
+                    <h3><i class="fas fa-calendar"></i> Upcoming Events</h3>
+                    <div class="events-list" id="upcoming-events">
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="event-day">24</div>
+                                <div class="event-month">SEP</div>
+                            </div>
+                            <div class="event-content">
+                                <div class="event-title">City Council Meeting</div>
+                                <div class="event-time">7:00 PM - City Hall</div>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="event-day">28</div>
+                                <div class="event-month">SEP</div>
+                            </div>
+                            <div class="event-content">
+                                <div class="event-title">Public Hearing - Zoning Changes</div>
+                                <div class="event-time">6:00 PM - Community Center</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mayor's Office Section -->
+            <section id="mayor-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-tie"></i> Mayor's Office</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="scheduleAppointment()">
+                            <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mayor-content">
+                    <div class="mayor-profile">
+                        <div class="mayor-photo">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="mayor-info">
+                            <h3>Mayor Alexandra Rivera</h3>
+                            <p class="mayor-title">Mayor of Los Scotia</p>
+                            <p class="mayor-term">Term: 2024 - 2028</p>
+                            <div class="mayor-contact">
+                                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                                <p><i class="fas fa-envelope"></i> mayor@losscotia.gov</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mayor-sections">
+                        <div class="mayor-section">
+                            <h4><i class="fas fa-bullhorn"></i> Mayor's Initiatives</h4>
+                            <div class="initiative-list">
+                                <div class="initiative-item">
+                                    <div class="initiative-title">Green Los Scotia 2025</div>
+                                    <div class="initiative-desc">City-wide sustainability and environmental protection program</div>
+                                    <div class="initiative-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 65%"></div>
+                                        </div>
+                                        <span>65% Complete</span>
+                                    </div>
+                                </div>
+                                <div class="initiative-item">
+                                    <div class="initiative-title">Infrastructure Modernization</div>
+                                    <div class="initiative-desc">Upgrade roads, bridges, and public facilities</div>
+                                    <div class="initiative-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 40%"></div>
+                                        </div>
+                                        <span>40% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mayor-section">
+                            <h4><i class="fas fa-calendar-alt"></i> Mayor's Schedule</h4>
+                            <div class="schedule-list" id="mayor-schedule">
+                                <div class="schedule-item">
+                                    <div class="schedule-time">9:00 AM</div>
+                                    <div class="schedule-event">Budget Meeting with City Manager</div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">11:30 AM</div>
+                                    <div class="schedule-event">Press Conference - New Park Opening</div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">2:00 PM</div>
+                                    <div class="schedule-event">Meeting with Business Leaders</div>
+                                </div>
+                                <div class="schedule-item">
+                                    <div class="schedule-time">4:30 PM</div>
+                                    <div class="schedule-event">Community Forum Planning</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- City Council Section -->
+            <section id="council-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> City Council</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="scheduleMeeting()">
+                            <i class="fas fa-plus"></i> Schedule Meeting
+                        </button>
+                        <button class="action-btn secondary" onclick="viewMinutes()">
+                            <i class="fas fa-file-alt"></i> Meeting Minutes
+                        </button>
+                    </div>
+                </div>
+
+                <div class="council-content">
+                    <div class="council-members">
+                        <h3><i class="fas fa-users-cog"></i> Council Members</h3>
+                        <div class="members-grid">
+                            <div class="member-card">
+                                <div class="member-photo"><i class="fas fa-user-circle"></i></div>
+                                <div class="member-info">
+                                    <h4>David Thompson</h4>
+                                    <p>Council President</p>
+                                    <p>District 1</p>
+                                </div>
+                            </div>
+                            <div class="member-card">
+                                <div class="member-photo"><i class="fas fa-user-circle"></i></div>
+                                <div class="member-info">
+                                    <h4>Maria Gonzalez</h4>
+                                    <p>Vice President</p>
+                                    <p>District 2</p>
+                                </div>
+                            </div>
+                            <div class="member-card">
+                                <div class="member-photo"><i class="fas fa-user-circle"></i></div>
+                                <div class="member-info">
+                                    <h4>Robert Chen</h4>
+                                    <p>Councilman</p>
+                                    <p>District 3</p>
+                                </div>
+                            </div>
+                            <div class="member-card">
+                                <div class="member-photo"><i class="fas fa-user-circle"></i></div>
+                                <div class="member-info">
+                                    <h4>Sarah Williams</h4>
+                                    <p>Councilwoman</p>
+                                    <p>District 4</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="council-meetings">
+                        <h3><i class="fas fa-calendar-check"></i> Upcoming Meetings</h3>
+                        <div class="meetings-list">
+                            <div class="meeting-item">
+                                <div class="meeting-date">
+                                    <div class="meeting-day">24</div>
+                                    <div class="meeting-month">SEP</div>
+                                </div>
+                                <div class="meeting-details">
+                                    <h4>Regular City Council Meeting</h4>
+                                    <p><i class="fas fa-clock"></i> 7:00 PM - 9:00 PM</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> City Hall Council Chambers</p>
+                                    <div class="meeting-agenda">
+                                        <strong>Agenda Items:</strong>
+                                        <ul>
+                                            <li>Budget Review Q3</li>
+                                            <li>New Park Development Proposal</li>
+                                            <li>Traffic Light Installation</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="council-voting">
+                        <h3><i class="fas fa-vote-yea"></i> Recent Votes</h3>
+                        <div class="voting-list">
+                            <div class="vote-item">
+                                <div class="vote-title">Resolution 2025-045: Downtown Revitalization</div>
+                                <div class="vote-result passed">PASSED</div>
+                                <div class="vote-details">4-0 unanimous approval</div>
+                            </div>
+                            <div class="vote-item">
+                                <div class="vote-title">Ordinance 2025-012: Noise Control Amendment</div>
+                                <div class="vote-result passed">PASSED</div>
+                                <div class="vote-details">3-1 approval</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Departments Section -->
+            <section id="departments-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-building"></i> City Departments</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="addDepartment()">
+                            <i class="fas fa-plus"></i> Add Department
+                        </button>
+                    </div>
+                </div>
+
+                <div class="departments-grid">
+                    <div class="department-card" onclick="viewDepartment('police')">
+                        <div class="dept-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="dept-info">
+                            <h3>Police Department</h3>
+                            <p>Law enforcement and public safety</p>
+                            <div class="dept-stats">
+                                <span>👮 45 Officers</span>
+                                <span>📞 156 Calls (24h)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="department-card" onclick="viewDepartment('fire')">
+                        <div class="dept-icon">
+                            <i class="fas fa-fire-extinguisher"></i>
+                        </div>
+                        <div class="dept-info">
+                            <h3>Fire Department</h3>
+                            <p>Fire suppression and emergency services</p>
+                            <div class="dept-stats">
+                                <span>🚒 3 Stations</span>
+                                <span>🔥 12 Calls (24h)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="department-card" onclick="viewDepartment('medical')">
+                        <div class="dept-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <div class="dept-info">
+                            <h3>EMS Department</h3>
+                            <p>Emergency medical services</p>
+                            <div class="dept-stats">
+                                <span>🚑 8 Ambulances</span>
+                                <span>🏥 23 Calls (24h)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="department-card" onclick="viewDepartment('public-works')">
+                        <div class="dept-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="dept-info">
+                            <h3>Public Works</h3>
+                            <p>Infrastructure and maintenance</p>
+                            <div class="dept-stats">
+                                <span>🔧 32 Workers</span>
+                                <span>🚧 5 Projects</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="department-card" onclick="viewDepartment('parks')">
+                        <div class="dept-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="dept-info">
+                            <h3>Parks & Recreation</h3>
+                            <p>Parks, facilities, and programs</p>
+                            <div class="dept-stats">
+                                <span>🌳 12 Parks</span>
+                                <span>🏃 8 Programs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="department-card" onclick="viewDepartment('planning')">
+                        <div class="dept-icon">
+                            <i class="fas fa-drafting-compass"></i>
+                        </div>
+                        <div class="dept-info">
+                            <h3>Planning & Zoning</h3>
+                            <p>Development and land use planning</p>
+                            <div class="dept-stats">
+                                <span>📋 15 Applications</span>
+                                <span>🏗️ 8 Projects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Public Services Section -->
+            <section id="services-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-handshake"></i> Public Services</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="addService()">
+                            <i class="fas fa-plus"></i> Add Service
+                        </button>
+                    </div>
+                </div>
+
+                <div class="services-content">
+                    <div class="services-categories">
+                        <div class="service-category">
+                            <h3><i class="fas fa-home"></i> Housing Services</h3>
+                            <div class="service-list">
+                                <div class="service-item">
+                                    <span>Housing Assistance Program</span>
+                                    <button class="service-btn" onclick="manageService('housing-assistance')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Code Enforcement</span>
+                                    <button class="service-btn" onclick="manageService('code-enforcement')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Property Tax Assessment</span>
+                                    <button class="service-btn" onclick="manageService('tax-assessment')">Manage</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-category">
+                            <h3><i class="fas fa-car"></i> Transportation</h3>
+                            <div class="service-list">
+                                <div class="service-item">
+                                    <span>Public Transit</span>
+                                    <button class="service-btn" onclick="manageService('public-transit')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Traffic Management</span>
+                                    <button class="service-btn" onclick="manageService('traffic-management')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Parking Services</span>
+                                    <button class="service-btn" onclick="manageService('parking-services')">Manage</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-category">
+                            <h3><i class="fas fa-leaf"></i> Environmental</h3>
+                            <div class="service-list">
+                                <div class="service-item">
+                                    <span>Waste Management</span>
+                                    <button class="service-btn" onclick="manageService('waste-management')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Water & Sewer</span>
+                                    <button class="service-btn" onclick="manageService('water-sewer')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Environmental Protection</span>
+                                    <button class="service-btn" onclick="manageService('environmental')">Manage</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-category">
+                            <h3><i class="fas fa-graduation-cap"></i> Community</h3>
+                            <div class="service-list">
+                                <div class="service-item">
+                                    <span>Library Services</span>
+                                    <button class="service-btn" onclick="manageService('library')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Senior Services</span>
+                                    <button class="service-btn" onclick="manageService('senior-services')">Manage</button>
+                                </div>
+                                <div class="service-item">
+                                    <span>Youth Programs</span>
+                                    <button class="service-btn" onclick="manageService('youth-programs')">Manage</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Permits & Licenses Section -->
+            <section id="permits-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-contract"></i> Permits & Licenses</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="newPermitApplication()">
+                            <i class="fas fa-plus"></i> New Application
+                        </button>
+                        <button class="action-btn secondary" onclick="searchPermits()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+
+                <div class="permits-content">
+                    <div class="permits-tabs">
+                        <button class="tab-btn active" onclick="showPermitTab('pending')">Pending Applications</button>
+                        <button class="tab-btn" onclick="showPermitTab('approved')">Approved</button>
+                        <button class="tab-btn" onclick="showPermitTab('denied')">Denied</button>
+                        <button class="tab-btn" onclick="showPermitTab('expired')">Expired</button>
+                    </div>
+
+                    <div class="permits-table-container">
+                        <table class="permits-table" id="permits-table">
+                            <thead>
+                                <tr>
+                                    <th>Application #</th>
+                                    <th>Type</th>
+                                    <th>Applicant</th>
+                                    <th>Property Address</th>
+                                    <th>Submit Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="permits-tbody">
+                                <tr>
+                                    <td>PER-2025-001</td>
+                                    <td>Building Permit</td>
+                                    <td>John Smith</td>
+                                    <td>123 Main St</td>
+                                    <td>2025-09-15</td>
+                                    <td><span class="status-badge pending">Pending Review</span></td>
+                                    <td>
+                                        <button class="action-btn small" onclick="reviewPermit('PER-2025-001')">Review</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PER-2025-002</td>
+                                    <td>Business License</td>
+                                    <td>Los Scotia Auto Repair</td>
+                                    <td>456 Oak Ave</td>
+                                    <td>2025-09-18</td>
+                                    <td><span class="status-badge pending">Pending Review</span></td>
+                                    <td>
+                                        <button class="action-btn small" onclick="reviewPermit('PER-2025-002')">Review</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PER-2025-003</td>
+                                    <td>Event Permit</td>
+                                    <td>Community Center</td>
+                                    <td>789 Park Blvd</td>
+                                    <td>2025-09-20</td>
+                                    <td><span class="status-badge in-review">In Review</span></td>
+                                    <td>
+                                        <button class="action-btn small" onclick="reviewPermit('PER-2025-003')">Review</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="permit-types">
+                        <h3><i class="fas fa-list"></i> Permit Types</h3>
+                        <div class="permit-types-grid">
+                            <div class="permit-type-card">
+                                <i class="fas fa-hammer"></i>
+                                <h4>Building Permits</h4>
+                                <p>Construction and renovation permits</p>
+                            </div>
+                            <div class="permit-type-card">
+                                <i class="fas fa-store"></i>
+                                <h4>Business Licenses</h4>
+                                <p>Commercial business operations</p>
+                            </div>
+                            <div class="permit-type-card">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h4>Event Permits</h4>
+                                <p>Public events and gatherings</p>
+                            </div>
+                            <div class="permit-type-card">
+                                <i class="fas fa-sign"></i>
+                                <h4>Sign Permits</h4>
+                                <p>Commercial and residential signage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budget Section -->
+            <section id="budget-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-pie"></i> City Budget</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="generateBudgetReport()">
+                            <i class="fas fa-file-pdf"></i> Generate Report
+                        </button>
+                        <button class="action-btn secondary" onclick="budgetProposal()">
+                            <i class="fas fa-plus"></i> New Proposal
+                        </button>
+                    </div>
+                </div>
+
+                <div class="budget-content">
+                    <div class="budget-overview">
+                        <div class="budget-summary">
+                            <h3>FY 2025 Budget Overview</h3>
+                            <div class="budget-totals">
+                                <div class="budget-total">
+                                    <span class="budget-label">Total Revenue</span>
+                                    <span class="budget-amount revenue">$12,450,000</span>
+                                </div>
+                                <div class="budget-total">
+                                    <span class="budget-label">Total Expenditures</span>
+                                    <span class="budget-amount expenditure">$11,890,000</span>
+                                </div>
+                                <div class="budget-total">
+                                    <span class="budget-label">Net Balance</span>
+                                    <span class="budget-amount balance">$560,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="budget-chart">
+                            <h4>Budget Allocation</h4>
+                            <div class="chart-placeholder">
+                                <div class="chart-item">
+                                    <div class="chart-bar police" style="height: 60%"></div>
+                                    <span>Police (35%)</span>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar fire" style="height: 40%"></div>
+                                    <span>Fire (25%)</span>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar public-works" style="height: 30%"></div>
+                                    <span>Public Works (20%)</span>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar parks" style="height: 20%"></div>
+                                    <span>Parks (10%)</span>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar admin" style="height: 15%"></div>
+                                    <span>Admin (10%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="budget-departments">
+                        <h3><i class="fas fa-building"></i> Department Budgets</h3>
+                        <div class="department-budgets-table">
+                            <table class="budget-table">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Allocated</th>
+                                        <th>Spent</th>
+                                        <th>Remaining</th>
+                                        <th>% Used</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Police Department</td>
+                                        <td>$4,350,000</td>
+                                        <td>$3,200,000</td>
+                                        <td>$1,150,000</td>
+                                        <td>73.6%</td>
+                                        <td><span class="budget-status on-track">On Track</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fire Department</td>
+                                        <td>$2,980,000</td>
+                                        <td>$2,100,000</td>
+                                        <td>$880,000</td>
+                                        <td>70.5%</td>
+                                        <td><span class="budget-status on-track">On Track</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Public Works</td>
+                                        <td>$2,450,000</td>
+                                        <td>$1,950,000</td>
+                                        <td>$500,000</td>
+                                        <td>79.6%</td>
+                                        <td><span class="budget-status warning">Over Budget</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Parks & Recreation</td>
+                                        <td>$1,200,000</td>
+                                        <td>$750,000</td>
+                                        <td>$450,000</td>
+                                        <td>62.5%</td>
+                                        <td><span class="budget-status on-track">On Track</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Elections Section -->
+            <section id="elections-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-vote-yea"></i> Elections</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="createElection()">
+                            <i class="fas fa-plus"></i> Create Election
+                        </button>
+                    </div>
+                </div>
+
+                <div class="elections-content">
+                    <div class="election-info">
+                        <h3><i class="fas fa-calendar-check"></i> Upcoming Elections</h3>
+                        <div class="election-card">
+                            <div class="election-header">
+                                <h4>2025 City Council Election</h4>
+                                <span class="election-date">November 3, 2025</span>
+                            </div>
+                            <div class="election-details">
+                                <p><strong>Positions:</strong> City Council District 2, District 4</p>
+                                <p><strong>Registration Deadline:</strong> October 3, 2025</p>
+                                <p><strong>Early Voting:</strong> October 20-30, 2025</p>
+                            </div>
+                            <div class="election-actions">
+                                <button class="action-btn secondary" onclick="manageElection('2025-council')">Manage</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="voter-registration">
+                        <h3><i class="fas fa-user-check"></i> Voter Registration</h3>
+                        <div class="registration-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">28,945</span>
+                                <span class="stat-label">Registered Voters</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1,234</span>
+                                <span class="stat-label">New Registrations (30 days)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">89.2%</span>
+                                <span class="stat-label">Eligible Population Registered</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="past-elections">
+                        <h3><i class="fas fa-history"></i> Past Elections</h3>
+                        <div class="past-elections-list">
+                            <div class="past-election-item">
+                                <div class="election-info">
+                                    <h4>2024 Mayoral Election</h4>
+                                    <p>November 5, 2024</p>
+                                </div>
+                                <div class="election-results">
+                                    <span>Winner: Alexandra Rivera (62.4%)</span>
+                                    <span>Turnout: 18,432 voters (72.3%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- City Planning Section -->
+            <section id="planning-section" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-city"></i> City Planning</h2>
+                    <div class="section-actions">
+                        <button class="action-btn primary" onclick="newPlanningProject()">
+                            <i class="fas fa-plus"></i> New Project
+                        </button>
+                        <button class="action-btn secondary" onclick="viewZoningMap()">
+                            <i class="fas fa-map"></i> Zoning Map
+                        </button>
+                    </div>
+                </div>
+
+                <div class="planning-content">
+                    <div class="planning-projects">
+                        <h3><i class="fas fa-project-diagram"></i> Active Projects</h3>
+                        <div class="projects-list">
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <h4>Downtown Revitalization</h4>
+                                    <span class="project-status in-progress">In Progress</span>
+                                </div>
+                                <div class="project-details">
+                                    <p>Comprehensive redevelopment of downtown core area</p>
+                                    <div class="project-meta">
+                                        <span><i class="fas fa-calendar"></i> Started: Jan 2025</span>
+                                        <span><i class="fas fa-dollar-sign"></i> Budget: $2.8M</span>
+                                    </div>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 45%"></div>
+                                    </div>
+                                    <span>45% Complete</span>
+                                </div>
+                            </div>
+
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <h4>Eastside Community Park</h4>
+                                    <span class="project-status planning">Planning</span>
+                                </div>
+                                <div class="project-details">
+                                    <p>New 15-acre community park with recreational facilities</p>
+                                    <div class="project-meta">
+                                        <span><i class="fas fa-calendar"></i> Planned: Q4 2025</span>
+                                        <span><i class="fas fa-dollar-sign"></i> Budget: $1.2M</span>
+                                    </div>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 15%"></div>
+                                    </div>
+                                    <span>15% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="zoning-info">
+                        <h3><i class="fas fa-map-marked-alt"></i> Zoning Information</h3>
+                        <div class="zoning-zones">
+                            <div class="zone-item">
+                                <div class="zone-color residential"></div>
+                                <span>Residential (R1, R2, R3)</span>
+                            </div>
+                            <div class="zone-item">
+                                <div class="zone-color commercial"></div>
+                                <span>Commercial (C1, C2)</span>
+                            </div>
+                            <div class="zone-item">
+                                <div class="zone-color industrial"></div>
+                                <span>Industrial (I1, I2)</span>
+                            </div>
+                            <div class="zone-item">
+                                <div class="zone-color mixed-use"></div>
+                                <span>Mixed Use (MU)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="planning-applications">
+                        <h3><i class="fas fa-file-alt"></i> Planning Applications</h3>
+                        <div class="applications-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Application #</th>
+                                        <th>Type</th>
+                                        <th>Location</th>
+                                        <th>Applicant</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>PLN-2025-008</td>
+                                        <td>Subdivision</td>
+                                        <td>North Hills District</td>
+                                        <td>Sunrise Development</td>
+                                        <td><span class="status-badge pending">Under Review</span></td>
+                                        <td><button class="action-btn small">Review</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>PLN-2025-009</td>
+                                        <td>Rezoning</td>
+                                        <td>1250 Commerce St</td>
+                                        <td>Metro Properties</td>
+                                        <td><span class="status-badge approved">Approved</span></td>
+                                        <td><button class="action-btn small">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="government-footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 City of Los Scotia. All rights reserved.</p>
+                    <p>Los Scotia Government Management System v2.1</p>
+                    <p class="created-by">Created by <strong>Millz902Games</strong></p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" onclick="showHelp()">Help</a>
+                    <a href="#" onclick="showAbout()">About</a>
+                    <a href="#" onclick="contactSupport()">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals and Overlays -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                Modal content goes here
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn primary" id="modal-confirm" onclick="confirmModal()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

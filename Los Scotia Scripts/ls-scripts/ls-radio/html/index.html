@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Radio Station</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="main-container">
+            <div class="header">
+                <h1>Los Scotia Radio Station</h1>
+                <button id="closeBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="live">Live</button>
+                    <button class="tab-btn" data-tab="music">Music Library</button>
+                    <button class="tab-btn" data-tab="schedule">Schedule</button>
+                    <button class="tab-btn" data-tab="management">Management</button>
+                </div>
+                
+                <!-- Live Broadcasting Tab -->
+                <div id="live" class="tab-content active">
+                    <div class="live-section">
+                        <div class="broadcast-status">
+                            <div class="status-indicator" id="broadcastStatus">
+                                <span class="status-dot offline"></span>
+                                <span class="status-text">OFFLINE</span>
+                            </div>
+                            <div class="listener-count">
+                                <span>Listeners: </span>
+                                <span id="listenerCount">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="broadcast-controls">
+                            <button id="startBroadcastBtn" class="control-btn start">Start Broadcast</button>
+                            <button id="stopBroadcastBtn" class="control-btn stop" disabled>Stop Broadcast</button>
+                            <button id="emergencyOffBtn" class="control-btn emergency">Emergency Off</button>
+                        </div>
+                        
+                        <div class="current-playing">
+                            <h3>Now Playing</h3>
+                            <div class="track-info">
+                                <div class="track-title" id="currentTrack">No track selected</div>
+                                <div class="track-artist" id="currentArtist">-</div>
+                                <div class="track-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="trackProgress"></div>
+                                    </div>
+                                    <div class="time-info">
+                                        <span id="currentTime">0:00</span>
+                                        <span id="totalTime">0:00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mic-controls">
+                            <h3>Microphone</h3>
+                            <div class="mic-section">
+                                <button id="micToggleBtn" class="mic-btn">
+                                    <span class="mic-icon">🎤</span>
+                                    <span class="mic-text">Go Live</span>
+                                </button>
+                                <div class="volume-control">
+                                    <label>Mic Volume:</label>
+                                    <input type="range" id="micVolume" min="0" max="100" value="75">
+                                    <span id="micVolumeValue">75%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Music Library Tab -->
+                <div id="music" class="tab-content">
+                    <div class="music-section">
+                        <div class="music-controls">
+                            <div class="search-section">
+                                <input type="text" id="musicSearch" placeholder="Search songs, artists, albums...">
+                                <button id="searchBtn" class="search-btn">Search</button>
+                            </div>
+                            <div class="filter-section">
+                                <select id="genreFilter">
+                                    <option value="">All Genres</option>
+                                    <option value="pop">Pop</option>
+                                    <option value="rock">Rock</option>
+                                    <option value="hip-hop">Hip Hop</option>
+                                    <option value="electronic">Electronic</option>
+                                    <option value="country">Country</option>
+                                    <option value="jazz">Jazz</option>
+                                    <option value="classical">Classical</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="music-library" id="musicLibrary">
+                            <div class="track-item">
+                                <div class="track-details">
+                                    <div class="track-name">Sample Song 1</div>
+                                    <div class="track-artist">Sample Artist</div>
+                                    <div class="track-duration">3:45</div>
+                                </div>
+                                <div class="track-actions">
+                                    <button class="play-btn">▶</button>
+                                    <button class="queue-btn">Add to Queue</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="queue-section">
+                            <h3>Queue</h3>
+                            <div class="queue-list" id="queueList">
+                                <p class="empty-queue">Queue is empty</p>
+                            </div>
+                            <div class="queue-controls">
+                                <button id="shuffleBtn" class="queue-control-btn">🔀 Shuffle</button>
+                                <button id="clearQueueBtn" class="queue-control-btn">🗑️ Clear Queue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Schedule Tab -->
+                <div id="schedule" class="tab-content">
+                    <div class="schedule-section">
+                        <div class="schedule-controls">
+                            <button id="addShowBtn" class="control-btn">Add New Show</button>
+                            <button id="editScheduleBtn" class="control-btn">Edit Schedule</button>
+                        </div>
+                        
+                        <div class="schedule-grid">
+                            <div class="time-slots">
+                                <div class="time-header">Time</div>
+                                <div class="time-slot">06:00</div>
+                                <div class="time-slot">08:00</div>
+                                <div class="time-slot">10:00</div>
+                                <div class="time-slot">12:00</div>
+                                <div class="time-slot">14:00</div>
+                                <div class="time-slot">16:00</div>
+                                <div class="time-slot">18:00</div>
+                                <div class="time-slot">20:00</div>
+                                <div class="time-slot">22:00</div>
+                                <div class="time-slot">00:00</div>
+                            </div>
+                            
+                            <div class="day-schedule">
+                                <div class="day-header">Monday</div>
+                                <div class="show-slot">Morning News</div>
+                                <div class="show-slot">Traffic Update</div>
+                                <div class="show-slot">Music Hour</div>
+                                <div class="show-slot">Lunch Break</div>
+                                <div class="show-slot">Afternoon Talk</div>
+                                <div class="show-slot">Drive Time</div>
+                                <div class="show-slot">Evening News</div>
+                                <div class="show-slot">Night Music</div>
+                                <div class="show-slot">Late Night</div>
+                                <div class="show-slot">Overnight</div>
+                            </div>
+                            
+                            <div class="day-schedule">
+                                <div class="day-header">Tuesday</div>
+                                <div class="show-slot">Morning News</div>
+                                <div class="show-slot">Traffic Update</div>
+                                <div class="show-slot">Music Hour</div>
+                                <div class="show-slot">Lunch Break</div>
+                                <div class="show-slot">Afternoon Talk</div>
+                                <div class="show-slot">Drive Time</div>
+                                <div class="show-slot">Evening News</div>
+                                <div class="show-slot">Night Music</div>
+                                <div class="show-slot">Late Night</div>
+                                <div class="show-slot">Overnight</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Management Tab -->
+                <div id="management" class="tab-content">
+                    <div class="management-section">
+                        <div class="staff-management">
+                            <h3>Staff Management</h3>
+                            <div class="staff-list">
+                                <div class="staff-member">
+                                    <div class="staff-info">
+                                        <div class="staff-name">DJ Mike</div>
+                                        <div class="staff-role">Morning Host</div>
+                                        <div class="staff-status online">Online</div>
+                                    </div>
+                                    <div class="staff-actions">
+                                        <button class="staff-btn">Edit</button>
+                                        <button class="staff-btn">Remove</button>
+                                    </div>
+                                </div>
+                                <div class="staff-member">
+                                    <div class="staff-info">
+                                        <div class="staff-name">Sarah Jones</div>
+                                        <div class="staff-role">News Anchor</div>
+                                        <div class="staff-status offline">Offline</div>
+                                    </div>
+                                    <div class="staff-actions">
+                                        <button class="staff-btn">Edit</button>
+                                        <button class="staff-btn">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="addStaffBtn" class="control-btn">Add Staff Member</button>
+                        </div>
+                        
+                        <div class="station-settings">
+                            <h3>Station Settings</h3>
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label>Station Name:</label>
+                                    <input type="text" value="Los Scotia Radio" id="stationName">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Frequency:</label>
+                                    <input type="text" value="102.5 FM" id="stationFreq">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Max Listeners:</label>
+                                    <input type="number" value="500" id="maxListeners">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Auto DJ:</label>
+                                    <select id="autoDJ">
+                                        <option value="enabled">Enabled</option>
+                                        <option value="disabled">Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="saveSettingsBtn" class="control-btn">Save Settings</button>
+                        </div>
+                        
+                        <div class="analytics">
+                            <h3>Analytics</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-title">Total Listeners Today</div>
+                                    <div class="stat-value" id="todayListeners">1,247</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-title">Peak Listeners</div>
+                                    <div class="stat-value" id="peakListeners">89</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-title">Broadcast Time</div>
+                                    <div class="stat-value" id="broadcastTime">18h 32m</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-title">Songs Played</div>
+                                    <div class="stat-value" id="songsPlayed">156</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

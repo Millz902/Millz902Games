@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Economy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="economy-container" class="hidden">
+        <div class="economy-header">
+            <h1>Los Scotia Economy</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="economy-content">
+            <div class="economy-stats">
+                <h2>Economic Overview</h2>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">City Fund</span>
+                        <span class="stat-value" id="city-fund">$0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Tax Rate</span>
+                        <span class="stat-value" id="tax-rate">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Business Count</span>
+                        <span class="stat-value" id="business-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Employment Rate</span>
+                        <span class="stat-value" id="employment-rate">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="economy-actions">
+                <div class="action-group">
+                    <h3>Tax Management</h3>
+                    <input type="number" id="tax-input" placeholder="Tax Rate %" min="0" max="100">
+                    <button id="set-tax-btn">Set Tax Rate</button>
+                </div>
+                <div class="action-group">
+                    <h3>City Fund</h3>
+                    <input type="number" id="fund-input" placeholder="Amount">
+                    <div class="button-row">
+                        <button id="add-fund-btn">Add Funds</button>
+                        <button id="remove-fund-btn">Remove Funds</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'LosScotiaFont';
+    src: url('fonts/los-scotia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'LosScotiaFont', sans-serif;
+    overflow: hidden;
+}
+
+/* Los Scotia branding styles */
+.los-scotia-logo {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.red {
+    color: #ff0000; /* Los Scotia red */
+}
+
+.white {
+    color: #ffffff;
+}
+
+.millz902-logo {
+    font-size: 18px;
+    color: #cccccc;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* QBCore Menu Branding */
+.qb-menu-brand {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 1000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Styling for branded watermark */
+.ls-watermark {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 9999;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Custom menu header styling */
+.ls-menu-header {
+    background: linear-gradient(to right, #990000, #cc0000);
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+}
+
+/* Animation for branding elements */
+@keyframes fadeInBranding {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated-branding {
+    animation: fadeInBranding 0.5s ease-out forwards;
+}

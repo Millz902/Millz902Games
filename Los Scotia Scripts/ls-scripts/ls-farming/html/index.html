@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Millz902Games">
+    <meta name="description" content="Los Scotia Farming Management System - Created by Millz902Games">
+    <title>Los Scotia Farming System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="farming-panel">
+            <div class="header">
+                <h1 id="panel-title">Los Scotia Agricultural Management</h1>
+                <button class="close-btn" onclick="closePanel()">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                    <button class="tab-btn" onclick="switchTab('crops')">Crops</button>
+                    <button class="tab-btn" onclick="switchTab('livestock')">Livestock</button>
+                    <button class="tab-btn" onclick="switchTab('weather')">Weather</button>
+                    <button class="tab-btn" onclick="switchTab('market')">Market</button>
+                    <button class="tab-btn" onclick="switchTab('settings')">Settings</button>
+                </div>
+
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content active">
+                    <div class="farming-overview">
+                        <h3>Agricultural Overview</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h4>Total Farmland</h4>
+                                <span id="total-farmland">2,450 acres</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Active Farms</h4>
+                                <span id="active-farms">23</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Crop Yield</h4>
+                                <span id="crop-yield">85%</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Monthly Revenue</h4>
+                                <span id="monthly-revenue">$450,000</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Water Usage</h4>
+                                <span id="water-usage">75%</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Farmer Count</h4>
+                                <span id="farmer-count">45</span>
+                            </div>
+                        </div>
+                        
+                        <div class="seasonal-info">
+                            <h4>Current Season Information</h4>
+                            <div class="season-display">
+                                <div class="season-item">
+                                    <label>Current Season:</label>
+                                    <span id="current-season">Summer</span>
+                                </div>
+                                <div class="season-item">
+                                    <label>Days Remaining:</label>
+                                    <span id="days-remaining">12 days</span>
+                                </div>
+                                <div class="season-item">
+                                    <label>Optimal Crops:</label>
+                                    <span id="optimal-crops">Corn, Wheat, Soybeans</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recent-activity">
+                            <h4>Recent Farm Activity</h4>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <span class="time">2 hours ago</span>
+                                    <span class="activity">Farm #14 harvested 500 kg of wheat</span>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="time">4 hours ago</span>
+                                    <span class="activity">New irrigation system installed at Farm #7</span>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="time">6 hours ago</span>
+                                    <span class="activity">Livestock vaccination completed at Ranch #3</span>
+                                </div>
+                                <div class="activity-item">
+                                    <span class="time">1 day ago</span>
+                                    <span class="activity">Weather alert: Heavy rain expected</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crops Tab -->
+                <div id="crops-tab" class="tab-content">
+                    <div class="crops-section">
+                        <h3>Crop Management</h3>
+                        <div class="crop-actions">
+                            <button class="action-btn" onclick="plantCrops()">Plant New Crops</button>
+                            <button class="action-btn" onclick="harvestCrops()">Harvest Ready Crops</button>
+                            <button class="action-btn" onclick="irrigateFarms()">Irrigate Farms</button>
+                            <button class="action-btn" onclick="treatPests()">Pest Control</button>
+                            <button class="action-btn danger" onclick="burnFields()">Emergency Burn</button>
+                        </div>
+                        
+                        <div class="crop-types">
+                            <div class="crop-category">
+                                <h4>Grains & Cereals</h4>
+                                <div class="crop-list">
+                                    <div class="crop-item">
+                                        <img src="#" alt="Wheat" class="crop-icon">
+                                        <div class="crop-info">
+                                            <span class="crop-name">Wheat</span>
+                                            <span class="crop-status ready">Ready for Harvest</span>
+                                            <span class="crop-quantity">1,200 kg</span>
+                                        </div>
+                                        <div class="crop-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crop-item">
+                                        <img src="#" alt="Corn" class="crop-icon">
+                                        <div class="crop-info">
+                                            <span class="crop-name">Corn</span>
+                                            <span class="crop-status growing">Growing</span>
+                                            <span class="crop-quantity">850 kg (estimated)</span>
+                                        </div>
+                                        <div class="crop-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 65%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crop-item">
+                                        <img src="#" alt="Rice" class="crop-icon">
+                                        <div class="crop-info">
+                                            <span class="crop-name">Rice</span>
+                                            <span class="crop-status planted">Recently Planted</span>
+                                            <span class="crop-quantity">0 kg</span>
+                                        </div>
+                                        <div class="crop-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 15%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="crop-category">
+                                <h4>Vegetables</h4>
+                                <div class="crop-list">
+                                    <div class="crop-item">
+                                        <img src="#" alt="Tomatoes" class="crop-icon">
+                                        <div class="crop-info">
+                                            <span class="crop-name">Tomatoes</span>
+                                            <span class="crop-status ready">Ready for Harvest</span>
+                                            <span class="crop-quantity">750 kg</span>
+                                        </div>
+                                        <div class="crop-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crop-item">
+                                        <img src="#" alt="Potatoes" class="crop-icon">
+                                        <div class="crop-info">
+                                            <span class="crop-name">Potatoes</span>
+                                            <span class="crop-status growing">Growing</span>
+                                            <span class="crop-quantity">900 kg (estimated)</span>
+                                        </div>
+                                        <div class="crop-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 80%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="crop-category">
+                                <h4>Fruits</h4>
+                                <div class="crop-list">
+                                    <div class="crop-item">
+                                        <img src="#" alt="Apples" class="crop-icon">
+                                        <div class="crop-info">
+                                            <span class="crop-name">Apples</span>
+                                            <span class="crop-status growing">Growing</span>
+                                            <span class="crop-quantity">600 kg (estimated)</span>
+                                        </div>
+                                        <div class="crop-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 45%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livestock Tab -->
+                <div id="livestock-tab" class="tab-content">
+                    <div class="livestock-section">
+                        <h3>Livestock Management</h3>
+                        <div class="livestock-actions">
+                            <button class="action-btn" onclick="feedAnimals()">Feed Animals</button>
+                            <button class="action-btn" onclick="milkCows()">Milk Cows</button>
+                            <button class="action-btn" onclick="shearSheep()">Shear Sheep</button>
+                            <button class="action-btn" onclick="collectEggs()">Collect Eggs</button>
+                            <button class="action-btn" onclick="veterinaryCheck()">Veterinary Check</button>
+                        </div>
+                        
+                        <div class="livestock-stats">
+                            <div class="animal-category">
+                                <h4>Cattle</h4>
+                                <div class="animal-list">
+                                    <div class="animal-item">
+                                        <span class="animal-type">Dairy Cows</span>
+                                        <span class="animal-count">45</span>
+                                        <span class="animal-health healthy">Healthy</span>
+                                        <span class="animal-production">350L/day</span>
+                                    </div>
+                                    <div class="animal-item">
+                                        <span class="animal-type">Beef Cattle</span>
+                                        <span class="animal-count">78</span>
+                                        <span class="animal-health healthy">Healthy</span>
+                                        <span class="animal-production">Ready: 12</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="animal-category">
+                                <h4>Poultry</h4>
+                                <div class="animal-list">
+                                    <div class="animal-item">
+                                        <span class="animal-type">Laying Hens</span>
+                                        <span class="animal-count">230</span>
+                                        <span class="animal-health healthy">Healthy</span>
+                                        <span class="animal-production">180 eggs/day</span>
+                                    </div>
+                                    <div class="animal-item">
+                                        <span class="animal-type">Broiler Chickens</span>
+                                        <span class="animal-count">150</span>
+                                        <span class="animal-health warning">Needs Attention</span>
+                                        <span class="animal-production">Ready: 45</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="animal-category">
+                                <h4>Other Animals</h4>
+                                <div class="animal-list">
+                                    <div class="animal-item">
+                                        <span class="animal-type">Sheep</span>
+                                        <span class="animal-count">32</span>
+                                        <span class="animal-health healthy">Healthy</span>
+                                        <span class="animal-production">Wool: 25kg</span>
+                                    </div>
+                                    <div class="animal-item">
+                                        <span class="animal-type">Pigs</span>
+                                        <span class="animal-count">18</span>
+                                        <span class="animal-health healthy">Healthy</span>
+                                        <span class="animal-production">Ready: 8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="animal-care">
+                            <h4>Animal Care Schedule</h4>
+                            <div class="care-schedule">
+                                <div class="care-item">
+                                    <span class="care-time">8:00 AM</span>
+                                    <span class="care-task">Morning Feeding</span>
+                                    <span class="care-status completed">Completed</span>
+                                </div>
+                                <div class="care-item">
+                                    <span class="care-time">12:00 PM</span>
+                                    <span class="care-task">Midday Check</span>
+                                    <span class="care-status pending">Pending</span>
+                                </div>
+                                <div class="care-item">
+                                    <span class="care-time">6:00 PM</span>
+                                    <span class="care-task">Evening Feeding</span>
+                                    <span class="care-status pending">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Tab -->
+                <div id="weather-tab" class="tab-content">
+                    <div class="weather-section">
+                        <h3>Weather & Climate Control</h3>
+                        <div class="weather-controls">
+                            <button class="action-btn" onclick="updateWeather()">Update Weather</button>
+                            <button class="action-btn" onclick="triggerRain()">Trigger Rain</button>
+                            <button class="action-btn" onclick="clearSkies()">Clear Skies</button>
+                            <button class="action-btn danger" onclick="triggerStorm()">Create Storm</button>
+                        </div>
+                        
+                        <div class="current-weather">
+                            <h4>Current Conditions</h4>
+                            <div class="weather-display">
+                                <div class="weather-main">
+                                    <span class="temperature">24°C</span>
+                                    <span class="condition">Partly Cloudy</span>
+                                </div>
+                                <div class="weather-details">
+                                    <div class="weather-detail">
+                                        <label>Humidity:</label>
+                                        <span>65%</span>
+                                    </div>
+                                    <div class="weather-detail">
+                                        <label>Wind Speed:</label>
+                                        <span>15 km/h</span>
+                                    </div>
+                                    <div class="weather-detail">
+                                        <label>Precipitation:</label>
+                                        <span>0%</span>
+                                    </div>
+                                    <div class="weather-detail">
+                                        <label>UV Index:</label>
+                                        <span>7 (High)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="weather-forecast">
+                            <h4>5-Day Forecast</h4>
+                            <div class="forecast-list">
+                                <div class="forecast-day">
+                                    <span class="day">Today</span>
+                                    <span class="condition">Sunny</span>
+                                    <span class="temp-high">26°C</span>
+                                    <span class="temp-low">18°C</span>
+                                    <span class="rain-chance">10%</span>
+                                </div>
+                                <div class="forecast-day">
+                                    <span class="day">Tomorrow</span>
+                                    <span class="condition">Cloudy</span>
+                                    <span class="temp-high">23°C</span>
+                                    <span class="temp-low">16°C</span>
+                                    <span class="rain-chance">30%</span>
+                                </div>
+                                <div class="forecast-day">
+                                    <span class="day">Wednesday</span>
+                                    <span class="condition">Rainy</span>
+                                    <span class="temp-high">20°C</span>
+                                    <span class="temp-low">14°C</span>
+                                    <span class="rain-chance">80%</span>
+                                </div>
+                                <div class="forecast-day">
+                                    <span class="day">Thursday</span>
+                                    <span class="condition">Partly Cloudy</span>
+                                    <span class="temp-high">25°C</span>
+                                    <span class="temp-low">17°C</span>
+                                    <span class="rain-chance">20%</span>
+                                </div>
+                                <div class="forecast-day">
+                                    <span class="day">Friday</span>
+                                    <span class="condition">Sunny</span>
+                                    <span class="temp-high">28°C</span>
+                                    <span class="temp-low">19°C</span>
+                                    <span class="rain-chance">5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="irrigation-system">
+                            <h4>Irrigation Control</h4>
+                            <div class="irrigation-controls">
+                                <div class="control-group">
+                                    <label>Automatic Irrigation:</label>
+                                    <input type="checkbox" id="auto-irrigation" checked>
+                                </div>
+                                <div class="control-group">
+                                    <label>Water Level:</label>
+                                    <div class="water-level">
+                                        <div class="water-bar">
+                                            <div class="water-fill" style="width: 75%"></div>
+                                        </div>
+                                        <span>75%</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>Daily Usage:</label>
+                                    <span>2,340 L</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Tab -->
+                <div id="market-tab" class="tab-content">
+                    <div class="market-section">
+                        <h3>Agricultural Market</h3>
+                        <div class="market-actions">
+                            <button class="action-btn" onclick="sellProduce()">Sell Produce</button>
+                            <button class="action-btn" onclick="buySeeds()">Buy Seeds</button>
+                            <button class="action-btn" onclick="contractFarming()">Contract Farming</button>
+                            <button class="action-btn" onclick="viewPrices()">View Market Prices</button>
+                        </div>
+                        
+                        <div class="market-prices">
+                            <h4>Current Market Prices</h4>
+                            <div class="price-list">
+                                <div class="price-category">
+                                    <h5>Grains</h5>
+                                    <div class="price-item">
+                                        <span class="product">Wheat</span>
+                                        <span class="price">$2.50/kg</span>
+                                        <span class="change positive">+5%</span>
+                                    </div>
+                                    <div class="price-item">
+                                        <span class="product">Corn</span>
+                                        <span class="price">$1.80/kg</span>
+                                        <span class="change negative">-2%</span>
+                                    </div>
+                                    <div class="price-item">
+                                        <span class="product">Rice</span>
+                                        <span class="price">$3.20/kg</span>
+                                        <span class="change neutral">0%</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="price-category">
+                                    <h5>Vegetables</h5>
+                                    <div class="price-item">
+                                        <span class="product">Tomatoes</span>
+                                        <span class="price">$4.50/kg</span>
+                                        <span class="change positive">+8%</span>
+                                    </div>
+                                    <div class="price-item">
+                                        <span class="product">Potatoes</span>
+                                        <span class="price">$1.20/kg</span>
+                                        <span class="change positive">+3%</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="price-category">
+                                    <h5>Livestock Products</h5>
+                                    <div class="price-item">
+                                        <span class="product">Milk</span>
+                                        <span class="price">$1.50/L</span>
+                                        <span class="change positive">+2%</span>
+                                    </div>
+                                    <div class="price-item">
+                                        <span class="product">Eggs</span>
+                                        <span class="price">$0.30/each</span>
+                                        <span class="change neutral">0%</span>
+                                    </div>
+                                    <div class="price-item">
+                                        <span class="product">Wool</span>
+                                        <span class="price">$8.00/kg</span>
+                                        <span class="change negative">-4%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sales-summary">
+                            <h4>Today's Sales</h4>
+                            <div class="sales-stats">
+                                <div class="sales-item">
+                                    <span class="product-sold">Wheat (500kg)</span>
+                                    <span class="revenue">$1,250</span>
+                                </div>
+                                <div class="sales-item">
+                                    <span class="product-sold">Tomatoes (200kg)</span>
+                                    <span class="revenue">$900</span>
+                                </div>
+                                <div class="sales-item">
+                                    <span class="product-sold">Milk (180L)</span>
+                                    <span class="revenue">$270</span>
+                                </div>
+                                <div class="sales-total">
+                                    <span class="total-label">Total Revenue:</span>
+                                    <span class="total-amount">$2,420</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="settings-section">
+                        <h3>Farming System Settings</h3>
+                        <div class="setting-group">
+                            <h4>Growth & Yield Settings</h4>
+                            <div class="setting-item">
+                                <label>Growth Speed Multiplier:</label>
+                                <input type="number" id="growth-multiplier" value="1.0" min="0.1" max="5.0" step="0.1">
+                                <span>x</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Base Yield Rate:</label>
+                                <input type="number" id="yield-rate" value="100" min="10" max="200" step="5">
+                                <span>%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Weather Impact:</label>
+                                <input type="range" id="weather-impact" min="0" max="100" value="75">
+                                <span id="weather-impact-value">75%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h4>Economic Settings</h4>
+                            <div class="setting-item">
+                                <label>Price Volatility:</label>
+                                <input type="range" id="price-volatility" min="0" max="50" value="15">
+                                <span id="price-volatility-value">15%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Market Tax Rate:</label>
+                                <input type="number" id="market-tax" value="8" min="0" max="25" step="1">
+                                <span>%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Subsidy Rate:</label>
+                                <input type="number" id="subsidy-rate" value="12" min="0" max="50" step="1">
+                                <span>%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h4>System Features</h4>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="seasonal-cycles" checked>
+                                <label for="seasonal-cycles">Enable Seasonal Cycles</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="weather-effects" checked>
+                                <label for="weather-effects">Weather Effects on Crops</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="pest-disease" checked>
+                                <label for="pest-disease">Pest & Disease System</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="livestock-aging">
+                                <label for="livestock-aging">Livestock Aging</label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-actions">
+                            <button class="action-btn" onclick="saveSettings()">Save Settings</button>
+                            <button class="action-btn" onclick="resetSettings()">Reset to Default</button>
+                            <button class="action-btn danger" onclick="resetAllFarms()">Reset All Farms</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

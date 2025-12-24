@@ -1,0 +1,140 @@
+local Translations = {
+    error = {
+        not_enough_money = 'You do not have enough money',
+        invalid_amount = 'Invalid amount entered',
+        bank_not_available = 'Bank services are currently unavailable',
+        account_not_found = 'Bank account not found',
+        insufficient_balance = 'Insufficient account balance',
+        transaction_failed = 'Transaction failed to process',
+        invalid_account = 'Invalid account number',
+        account_frozen = 'Account has been frozen',
+        daily_limit_exceeded = 'Daily transaction limit exceeded',
+        minimum_balance = 'Account below minimum balance requirement',
+        access_denied = 'Access denied to banking services',
+        server_error = 'Banking server error, please try again later'
+    },
+    success = {
+        deposit_complete = 'Deposit successful - $%{amount} added to account',
+        withdrawal_complete = 'Withdrawal successful - $%{amount} taken from account',
+        transfer_complete = 'Transfer successful - $%{amount} sent to %{target}',
+        account_created = 'Bank account successfully created',
+        loan_approved = 'Loan application approved for $%{amount}',
+        payment_processed = 'Payment of $%{amount} processed successfully',
+        account_updated = 'Account information updated successfully',
+        investment_purchased = 'Investment purchased successfully',
+        bill_paid = 'Bill payment of $%{amount} completed',
+        balance_updated = 'Account balance updated'
+    },
+    info = {
+        current_balance = 'Current balance: $%{balance}',
+        available_balance = 'Available balance: $%{balance}',
+        account_number = 'Account Number: %{account}',
+        daily_limit = 'Daily limit: $%{limit}',
+        transaction_fee = 'Transaction fee: $%{fee}',
+        interest_rate = 'Current interest rate: %{rate}%',
+        last_transaction = 'Last transaction: %{date}',
+        account_type = 'Account type: %{type}',
+        monthly_fee = 'Monthly maintenance fee: $%{fee}',
+        next_statement = 'Next statement: %{date}'
+    },
+    menu = {
+        bank_menu = 'Los Scotia Bank',
+        account_overview = 'Account Overview',
+        deposit_money = 'Deposit Money',
+        withdraw_money = 'Withdraw Money',
+        transfer_money = 'Transfer Money',
+        transaction_history = 'Transaction History',
+        loan_services = 'Loan Services',
+        investment_options = 'Investment Options',
+        bill_payment = 'Bill Payment',
+        account_settings = 'Account Settings',
+        close_menu = 'Close Menu',
+        confirm_transaction = 'Confirm Transaction',
+        cancel_transaction = 'Cancel Transaction'
+    },
+    input = {
+        enter_amount = 'Enter amount',
+        enter_account_number = 'Enter account number',
+        enter_recipient = 'Enter recipient name',
+        enter_description = 'Enter transaction description',
+        confirm_pin = 'Enter your PIN',
+        new_pin = 'Enter new PIN',
+        confirm_new_pin = 'Confirm new PIN',
+        phone_number = 'Enter phone number',
+        email_address = 'Enter email address'
+    },
+    loans = {
+        loan_application = 'Loan Application',
+        personal_loan = 'Personal Loan',
+        business_loan = 'Business Loan',
+        vehicle_loan = 'Vehicle Loan',
+        property_loan = 'Property Loan',
+        loan_amount = 'Loan Amount: $%{amount}',
+        interest_rate = 'Interest Rate: %{rate}%',
+        monthly_payment = 'Monthly Payment: $%{payment}',
+        loan_term = 'Loan Term: %{months} months',
+        apply_loan = 'Apply for Loan',
+        loan_status = 'Loan Status: %{status}',
+        repay_loan = 'Repay Loan',
+        loan_balance = 'Remaining Balance: $%{balance}'
+    },
+    investments = {
+        investment_portfolio = 'Investment Portfolio',
+        stocks = 'Stocks',
+        bonds = 'Bonds',
+        mutual_funds = 'Mutual Funds',
+        savings_account = 'High-Yield Savings',
+        current_value = 'Current Value: $%{value}',
+        daily_change = 'Daily Change: %{change}%',
+        total_return = 'Total Return: %{return}%',
+        buy_investment = 'Buy Investment',
+        sell_investment = 'Sell Investment',
+        investment_details = 'Investment Details'
+    },
+    transactions = {
+        transaction_history = 'Transaction History',
+        date = 'Date',
+        description = 'Description',
+        amount = 'Amount',
+        balance = 'Balance',
+        type_deposit = 'Deposit',
+        type_withdrawal = 'Withdrawal',
+        type_transfer = 'Transfer',
+        type_payment = 'Payment',
+        type_fee = 'Fee',
+        type_interest = 'Interest',
+        filter_all = 'All Transactions',
+        filter_deposits = 'Deposits Only',
+        filter_withdrawals = 'Withdrawals Only',
+        no_transactions = 'No transactions found'
+    },
+    atm = {
+        atm_interface = 'ATM',
+        insert_card = 'Insert your bank card',
+        enter_pin = 'Enter your PIN',
+        quick_cash = 'Quick Cash',
+        custom_amount = 'Custom Amount',
+        balance_inquiry = 'Check Balance',
+        receipt_option = 'Print Receipt?',
+        take_cash = 'Please take your cash',
+        take_receipt = 'Please take your receipt',
+        remove_card = 'Please remove your card',
+        out_of_service = 'ATM is currently out of service',
+        insufficient_funds = 'ATM has insufficient funds'
+    },
+    notifications = {
+        low_balance = 'Warning: Account balance is low ($%{balance})',
+        large_transaction = 'Large transaction alert: $%{amount}',
+        login_detected = 'Account access detected from %{location}',
+        payment_due = 'Payment due: $%{amount} due on %{date}',
+        investment_update = 'Investment update: %{investment} %{change}%',
+        security_alert = 'Security alert: Unusual account activity detected',
+        maintenance_notice = 'Scheduled maintenance: %{date} %{time}',
+        new_feature = 'New banking feature available: %{feature}'
+    }
+}
+
+Lang = Locale:new({
+    phrases = Translations,
+    warnOnMissing = true
+})

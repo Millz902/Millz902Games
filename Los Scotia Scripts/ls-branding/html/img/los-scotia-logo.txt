@@ -1,0 +1,2 @@
+This is a placeholder for the Los Scotia logo.
+For production, replace this file with a proper PNG logo.

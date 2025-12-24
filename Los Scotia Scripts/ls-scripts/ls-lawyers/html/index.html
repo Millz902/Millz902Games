@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Legal Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="legal-panel">
+            <div class="header">
+                <h1>Los Scotia Legal Services</h1>
+                <button id="close-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="cases">Cases</button>
+                    <button class="tab-btn" data-tab="services">Services</button>
+                    <button class="tab-btn" data-tab="billing">Billing</button>
+                </div>
+                
+                <div id="overview" class="tab-content active">
+                    <div class="legal-overview">
+                        <h3>Legal Practice Dashboard</h3>
+                        <div class="overview-stats">
+                            <div class="stat-card">
+                                <h4>Active Cases</h4>
+                                <span id="active-cases">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Cases Won</h4>
+                                <span id="cases-won">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Success Rate</h4>
+                                <span id="success-rate">0%</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Monthly Revenue</h4>
+                                <span id="monthly-revenue">$0</span>
+                            </div>
+                        </div>
+                        <div class="lawyer-info">
+                            <h4>Professional Information</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Lawyer Name:</label>
+                                    <span id="lawyer-name">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Bar License:</label>
+                                    <span id="bar-license">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Specialization:</label>
+                                    <span id="specialization">General Practice</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Years of Practice:</label>
+                                    <span id="experience">0 years</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="cases" class="tab-content">
+                    <div class="cases-section">
+                        <h3>Case Management</h3>
+                        <div class="case-filters">
+                            <select id="case-filter">
+                                <option value="all">All Cases</option>
+                                <option value="active">Active</option>
+                                <option value="closed">Closed</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                            <button id="new-case-btn" class="action-btn">New Case</button>
+                        </div>
+                        <div class="cases-list" id="cases-list">
+                            <!-- Cases will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="services" class="tab-content">
+                    <div class="services-section">
+                        <h3>Legal Services</h3>
+                        <div class="services-grid">
+                            <div class="service-card" data-service="defense">
+                                <h4>Criminal Defense</h4>
+                                <div class="service-price">$500/hour</div>
+                                <ul class="service-features">
+                                    <li>Court Representation</li>
+                                    <li>Legal Consultation</li>
+                                    <li>Evidence Review</li>
+                                    <li>Plea Negotiations</li>
+                                </ul>
+                                <button class="request-btn" data-service="defense">Request Service</button>
+                            </div>
+                            <div class="service-card" data-service="civil">
+                                <h4>Civil Litigation</h4>
+                                <div class="service-price">$400/hour</div>
+                                <ul class="service-features">
+                                    <li>Contract Disputes</li>
+                                    <li>Property Issues</li>
+                                    <li>Personal Injury</li>
+                                    <li>Business Law</li>
+                                </ul>
+                                <button class="request-btn" data-service="civil">Request Service</button>
+                            </div>
+                            <div class="service-card" data-service="consultation">
+                                <h4>Legal Consultation</h4>
+                                <div class="service-price">$200/hour</div>
+                                <ul class="service-features">
+                                    <li>Legal Advice</li>
+                                    <li>Document Review</li>
+                                    <li>Risk Assessment</li>
+                                    <li>Strategy Planning</li>
+                                </ul>
+                                <button class="request-btn" data-service="consultation">Request Service</button>
+                            </div>
+                        </div>
+                        <div class="legal-forms">
+                            <h4>Legal Documents</h4>
+                            <div class="forms-list">
+                                <button class="form-btn" data-form="contract">Generate Contract</button>
+                                <button class="form-btn" data-form="will">Draft Will</button>
+                                <button class="form-btn" data-form="power-of-attorney">Power of Attorney</button>
+                                <button class="form-btn" data-form="lawsuit">File Lawsuit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="billing" class="tab-content">
+                    <div class="billing-section">
+                        <h3>Billing & Invoices</h3>
+                        <div class="billing-summary">
+                            <div class="billing-card">
+                                <h4>Outstanding Invoices</h4>
+                                <span id="outstanding-amount">$0</span>
+                            </div>
+                            <div class="billing-card">
+                                <h4>This Month</h4>
+                                <span id="month-earnings">$0</span>
+                            </div>
+                            <div class="billing-card">
+                                <h4>Total Earnings</h4>
+                                <span id="total-earnings">$0</span>
+                            </div>
+                        </div>
+                        <div class="invoice-creator">
+                            <h4>Create Invoice</h4>
+                            <div class="form-group">
+                                <label for="client-name">Client Name:</label>
+                                <input type="text" id="client-name" placeholder="Enter client name">
+                            </div>
+                            <div class="form-group">
+                                <label for="service-type">Service Type:</label>
+                                <select id="service-type">
+                                    <option value="defense">Criminal Defense</option>
+                                    <option value="civil">Civil Litigation</option>
+                                    <option value="consultation">Legal Consultation</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hours-worked">Hours Worked:</label>
+                                <input type="number" id="hours-worked" min="0" step="0.5" placeholder="0.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="invoice-description">Description:</label>
+                                <textarea id="invoice-description" placeholder="Describe services provided..."></textarea>
+                            </div>
+                            <button id="create-invoice-btn" class="action-btn">Create Invoice</button>
+                        </div>
+                        <div class="invoices-list">
+                            <h4>Recent Invoices</h4>
+                            <div id="invoices-container">
+                                <!-- Invoices will be populated -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

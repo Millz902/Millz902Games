@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Taxi - Dispatch Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="taxi-dispatch" class="taxi-container">
+        <!-- Header -->
+        <header class="taxi-header">
+            <div class="header-content">
+                <div class="company-logo">
+                    <i class="fas fa-taxi"></i>
+                    <h1>LS Taxi Dispatch</h1>
+                </div>
+                <div class="header-info">
+                    <div class="shift-status" id="shift-status">
+                        <span class="status-indicator online"></span>
+                        <span>Online</span>
+                    </div>
+                    <div class="current-time" id="current-time"></div>
+                    <div class="dispatcher-info">
+                        <span id="dispatcher-name">Dispatcher</span>
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="taxi-main">
+            <!-- Navigation Tabs -->
+            <nav class="taxi-nav">
+                <button class="nav-tab active" data-tab="dispatch" onclick="showTab('dispatch')">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Dispatch</span>
+                </button>
+                <button class="nav-tab" data-tab="drivers" onclick="showTab('drivers')">
+                    <i class="fas fa-users"></i>
+                    <span>Drivers</span>
+                </button>
+                <button class="nav-tab" data-tab="vehicles" onclick="showTab('vehicles')">
+                    <i class="fas fa-car"></i>
+                    <span>Vehicles</span>
+                </button>
+                <button class="nav-tab" data-tab="rides" onclick="showTab('rides')">
+                    <i class="fas fa-route"></i>
+                    <span>Rides</span>
+                </button>
+                <button class="nav-tab" data-tab="earnings" onclick="showTab('earnings')">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Earnings</span>
+                </button>
+                <button class="nav-tab" data-tab="settings" onclick="showTab('settings')">
+                    <i class="fas fa-cogs"></i>
+                    <span>Settings</span>
+                </button>
+            </nav>
+
+            <!-- Content Areas -->
+            <div class="content-wrapper">
+                <!-- Dispatch Tab -->
+                <div id="dispatch-tab" class="tab-content active">
+                    <div class="dispatch-header">
+                        <h2><i class="fas fa-phone-alt"></i> Active Dispatch</h2>
+                        <div class="dispatch-stats">
+                            <div class="stat-card">
+                                <div class="stat-value" id="active-calls">12</div>
+                                <div class="stat-label">Active Calls</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="available-drivers">8</div>
+                                <div class="stat-label">Available Drivers</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="avg-wait-time">4.2</div>
+                                <div class="stat-label">Avg Wait (min)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dispatch-layout">
+                        <!-- Live Map -->
+                        <div class="map-section">
+                            <div class="map-header">
+                                <h3><i class="fas fa-map"></i> Live Tracking</h3>
+                                <div class="map-controls">
+                                    <button class="map-btn" onclick="centerMap()">
+                                        <i class="fas fa-crosshairs"></i> Center
+                                    </button>
+                                    <button class="map-btn" onclick="refreshMap()">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="map-container">
+                                <div class="map-placeholder">
+                                    <div class="map-overlay">
+                                        <div class="driver-marker active" style="top: 30%; left: 25%;">
+                                            <i class="fas fa-taxi"></i>
+                                            <span class="driver-info">Driver #42</span>
+                                        </div>
+                                        <div class="driver-marker busy" style="top: 60%; left: 70%;">
+                                            <i class="fas fa-taxi"></i>
+                                            <span class="driver-info">Driver #18</span>
+                                        </div>
+                                        <div class="pickup-marker" style="top: 45%; left: 40%;">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span class="pickup-info">Pickup Request</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="map-legend">
+                                <div class="legend-item">
+                                    <span class="legend-marker available"></span>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker busy"></span>
+                                    <span>On Ride</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker pickup"></span>
+                                    <span>Pickup</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker offline"></span>
+                                    <span>Offline</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call Queue -->
+                        <div class="call-section">
+                            <div class="call-header">
+                                <h3><i class="fas fa-list"></i> Call Queue</h3>
+                                <button class="action-btn primary" onclick="newDispatchCall()">
+                                    <i class="fas fa-plus"></i> New Call
+                                </button>
+                            </div>
+                            <div class="call-queue" id="call-queue">
+                                <div class="call-item urgent">
+                                    <div class="call-priority">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <span>URGENT</span>
+                                    </div>
+                                    <div class="call-details">
+                                        <div class="call-from">Downtown Hospital</div>
+                                        <div class="call-to">Los Scotia Airport</div>
+                                        <div class="call-time">Requested: 14:23</div>
+                                        <div class="call-customer">Medical Transport</div>
+                                    </div>
+                                    <div class="call-actions">
+                                        <button class="assign-btn" onclick="assignDriver('CALL-001')">
+                                            <i class="fas fa-user-plus"></i> Assign
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="call-item normal">
+                                    <div class="call-priority">
+                                        <i class="fas fa-clock"></i>
+                                        <span>NORMAL</span>
+                                    </div>
+                                    <div class="call-details">
+                                        <div class="call-from">123 Main Street</div>
+                                        <div class="call-to">City Mall</div>
+                                        <div class="call-time">Requested: 14:25</div>
+                                        <div class="call-customer">John Smith</div>
+                                    </div>
+                                    <div class="call-actions">
+                                        <button class="assign-btn" onclick="assignDriver('CALL-002')">
+                                            <i class="fas fa-user-plus"></i> Assign
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="call-item scheduled">
+                                    <div class="call-priority">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>SCHEDULED</span>
+                                    </div>
+                                    <div class="call-details">
+                                        <div class="call-from">456 Oak Avenue</div>
+                                        <div class="call-to">Train Station</div>
+                                        <div class="call-time">Scheduled: 15:30</div>
+                                        <div class="call-customer">Sarah Johnson</div>
+                                    </div>
+                                    <div class="call-actions">
+                                        <button class="assign-btn" onclick="assignDriver('CALL-003')">
+                                            <i class="fas fa-calendar-plus"></i> Schedule
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drivers Tab -->
+                <div id="drivers-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Driver Management</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="addDriver()">
+                                <i class="fas fa-user-plus"></i> Add Driver
+                            </button>
+                            <button class="action-btn secondary" onclick="exportDrivers()">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="drivers-content">
+                        <!-- Driver Filters -->
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label for="status-filter">Status:</label>
+                                <select id="status-filter" onchange="filterDrivers()">
+                                    <option value="all">All Drivers</option>
+                                    <option value="online">Online</option>
+                                    <option value="offline">Offline</option>
+                                    <option value="busy">On Ride</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="shift-filter">Shift:</label>
+                                <select id="shift-filter" onchange="filterDrivers()">
+                                    <option value="all">All Shifts</option>
+                                    <option value="day">Day Shift</option>
+                                    <option value="night">Night Shift</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <input type="text" id="driver-search" placeholder="Search drivers..." onkeyup="searchDrivers()">
+                            </div>
+                        </div>
+
+                        <!-- Driver Grid -->
+                        <div class="drivers-grid" id="drivers-grid">
+                            <div class="driver-card online">
+                                <div class="driver-header">
+                                    <div class="driver-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="driver-info">
+                                        <h4>Marcus Rodriguez</h4>
+                                        <span class="driver-id">#LS-042</span>
+                                    </div>
+                                    <div class="driver-status online">
+                                        <i class="fas fa-circle"></i>
+                                        <span>Online</span>
+                                    </div>
+                                </div>
+                                <div class="driver-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Today's Rides:</span>
+                                        <span class="stat-value">12</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Earnings:</span>
+                                        <span class="stat-value">$245.60</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Rating:</span>
+                                        <span class="stat-value">4.8 ⭐</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Vehicle:</span>
+                                        <span class="stat-value">Taxi #7</span>
+                                    </div>
+                                </div>
+                                <div class="driver-actions">
+                                    <button class="action-btn small" onclick="viewDriver('042')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="action-btn small" onclick="contactDriver('042')">
+                                        <i class="fas fa-phone"></i> Call
+                                    </button>
+                                    <button class="action-btn small warning" onclick="suspendDriver('042')">
+                                        <i class="fas fa-pause"></i> Suspend
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="driver-card busy">
+                                <div class="driver-header">
+                                    <div class="driver-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="driver-info">
+                                        <h4>Jennifer Chen</h4>
+                                        <span class="driver-id">#LS-018</span>
+                                    </div>
+                                    <div class="driver-status busy">
+                                        <i class="fas fa-circle"></i>
+                                        <span>On Ride</span>
+                                    </div>
+                                </div>
+                                <div class="driver-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Today's Rides:</span>
+                                        <span class="stat-value">8</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Earnings:</span>
+                                        <span class="stat-value">$189.25</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Rating:</span>
+                                        <span class="stat-value">4.9 ⭐</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Vehicle:</span>
+                                        <span class="stat-value">Taxi #3</span>
+                                    </div>
+                                </div>
+                                <div class="driver-actions">
+                                    <button class="action-btn small" onclick="viewDriver('018')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="action-btn small" onclick="trackRide('018')">
+                                        <i class="fas fa-map-marker-alt"></i> Track
+                                    </button>
+                                    <button class="action-btn small danger" onclick="emergencyContact('018')">
+                                        <i class="fas fa-exclamation-triangle"></i> Emergency
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="driver-card offline">
+                                <div class="driver-header">
+                                    <div class="driver-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="driver-info">
+                                        <h4>David Thompson</h4>
+                                        <span class="driver-id">#LS-025</span>
+                                    </div>
+                                    <div class="driver-status offline">
+                                        <i class="fas fa-circle"></i>
+                                        <span>Offline</span>
+                                    </div>
+                                </div>
+                                <div class="driver-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Last Shift:</span>
+                                        <span class="stat-value">Yesterday</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Last Earnings:</span>
+                                        <span class="stat-value">$312.80</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Rating:</span>
+                                        <span class="stat-value">4.7 ⭐</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Vehicle:</span>
+                                        <span class="stat-value">Taxi #12</span>
+                                    </div>
+                                </div>
+                                <div class="driver-actions">
+                                    <button class="action-btn small" onclick="viewDriver('025')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="action-btn small" onclick="contactDriver('025')">
+                                        <i class="fas fa-phone"></i> Call
+                                    </button>
+                                    <button class="action-btn small" onclick="scheduleDriver('025')">
+                                        <i class="fas fa-calendar"></i> Schedule
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicles Tab -->
+                <div id="vehicles-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-car"></i> Fleet Management</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="addVehicle()">
+                                <i class="fas fa-plus"></i> Add Vehicle
+                            </button>
+                            <button class="action-btn secondary" onclick="maintenanceSchedule()">
+                                <i class="fas fa-wrench"></i> Maintenance
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="vehicles-content">
+                        <!-- Vehicle Stats -->
+                        <div class="vehicle-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">24</div>
+                                    <div class="stat-label">Total Fleet</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-road"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">18</div>
+                                    <div class="stat-label">In Service</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">4</div>
+                                    <div class="stat-label">Maintenance</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">Out of Service</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vehicle List -->
+                        <div class="vehicles-table-container">
+                            <table class="vehicles-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle ID</th>
+                                        <th>License Plate</th>
+                                        <th>Model</th>
+                                        <th>Driver</th>
+                                        <th>Status</th>
+                                        <th>Mileage</th>
+                                        <th>Next Service</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vehicles-tbody">
+                                    <tr>
+                                        <td>Taxi #7</td>
+                                        <td>LST-0007</td>
+                                        <td>Crown Victoria</td>
+                                        <td>Marcus Rodriguez</td>
+                                        <td><span class="status-badge active">Active</span></td>
+                                        <td>124,567</td>
+                                        <td>Oct 15, 2025</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewVehicle('007')">View</button>
+                                            <button class="action-btn small" onclick="trackVehicle('007')">Track</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Taxi #3</td>
+                                        <td>LST-0003</td>
+                                        <td>Toyota Camry</td>
+                                        <td>Jennifer Chen</td>
+                                        <td><span class="status-badge active">Active</span></td>
+                                        <td>89,234</td>
+                                        <td>Oct 22, 2025</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewVehicle('003')">View</button>
+                                            <button class="action-btn small" onclick="trackVehicle('003')">Track</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Taxi #12</td>
+                                        <td>LST-0012</td>
+                                        <td>Honda Accord</td>
+                                        <td>David Thompson</td>
+                                        <td><span class="status-badge parked">Parked</span></td>
+                                        <td>156,789</td>
+                                        <td>Oct 5, 2025</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewVehicle('012')">View</button>
+                                            <button class="action-btn small warning" onclick="scheduleService('012')">Service</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Taxi #15</td>
+                                        <td>LST-0015</td>
+                                        <td>Nissan Altima</td>
+                                        <td>Unassigned</td>
+                                        <td><span class="status-badge maintenance">Maintenance</span></td>
+                                        <td>98,456</td>
+                                        <td>In Progress</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewVehicle('015')">View</button>
+                                            <button class="action-btn small" onclick="maintenanceStatus('015')">Status</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rides Tab -->
+                <div id="rides-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-route"></i> Ride History & Analytics</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="exportRides()">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            <button class="action-btn secondary" onclick="generateReport()">
+                                <i class="fas fa-chart-bar"></i> Generate Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="rides-content">
+                        <!-- Ride Filters -->
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label for="date-from">From:</label>
+                                <input type="date" id="date-from" onchange="filterRides()">
+                            </div>
+                            <div class="filter-group">
+                                <label for="date-to">To:</label>
+                                <input type="date" id="date-to" onchange="filterRides()">
+                            </div>
+                            <div class="filter-group">
+                                <label for="ride-status">Status:</label>
+                                <select id="ride-status" onchange="filterRides()">
+                                    <option value="all">All Rides</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="in-progress">In Progress</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <input type="text" id="ride-search" placeholder="Search rides..." onkeyup="searchRides()">
+                            </div>
+                        </div>
+
+                        <!-- Ride Statistics -->
+                        <div class="ride-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">1,247</div>
+                                    <div class="stat-label">Total Rides Today</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">$18,945</div>
+                                    <div class="stat-label">Revenue Today</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">4.2</div>
+                                    <div class="stat-label">Avg Wait Time</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">4.7</div>
+                                    <div class="stat-label">Avg Rating</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ride History Table -->
+                        <div class="rides-table-container">
+                            <table class="rides-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ride ID</th>
+                                        <th>Customer</th>
+                                        <th>Driver</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Distance</th>
+                                        <th>Fare</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rides-tbody">
+                                    <tr>
+                                        <td>R-240921-001</td>
+                                        <td>John Smith</td>
+                                        <td>Marcus Rodriguez</td>
+                                        <td>Downtown Hospital</td>
+                                        <td>Airport</td>
+                                        <td>12.4 mi</td>
+                                        <td>$28.50</td>
+                                        <td><span class="status-badge completed">Completed</span></td>
+                                        <td>14:23</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewRide('R-240921-001')">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>R-240921-002</td>
+                                        <td>Sarah Johnson</td>
+                                        <td>Jennifer Chen</td>
+                                        <td>City Mall</td>
+                                        <td>Main Street</td>
+                                        <td>3.2 mi</td>
+                                        <td>$12.75</td>
+                                        <td><span class="status-badge in-progress">In Progress</span></td>
+                                        <td>14:45</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="trackRide('R-240921-002')">Track</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>R-240921-003</td>
+                                        <td>Michael Brown</td>
+                                        <td>David Thompson</td>
+                                        <td>Train Station</td>
+                                        <td>Hotel District</td>
+                                        <td>8.7 mi</td>
+                                        <td>$19.25</td>
+                                        <td><span class="status-badge completed">Completed</span></td>
+                                        <td>13:15</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewRide('R-240921-003')">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings Tab -->
+                <div id="earnings-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-dollar-sign"></i> Financial Overview</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="generateFinancialReport()">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                            <button class="action-btn secondary" onclick="payoutDrivers()">
+                                <i class="fas fa-money-bill-wave"></i> Process Payouts
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="earnings-content">
+                        <!-- Financial Summary -->
+                        <div class="financial-summary">
+                            <div class="summary-card revenue">
+                                <div class="summary-header">
+                                    <h3>Today's Revenue</h3>
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="summary-amount">$18,945.60</div>
+                                <div class="summary-change positive">+12.5% from yesterday</div>
+                            </div>
+                            <div class="summary-card expenses">
+                                <div class="summary-header">
+                                    <h3>Operating Costs</h3>
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <div class="summary-amount">$4,236.80</div>
+                                <div class="summary-change negative">+8.2% from yesterday</div>
+                            </div>
+                            <div class="summary-card profit">
+                                <div class="summary-header">
+                                    <h3>Net Profit</h3>
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="summary-amount">$14,708.80</div>
+                                <div class="summary-change positive">+14.1% from yesterday</div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings Chart -->
+                        <div class="earnings-chart">
+                            <h3><i class="fas fa-chart-bar"></i> Revenue Trend (Last 7 Days)</h3>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <div class="chart-bars">
+                                        <div class="chart-bar" style="height: 60%;">
+                                            <div class="bar-value">$15,245</div>
+                                            <div class="bar-label">Mon</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 75%;">
+                                            <div class="bar-value">$18,890</div>
+                                            <div class="bar-label">Tue</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 55%;">
+                                            <div class="bar-value">$13,675</div>
+                                            <div class="bar-label">Wed</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 80%;">
+                                            <div class="bar-value">$20,125</div>
+                                            <div class="bar-label">Thu</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 90%;">
+                                            <div class="bar-value">$22,450</div>
+                                            <div class="bar-label">Fri</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 85%;">
+                                            <div class="bar-value">$21,250</div>
+                                            <div class="bar-label">Sat</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 75%;">
+                                            <div class="bar-value">$18,946</div>
+                                            <div class="bar-label">Sun</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Driver Earnings -->
+                        <div class="driver-earnings">
+                            <h3><i class="fas fa-users"></i> Top Earning Drivers (Today)</h3>
+                            <div class="earnings-list">
+                                <div class="earnings-item">
+                                    <div class="driver-rank">1</div>
+                                    <div class="driver-name">Marcus Rodriguez</div>
+                                    <div class="driver-rides">15 rides</div>
+                                    <div class="driver-earnings">$312.80</div>
+                                </div>
+                                <div class="earnings-item">
+                                    <div class="driver-rank">2</div>
+                                    <div class="driver-name">Jennifer Chen</div>
+                                    <div class="driver-rides">12 rides</div>
+                                    <div class="driver-earnings">$289.45</div>
+                                </div>
+                                <div class="earnings-item">
+                                    <div class="driver-rank">3</div>
+                                    <div class="driver-name">David Thompson</div>
+                                    <div class="driver-rides">11 rides</div>
+                                    <div class="driver-earnings">$267.20</div>
+                                </div>
+                                <div class="earnings-item">
+                                    <div class="driver-rank">4</div>
+                                    <div class="driver-name">Lisa Martinez</div>
+                                    <div class="driver-rides">10 rides</div>
+                                    <div class="driver-earnings">$245.60</div>
+                                </div>
+                                <div class="earnings-item">
+                                    <div class="driver-rank">5</div>
+                                    <div class="driver-name">Robert Wilson</div>
+                                    <div class="driver-rides">9 rides</div>
+                                    <div class="driver-earnings">$223.85</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cogs"></i> System Settings</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                            <button class="action-btn secondary" onclick="resetSettings()">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-content">
+                        <div class="settings-sections">
+                            <!-- Dispatch Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-phone-alt"></i> Dispatch Settings</h3>
+                                <div class="setting-group">
+                                    <label for="auto-assign">Auto-assign drivers:</label>
+                                    <input type="checkbox" id="auto-assign" checked>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="max-wait-time">Max wait time (minutes):</label>
+                                    <input type="number" id="max-wait-time" value="10" min="1" max="30">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="priority-zones">Priority zones:</label>
+                                    <textarea id="priority-zones" placeholder="Hospital, Airport, Train Station"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Pricing Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-dollar-sign"></i> Pricing Settings</h3>
+                                <div class="setting-group">
+                                    <label for="base-fare">Base fare:</label>
+                                    <input type="number" id="base-fare" value="3.50" step="0.25" min="0">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="per-mile-rate">Per mile rate:</label>
+                                    <input type="number" id="per-mile-rate" value="2.25" step="0.25" min="0">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="surge-multiplier">Surge pricing multiplier:</label>
+                                    <input type="number" id="surge-multiplier" value="1.5" step="0.1" min="1">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="driver-commission">Driver commission (%):</label>
+                                    <input type="number" id="driver-commission" value="75" min="50" max="90">
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                                <div class="setting-group">
+                                    <label for="email-notifications">Email notifications:</label>
+                                    <input type="checkbox" id="email-notifications" checked>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="sms-alerts">SMS alerts:</label>
+                                    <input type="checkbox" id="sms-alerts">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="emergency-contacts">Emergency contacts:</label>
+                                    <textarea id="emergency-contacts" placeholder="Police: 911, Fire: 911, Medical: 911"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- System Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-server"></i> System Settings</h3>
+                                <div class="setting-group">
+                                    <label for="backup-frequency">Backup frequency (hours):</label>
+                                    <input type="number" id="backup-frequency" value="6" min="1" max="24">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="log-retention">Log retention (days):</label>
+                                    <input type="number" id="log-retention" value="30" min="7" max="365">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="maintenance-mode">Maintenance mode:</label>
+                                    <input type="checkbox" id="maintenance-mode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="taxi-footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 LS Taxi Company. All rights reserved.</p>
+                    <p>Dispatch Management System v3.2</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" onclick="showHelp()">Help</a>
+                    <a href="#" onclick="showAbout()">About</a>
+                    <a href="#" onclick="contactSupport()">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                Modal content goes here
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn primary" id="modal-confirm" onclick="confirmModal()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

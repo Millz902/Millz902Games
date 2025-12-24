@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: transparent;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#economy-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    color: white;
+    overflow: hidden;
+}
+
+.economy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.economy-header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+#close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+#close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.economy-content {
+    padding: 30px;
+}
+
+.economy-stats {
+    margin-bottom: 30px;
+}
+
+.economy-stats h2 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.economy-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.action-group {
+    flex: 1;
+    text-align: center;
+}
+
+.action-group h3 {
+    margin: 0 0 15px 0;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.action-group input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.action-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.action-group button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+}
+
+.button-row button {
+    margin-bottom: 0;
+}
+
+.action-group button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+}
+
+#remove-fund-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+#remove-fund-btn:hover {
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}

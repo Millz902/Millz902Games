@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Nightlife</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="nightlife-panel">
+            <div class="header">
+                <h1>Los Scotia Nightlife</h1>
+                <button id="closeBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="venues">Venues</button>
+                    <button class="tab-btn" data-tab="events">Events</button>
+                    <button class="tab-btn" data-tab="bookings">Bookings</button>
+                    <button class="tab-btn" data-tab="vip">VIP Services</button>
+                </div>
+                
+                <!-- Venues Tab -->
+                <div id="venuesTab" class="tab-content active">
+                    <div class="venues-section">
+                        <h3>Popular Venues</h3>
+                        <div class="venues-grid">
+                            <div class="venue-card">
+                                <div class="venue-image"></div>
+                                <div class="venue-info">
+                                    <h4>Club Galaxy</h4>
+                                    <p class="venue-type">Dance Club</p>
+                                    <p class="venue-rating">★★★★★ (4.8)</p>
+                                    <div class="venue-details">
+                                        <span class="capacity">Capacity: 500</span>
+                                        <span class="price-range">$$$$</span>
+                                    </div>
+                                    <button class="visit-btn" data-venue="galaxy">Visit Venue</button>
+                                </div>
+                            </div>
+                            
+                            <div class="venue-card">
+                                <div class="venue-image"></div>
+                                <div class="venue-info">
+                                    <h4>The Rooftop</h4>
+                                    <p class="venue-type">Lounge Bar</p>
+                                    <p class="venue-rating">★★★★☆ (4.5)</p>
+                                    <div class="venue-details">
+                                        <span class="capacity">Capacity: 200</span>
+                                        <span class="price-range">$$$</span>
+                                    </div>
+                                    <button class="visit-btn" data-venue="rooftop">Visit Venue</button>
+                                </div>
+                            </div>
+                            
+                            <div class="venue-card">
+                                <div class="venue-image"></div>
+                                <div class="venue-info">
+                                    <h4>Neon Underground</h4>
+                                    <p class="venue-type">Underground Club</p>
+                                    <p class="venue-rating">★★★★★ (4.9)</p>
+                                    <div class="venue-details">
+                                        <span class="capacity">Capacity: 300</span>
+                                        <span class="price-range">$$</span>
+                                    </div>
+                                    <button class="visit-btn" data-venue="neon">Visit Venue</button>
+                                </div>
+                            </div>
+                            
+                            <div class="venue-card">
+                                <div class="venue-image"></div>
+                                <div class="venue-info">
+                                    <h4>Ocean View Terrace</h4>
+                                    <p class="venue-type">Beach Club</p>
+                                    <p class="venue-rating">★★★★☆ (4.6)</p>
+                                    <div class="venue-details">
+                                        <span class="capacity">Capacity: 400</span>
+                                        <span class="price-range">$$$$</span>
+                                    </div>
+                                    <button class="visit-btn" data-venue="ocean">Visit Venue</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="venue-filters">
+                        <h4>Filter Venues</h4>
+                        <div class="filter-options">
+                            <select id="venueType">
+                                <option value="">All Types</option>
+                                <option value="club">Dance Club</option>
+                                <option value="bar">Bar/Lounge</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="casino">Casino</option>
+                            </select>
+                            <select id="priceRange">
+                                <option value="">All Prices</option>
+                                <option value="$">Budget ($)</option>
+                                <option value="$$">Moderate ($$)</option>
+                                <option value="$$$">Upscale ($$$)</option>
+                                <option value="$$$$">Luxury ($$$$)</option>
+                            </select>
+                            <button id="applyFilters" class="filter-btn">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events Tab -->
+                <div id="eventsTab" class="tab-content">
+                    <div class="events-section">
+                        <h3>Upcoming Events</h3>
+                        <div class="events-list" id="eventsList">
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">25</span>
+                                    <span class="month">Dec</span>
+                                </div>
+                                <div class="event-details">
+                                    <h4>New Year's Eve Bash</h4>
+                                    <p class="event-venue">Club Galaxy</p>
+                                    <p class="event-time">10:00 PM - 6:00 AM</p>
+                                    <p class="event-price">Entry: $50</p>
+                                </div>
+                                <button class="book-btn" data-event="nye-bash">Book Tickets</button>
+                            </div>
+                            
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">28</span>
+                                    <span class="month">Dec</span>
+                                </div>
+                                <div class="event-details">
+                                    <h4>Jazz Night</h4>
+                                    <p class="event-venue">The Rooftop</p>
+                                    <p class="event-time">8:00 PM - 12:00 AM</p>
+                                    <p class="event-price">Entry: $25</p>
+                                </div>
+                                <button class="book-btn" data-event="jazz-night">Book Tickets</button>
+                            </div>
+                            
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">30</span>
+                                    <span class="month">Dec</span>
+                                </div>
+                                <div class="event-details">
+                                    <h4>Electronic Music Festival</h4>
+                                    <p class="event-venue">Neon Underground</p>
+                                    <p class="event-time">9:00 PM - 4:00 AM</p>
+                                    <p class="event-price">Entry: $40</p>
+                                </div>
+                                <button class="book-btn" data-event="emf">Book Tickets</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-creator manager-only">
+                        <h4>Create Event</h4>
+                        <div class="form-group">
+                            <label for="eventName">Event Name</label>
+                            <input type="text" id="eventName" placeholder="Enter event name">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventVenue">Venue</label>
+                            <select id="eventVenue">
+                                <option value="">Select Venue</option>
+                                <option value="galaxy">Club Galaxy</option>
+                                <option value="rooftop">The Rooftop</option>
+                                <option value="neon">Neon Underground</option>
+                                <option value="ocean">Ocean View Terrace</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventDate">Date</label>
+                                <input type="date" id="eventDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTime">Time</label>
+                                <input type="time" id="eventTime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventPrice">Entry Price ($)</label>
+                            <input type="number" id="eventPrice" placeholder="0">
+                        </div>
+                        <button id="createEventBtn" class="action-btn">Create Event</button>
+                    </div>
+                </div>
+                
+                <!-- Bookings Tab -->
+                <div id="bookingsTab" class="tab-content">
+                    <div class="bookings-section">
+                        <h3>My Reservations</h3>
+                        <div class="bookings-list" id="bookingsList">
+                            <div class="booking-item">
+                                <div class="booking-info">
+                                    <h4>VIP Table - Club Galaxy</h4>
+                                    <p class="booking-date">December 31, 2023 - 10:00 PM</p>
+                                    <p class="booking-details">Table for 8 people, Premium bottle service</p>
+                                    <p class="booking-price">Total: $800</p>
+                                </div>
+                                <div class="booking-status">
+                                    <span class="status-badge confirmed">Confirmed</span>
+                                    <button class="cancel-btn" data-booking="vip-table-1">Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <div class="booking-item">
+                                <div class="booking-info">
+                                    <h4>Regular Entry - Neon Underground</h4>
+                                    <p class="booking-date">December 28, 2023 - 9:00 PM</p>
+                                    <p class="booking-details">General admission, 2 tickets</p>
+                                    <p class="booking-price">Total: $80</p>
+                                </div>
+                                <div class="booking-status">
+                                    <span class="status-badge pending">Pending</span>
+                                    <button class="cancel-btn" data-booking="entry-1">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-creator">
+                        <h4>Make New Reservation</h4>
+                        <div class="form-group">
+                            <label for="bookingVenue">Select Venue</label>
+                            <select id="bookingVenue">
+                                <option value="">Choose Venue</option>
+                                <option value="galaxy">Club Galaxy</option>
+                                <option value="rooftop">The Rooftop</option>
+                                <option value="neon">Neon Underground</option>
+                                <option value="ocean">Ocean View Terrace</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookingDate">Date</label>
+                                <input type="date" id="bookingDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingTime">Time</label>
+                                <input type="time" id="bookingTime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="partySize">Party Size</label>
+                            <input type="number" id="partySize" min="1" max="20" placeholder="Number of people">
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceType">Service Type</label>
+                            <select id="serviceType">
+                                <option value="general">General Admission</option>
+                                <option value="vip">VIP Table</option>
+                                <option value="bottle">Bottle Service</option>
+                                <option value="private">Private Event</option>
+                            </select>
+                        </div>
+                        <button id="makeReservationBtn" class="action-btn">Make Reservation</button>
+                    </div>
+                </div>
+                
+                <!-- VIP Services Tab -->
+                <div id="vipTab" class="tab-content">
+                    <div class="vip-section">
+                        <h3>VIP Services</h3>
+                        <div class="vip-services-grid">
+                            <div class="vip-service-card">
+                                <h4>VIP Table Service</h4>
+                                <div class="service-price">$200 - $500</div>
+                                <ul class="service-features">
+                                    <li>Reserved table for your party</li>
+                                    <li>Dedicated server</li>
+                                    <li>Skip the line entrance</li>
+                                    <li>Premium location</li>
+                                    <li>Complimentary appetizers</li>
+                                </ul>
+                                <button class="request-btn" data-service="vip-table">Request Service</button>
+                            </div>
+                            
+                            <div class="vip-service-card">
+                                <h4>Bottle Service</h4>
+                                <div class="service-price">$300 - $800</div>
+                                <ul class="service-features">
+                                    <li>Premium bottle selection</li>
+                                    <li>Mixers and garnishes included</li>
+                                    <li>Private server</li>
+                                    <li>VIP table included</li>
+                                    <li>Celebration setup available</li>
+                                </ul>
+                                <button class="request-btn" data-service="bottle-service">Request Service</button>
+                            </div>
+                            
+                            <div class="vip-service-card">
+                                <h4>Private Event Hosting</h4>
+                                <div class="service-price">$1000+</div>
+                                <ul class="service-features">
+                                    <li>Exclusive venue access</li>
+                                    <li>Custom catering options</li>
+                                    <li>Professional DJ/Entertainment</li>
+                                    <li>Event coordination</li>
+                                    <li>Photography services</li>
+                                </ul>
+                                <button class="request-btn" data-service="private-event">Request Service</button>
+                            </div>
+                            
+                            <div class="vip-service-card">
+                                <h4>VIP Membership</h4>
+                                <div class="service-price">$100/month</div>
+                                <ul class="service-features">
+                                    <li>Skip the line at all venues</li>
+                                    <li>20% discount on all services</li>
+                                    <li>Priority reservations</li>
+                                    <li>Exclusive member events</li>
+                                    <li>Personal concierge service</li>
+                                </ul>
+                                <button class="request-btn" data-service="vip-membership">Join VIP</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vip-contact">
+                        <h4>VIP Concierge</h4>
+                        <p>For personalized service and special requests, contact our VIP concierge team.</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <span class="contact-label">Phone:</span>
+                                <span class="contact-value">(555) 123-NIGHT</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">Email:</span>
+                                <span class="contact-value">vip@losscotianightlife.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-label">Available:</span>
+                                <span class="contact-value">7 PM - 4 AM Daily</span>
+                            </div>
+                        </div>
+                        <button id="contactConciergeBtn" class="action-btn">Contact Concierge</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

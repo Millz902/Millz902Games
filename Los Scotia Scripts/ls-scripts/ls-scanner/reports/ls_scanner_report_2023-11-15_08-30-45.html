@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Server Scanner Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .summary-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .issue-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: orange;
+        }
+        .issue {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-left: 4px solid #e74c3c;
+            background-color: #fdedec;
+        }
+        .warning {
+            border-left-color: #f39c12;
+            background-color: #fef9e7;
+        }
+        .error {
+            border-left-color: #e74c3c;
+            background-color: #fdedec;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .recommendations {
+            background-color: #eafaf1;
+            border-left: 5px solid #2ecc71;
+            padding: 15px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        .stat-value {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #3498db;
+        }
+        .stat-value.warning {
+            color: #f39c12;
+        }
+        .stat-value.error {
+            color: #e74c3c;
+        }
+        .collapse-btn {
+            background-color: #f1f1f1;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            transition: 0.4s;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .collapse-btn:hover {
+            background-color: #ddd;
+        }
+        .collapse-btn:after {
+            content: '\002B';
+            font-weight: bold;
+            float: right;
+        }
+        .collapse-btn.active:after {
+            content: "\2212";
+        }
+        .collapse-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Los Scotia Server Scanner Report</h1>
+        
+        <div class="summary">
+            <p><strong>Generated:</strong> 2023-11-15 08:30:45</p>
+            <p><strong>Server Name:</strong> Los Scotia QBCore Server</p>
+            <div class="summary-title">Total Issues Found: <span class="issue-count">7</span></div>
+        </div>
+        
+        <div class="stat-grid">
+            <div class="stat-box">
+                <div class="stat-label">Resource Conflicts</div>
+                <div class="stat-value warning">2</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Missing Dependencies</div>
+                <div class="stat-value warning">1</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">SQL Issues</div>
+                <div class="stat-value warning">2</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Webhook Issues</div>
+                <div class="stat-value warning">1</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Missing Required Resources</div>
+                <div class="stat-value">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Resource Errors</div>
+                <div class="stat-value">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">System Issues</div>
+                <div class="stat-value warning">1</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="collapse-btn">Resource Conflicts (2)</button>
+            <div class="collapse-content">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th>Resources</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Known conflict between qb-banking and rl-banking</td>
+                        <td>qb-banking, rl-banking</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Known conflict between smartphone-pro and phone-for-everyone</td>
+                        <td>smartphone-pro, phone-for-everyone</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="collapse-btn">Dependency Issues (1)</button>
+            <div class="collapse-content">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Resource</th>
+                        <th>Missing Dependency</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>rl-banking</td>
+                        <td>qb-target</td>
+                        <td>explicit_not_started</td>
+                        <td>Resource rl-banking depends on resource qb-target which is not started (state: stopped)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="collapse-btn">SQL Issues (2)</button>
+            <div class="collapse-content">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Resource</th>
+                        <th>File/Table</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>rl-banking</td>
+                        <td>install.sql</td>
+                        <td>Table created without PRIMARY KEY definition</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Multiple</td>
+                        <td>players</td>
+                        <td>Table 'players' is defined in multiple resources: qb-core, rl-banking</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="collapse-btn">Webhook Issues (1)</button>
+            <div class="collapse-content">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Resources</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>qb-banking, ls-discord-webhooks</td>
+                        <td>Webhook used by multiple resources: qb-banking, ls-discord-webhooks</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="collapse-btn">System Functionality Issues (1)</button>
+            <div class="collapse-content">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>System</th>
+                        <th>Category</th>
+                        <th>Active Resources</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Banking System</td>
+                        <td>banking</td>
+                        <td>qb-banking, rl-banking</td>
+                        <td>Multiple Banking System resources are active: qb-banking, rl-banking. This will cause conflicts.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section recommendations">
+            <h2>Recommendations</h2>
+
+            <p><strong>Resource Conflicts:</strong></p>
+            <ul>
+                <li>Ensure only one resource providing each functionality is active.</li>
+                <li>Check server.cfg and disable conflicting resources.</li>
+            </ul>
+
+            <p><strong>Dependency Issues:</strong></p>
+            <ul>
+                <li>Ensure all required resources are installed and enabled.</li>
+                <li>Check load order to make sure dependencies are loaded before resources that need them.</li>
+                <li>Address circular dependencies by refactoring the resources.</li>
+            </ul>
+
+            <p><strong>SQL Issues:</strong></p>
+            <ul>
+                <li>Review SQL files for syntax errors and potential conflicts.</li>
+                <li>Ensure table definitions are not duplicated across resources.</li>
+                <li>Check for proper primary keys and indexing on tables.</li>
+            </ul>
+
+            <p><strong>System Functionality Issues:</strong></p>
+            <ul>
+                <li>Banking: Ensure only ls-bank-advanced is active in server.cfg.</li>
+                <li>Phone: Ensure only smartphone-pro is active in server.cfg.</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>Report generated by Los Scotia Server Scanner v1.0</p>
+            <p>Developed by Los Scotia Development Team</p>
+        </div>
+    </div>
+
+    <script>
+        // Add JavaScript for collapsible sections
+        var coll = document.getElementsByClassName("collapse-btn");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

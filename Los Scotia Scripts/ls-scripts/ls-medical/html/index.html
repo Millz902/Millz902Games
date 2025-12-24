@@ -1,0 +1,646 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Millz902Games">
+    <meta name="description" content="Los Scotia Emergency Medical Services - Created by Millz902Games">
+    <title>Los Scotia Medical System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="medical-panel">
+            <div class="header">
+                <h1 id="panel-title">Los Scotia Emergency Medical Services</h1>
+                <button class="close-btn" onclick="closePanel()">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
+                    <button class="tab-btn" onclick="switchTab('patients')">Patients</button>
+                    <button class="tab-btn" onclick="switchTab('ambulances')">Ambulances</button>
+                    <button class="tab-btn" onclick="switchTab('hospital')">Hospital</button>
+                    <button class="tab-btn" onclick="switchTab('inventory')">Inventory</button>
+                    <button class="tab-btn" onclick="switchTab('settings')">Settings</button>
+                </div>
+
+                <!-- Dashboard Tab -->
+                <div id="dashboard-tab" class="tab-content active">
+                    <div class="medical-dashboard">
+                        <h3>EMS Operations Dashboard</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h4>Active Calls</h4>
+                                <span id="active-calls">3</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>On-Duty Medics</h4>
+                                <span id="on-duty-medics">8</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Ambulances Available</h4>
+                                <span id="available-ambulances">5/7</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Hospital Beds</h4>
+                                <span id="hospital-beds">12/20</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>ICU Beds</h4>
+                                <span id="icu-beds">3/8</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Emergency Level</h4>
+                                <span id="emergency-level">Normal</span>
+                            </div>
+                        </div>
+                        
+                        <div class="emergency-calls">
+                            <h4>Active Emergency Calls</h4>
+                            <div class="call-list">
+                                <div class="call-item high-priority">
+                                    <div class="call-info">
+                                        <span class="call-id">#EMS-001</span>
+                                        <span class="call-location">Legion Square</span>
+                                        <span class="call-type">Vehicle Accident</span>
+                                        <span class="call-time">5 min ago</span>
+                                    </div>
+                                    <div class="call-status">
+                                        <span class="priority high">High Priority</span>
+                                        <span class="assigned">Unit 3 Assigned</span>
+                                    </div>
+                                </div>
+                                <div class="call-item medium-priority">
+                                    <div class="call-info">
+                                        <span class="call-id">#EMS-002</span>
+                                        <span class="call-location">Pillbox Hospital</span>
+                                        <span class="call-type">Cardiac Arrest</span>
+                                        <span class="call-time">12 min ago</span>
+                                    </div>
+                                    <div class="call-status">
+                                        <span class="priority medium">Medium Priority</span>
+                                        <span class="assigned">Unit 1 En Route</span>
+                                    </div>
+                                </div>
+                                <div class="call-item low-priority">
+                                    <div class="call-info">
+                                        <span class="call-id">#EMS-003</span>
+                                        <span class="call-location">Sandy Shores</span>
+                                        <span class="call-type">Minor Injury</span>
+                                        <span class="call-time">18 min ago</span>
+                                    </div>
+                                    <div class="call-status">
+                                        <span class="priority low">Low Priority</span>
+                                        <span class="assigned">Unit 5 Responding</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="unit-status">
+                            <h4>EMS Unit Status</h4>
+                            <div class="unit-grid">
+                                <div class="unit-card available">
+                                    <span class="unit-id">Unit 1</span>
+                                    <span class="unit-crew">Dr. Smith, Medic Jones</span>
+                                    <span class="unit-location">Hospital</span>
+                                    <span class="unit-status">Available</span>
+                                </div>
+                                <div class="unit-card busy">
+                                    <span class="unit-id">Unit 2</span>
+                                    <span class="unit-crew">Dr. Wilson, Medic Brown</span>
+                                    <span class="unit-location">Downtown</span>
+                                    <span class="unit-status">On Call</span>
+                                </div>
+                                <div class="unit-card maintenance">
+                                    <span class="unit-id">Unit 3</span>
+                                    <span class="unit-crew">-</span>
+                                    <span class="unit-location">Garage</span>
+                                    <span class="unit-status">Maintenance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patients Tab -->
+                <div id="patients-tab" class="tab-content">
+                    <div class="patients-section">
+                        <h3>Patient Management</h3>
+                        <div class="patient-actions">
+                            <button class="action-btn" onclick="admitPatient()">Admit Patient</button>
+                            <button class="action-btn" onclick="dischargePatient()">Discharge Patient</button>
+                            <button class="action-btn" onclick="treatPatient()">Emergency Treatment</button>
+                            <button class="action-btn" onclick="transferPatient()">Transfer Patient</button>
+                            <button class="action-btn danger" onclick="codeBlue()">Code Blue</button>
+                        </div>
+                        
+                        <div class="patient-list">
+                            <h4>Current Patients</h4>
+                            <div class="patients-grid">
+                                <div class="patient-card critical">
+                                    <div class="patient-header">
+                                        <span class="patient-name">John Doe</span>
+                                        <span class="patient-id">#P-001</span>
+                                        <span class="patient-condition critical">Critical</span>
+                                    </div>
+                                    <div class="patient-details">
+                                        <div class="detail-item">
+                                            <label>Age:</label>
+                                            <span>34</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Admission:</label>
+                                            <span>2 hours ago</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Condition:</label>
+                                            <span>GSW to chest</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Room:</label>
+                                            <span>ICU-3</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Doctor:</label>
+                                            <span>Dr. Smith</span>
+                                        </div>
+                                    </div>
+                                    <div class="patient-vitals">
+                                        <div class="vital">
+                                            <span class="vital-label">Heart Rate:</span>
+                                            <span class="vital-value critical">145 BPM</span>
+                                        </div>
+                                        <div class="vital">
+                                            <span class="vital-label">Blood Pressure:</span>
+                                            <span class="vital-value critical">80/40</span>
+                                        </div>
+                                        <div class="vital">
+                                            <span class="vital-label">O2 Saturation:</span>
+                                            <span class="vital-value critical">88%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="patient-card stable">
+                                    <div class="patient-header">
+                                        <span class="patient-name">Jane Smith</span>
+                                        <span class="patient-id">#P-002</span>
+                                        <span class="patient-condition stable">Stable</span>
+                                    </div>
+                                    <div class="patient-details">
+                                        <div class="detail-item">
+                                            <label>Age:</label>
+                                            <span>28</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Admission:</label>
+                                            <span>4 hours ago</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Condition:</label>
+                                            <span>Broken arm</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Room:</label>
+                                            <span>Room 12</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Doctor:</label>
+                                            <span>Dr. Wilson</span>
+                                        </div>
+                                    </div>
+                                    <div class="patient-vitals">
+                                        <div class="vital">
+                                            <span class="vital-label">Heart Rate:</span>
+                                            <span class="vital-value normal">72 BPM</span>
+                                        </div>
+                                        <div class="vital">
+                                            <span class="vital-label">Blood Pressure:</span>
+                                            <span class="vital-value normal">120/80</span>
+                                        </div>
+                                        <div class="vital">
+                                            <span class="vital-label">O2 Saturation:</span>
+                                            <span class="vital-value normal">98%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="patient-card recovering">
+                                    <div class="patient-header">
+                                        <span class="patient-name">Mike Johnson</span>
+                                        <span class="patient-id">#P-003</span>
+                                        <span class="patient-condition recovering">Recovering</span>
+                                    </div>
+                                    <div class="patient-details">
+                                        <div class="detail-item">
+                                            <label>Age:</label>
+                                            <span>45</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Admission:</label>
+                                            <span>1 day ago</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Condition:</label>
+                                            <span>Post-surgery</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Room:</label>
+                                            <span>Room 8</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Doctor:</label>
+                                            <span>Dr. Brown</span>
+                                        </div>
+                                    </div>
+                                    <div class="patient-vitals">
+                                        <div class="vital">
+                                            <span class="vital-label">Heart Rate:</span>
+                                            <span class="vital-value normal">68 BPM</span>
+                                        </div>
+                                        <div class="vital">
+                                            <span class="vital-label">Blood Pressure:</span>
+                                            <span class="vital-value normal">115/75</span>
+                                        </div>
+                                        <div class="vital">
+                                            <span class="vital-label">O2 Saturation:</span>
+                                            <span class="vital-value normal">96%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ambulances Tab -->
+                <div id="ambulances-tab" class="tab-content">
+                    <div class="ambulances-section">
+                        <h3>Ambulance Fleet Management</h3>
+                        <div class="ambulance-actions">
+                            <button class="action-btn" onclick="deployAmbulance()">Deploy Ambulance</button>
+                            <button class="action-btn" onclick="recallAmbulance()">Recall Unit</button>
+                            <button class="action-btn" onclick="maintenanceCheck()">Maintenance Check</button>
+                            <button class="action-btn" onclick="refuelAmbulance()">Refuel Vehicle</button>
+                            <button class="action-btn" onclick="restockSupplies()">Restock Supplies</button>
+                        </div>
+                        
+                        <div class="ambulance-fleet">
+                            <div class="ambulance-item active">
+                                <div class="ambulance-info">
+                                    <span class="ambulance-id">AMB-001</span>
+                                    <span class="ambulance-model">Mercedes Sprinter</span>
+                                    <span class="ambulance-location">Hospital Parking</span>
+                                    <span class="ambulance-status active">Active</span>
+                                </div>
+                                <div class="ambulance-details">
+                                    <div class="detail-row">
+                                        <span class="detail-label">Fuel:</span>
+                                        <div class="fuel-bar">
+                                            <div class="fuel-fill" style="width: 85%"></div>
+                                        </div>
+                                        <span class="detail-value">85%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Supplies:</span>
+                                        <div class="supplies-bar">
+                                            <div class="supplies-fill" style="width: 90%"></div>
+                                        </div>
+                                        <span class="detail-value">90%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Condition:</span>
+                                        <span class="detail-value good">Excellent</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Crew:</span>
+                                        <span class="detail-value">Dr. Smith, Medic Jones</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="ambulance-item on-call">
+                                <div class="ambulance-info">
+                                    <span class="ambulance-id">AMB-002</span>
+                                    <span class="ambulance-model">Ford Transit</span>
+                                    <span class="ambulance-location">Legion Square</span>
+                                    <span class="ambulance-status on-call">On Call</span>
+                                </div>
+                                <div class="ambulance-details">
+                                    <div class="detail-row">
+                                        <span class="detail-label">Fuel:</span>
+                                        <div class="fuel-bar">
+                                            <div class="fuel-fill" style="width: 65%"></div>
+                                        </div>
+                                        <span class="detail-value">65%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Supplies:</span>
+                                        <div class="supplies-bar">
+                                            <div class="supplies-fill" style="width: 70%"></div>
+                                        </div>
+                                        <span class="detail-value">70%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Condition:</span>
+                                        <span class="detail-value good">Good</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Crew:</span>
+                                        <span class="detail-value">Dr. Wilson, Medic Brown</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="ambulance-item maintenance">
+                                <div class="ambulance-info">
+                                    <span class="ambulance-id">AMB-003</span>
+                                    <span class="ambulance-model">Chevrolet Express</span>
+                                    <span class="ambulance-location">Garage</span>
+                                    <span class="ambulance-status maintenance">Maintenance</span>
+                                </div>
+                                <div class="ambulance-details">
+                                    <div class="detail-row">
+                                        <span class="detail-label">Fuel:</span>
+                                        <div class="fuel-bar">
+                                            <div class="fuel-fill" style="width: 30%"></div>
+                                        </div>
+                                        <span class="detail-value">30%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Supplies:</span>
+                                        <div class="supplies-bar">
+                                            <div class="supplies-fill" style="width: 45%"></div>
+                                        </div>
+                                        <span class="detail-value">45%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Condition:</span>
+                                        <span class="detail-value poor">Needs Repair</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="detail-label">Crew:</span>
+                                        <span class="detail-value">Unassigned</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital Tab -->
+                <div id="hospital-tab" class="tab-content">
+                    <div class="hospital-section">
+                        <h3>Hospital Management</h3>
+                        <div class="hospital-actions">
+                            <button class="action-btn" onclick="checkInPatient()">Check-in Patient</button>
+                            <button class="action-btn" onclick="scheduleOperation()">Schedule Operation</button>
+                            <button class="action-btn" onclick="manageBeds()">Manage Beds</button>
+                            <button class="action-btn" onclick="staffSchedule()">Staff Schedule</button>
+                            <button class="action-btn danger" onclick="emergencyProtocol()">Emergency Protocol</button>
+                        </div>
+                        
+                        <div class="hospital-overview">
+                            <div class="department-stats">
+                                <h4>Department Status</h4>
+                                <div class="departments-grid">
+                                    <div class="department-card">
+                                        <h5>Emergency Room</h5>
+                                        <div class="department-info">
+                                            <span class="capacity">Capacity: 8/12</span>
+                                            <span class="wait-time">Wait Time: 15 min</span>
+                                            <span class="status normal">Normal</span>
+                                        </div>
+                                    </div>
+                                    <div class="department-card">
+                                        <h5>Intensive Care Unit</h5>
+                                        <div class="department-info">
+                                            <span class="capacity">Capacity: 3/8</span>
+                                            <span class="wait-time">Wait Time: N/A</span>
+                                            <span class="status normal">Normal</span>
+                                        </div>
+                                    </div>
+                                    <div class="department-card">
+                                        <h5>General Ward</h5>
+                                        <div class="department-info">
+                                            <span class="capacity">Capacity: 15/25</span>
+                                            <span class="wait-time">Wait Time: 45 min</span>
+                                            <span class="status busy">Busy</span>
+                                        </div>
+                                    </div>
+                                    <div class="department-card">
+                                        <h5>Surgery</h5>
+                                        <div class="department-info">
+                                            <span class="capacity">Capacity: 2/4</span>
+                                            <span class="wait-time">Wait Time: 2 hours</span>
+                                            <span class="status normal">Normal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="staff-overview">
+                                <h4>Staff On Duty</h4>
+                                <div class="staff-list">
+                                    <div class="staff-item">
+                                        <span class="staff-name">Dr. Sarah Smith</span>
+                                        <span class="staff-role">Chief of Medicine</span>
+                                        <span class="staff-department">Emergency Room</span>
+                                        <span class="staff-status available">Available</span>
+                                    </div>
+                                    <div class="staff-item">
+                                        <span class="staff-name">Dr. Michael Wilson</span>
+                                        <span class="staff-role">Surgeon</span>
+                                        <span class="staff-department">Surgery</span>
+                                        <span class="staff-status busy">In Surgery</span>
+                                    </div>
+                                    <div class="staff-item">
+                                        <span class="staff-name">Dr. Emily Brown</span>
+                                        <span class="staff-role">Cardiologist</span>
+                                        <span class="staff-department">ICU</span>
+                                        <span class="staff-status available">Available</span>
+                                    </div>
+                                    <div class="staff-item">
+                                        <span class="staff-name">Nurse Jennifer Taylor</span>
+                                        <span class="staff-role">Head Nurse</span>
+                                        <span class="staff-department">General Ward</span>
+                                        <span class="staff-status busy">With Patient</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Tab -->
+                <div id="inventory-tab" class="tab-content">
+                    <div class="inventory-section">
+                        <h3>Medical Inventory</h3>
+                        <div class="inventory-actions">
+                            <button class="action-btn" onclick="orderSupplies()">Order Supplies</button>
+                            <button class="action-btn" onclick="checkExpiry()">Check Expiry Dates</button>
+                            <button class="action-btn" onclick="stockAlert()">Stock Alerts</button>
+                            <button class="action-btn" onclick="inventoryReport()">Generate Report</button>
+                        </div>
+                        
+                        <div class="inventory-categories">
+                            <div class="category-section">
+                                <h4>Emergency Medications</h4>
+                                <div class="inventory-list">
+                                    <div class="inventory-item low-stock">
+                                        <span class="item-name">Epinephrine</span>
+                                        <span class="item-quantity">15 vials</span>
+                                        <span class="item-status low">Low Stock</span>
+                                        <span class="item-expiry">Exp: 6 months</span>
+                                    </div>
+                                    <div class="inventory-item normal-stock">
+                                        <span class="item-name">Morphine</span>
+                                        <span class="item-quantity">45 vials</span>
+                                        <span class="item-status normal">Normal</span>
+                                        <span class="item-expiry">Exp: 12 months</span>
+                                    </div>
+                                    <div class="inventory-item normal-stock">
+                                        <span class="item-name">Atropine</span>
+                                        <span class="item-quantity">32 vials</span>
+                                        <span class="item-status normal">Normal</span>
+                                        <span class="item-expiry">Exp: 8 months</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="category-section">
+                                <h4>Medical Equipment</h4>
+                                <div class="inventory-list">
+                                    <div class="inventory-item normal-stock">
+                                        <span class="item-name">Defibrillators</span>
+                                        <span class="item-quantity">8 units</span>
+                                        <span class="item-status normal">Normal</span>
+                                        <span class="item-expiry">-</span>
+                                    </div>
+                                    <div class="inventory-item critical-stock">
+                                        <span class="item-name">Oxygen Tanks</span>
+                                        <span class="item-quantity">3 tanks</span>
+                                        <span class="item-status critical">Critical</span>
+                                        <span class="item-expiry">-</span>
+                                    </div>
+                                    <div class="inventory-item normal-stock">
+                                        <span class="item-name">Stretchers</span>
+                                        <span class="item-quantity">12 units</span>
+                                        <span class="item-status normal">Normal</span>
+                                        <span class="item-expiry">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="category-section">
+                                <h4>Surgical Supplies</h4>
+                                <div class="inventory-list">
+                                    <div class="inventory-item normal-stock">
+                                        <span class="item-name">Surgical Kits</span>
+                                        <span class="item-quantity">25 kits</span>
+                                        <span class="item-status normal">Normal</span>
+                                        <span class="item-expiry">Exp: 2 years</span>
+                                    </div>
+                                    <div class="inventory-item low-stock">
+                                        <span class="item-name">Anesthesia</span>
+                                        <span class="item-quantity">18 vials</span>
+                                        <span class="item-status low">Low Stock</span>
+                                        <span class="item-expiry">Exp: 10 months</span>
+                                    </div>
+                                    <div class="inventory-item normal-stock">
+                                        <span class="item-name">Bandages</span>
+                                        <span class="item-quantity">200 rolls</span>
+                                        <span class="item-status normal">Normal</span>
+                                        <span class="item-expiry">Exp: 3 years</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="settings-section">
+                        <h3>Medical System Settings</h3>
+                        <div class="setting-group">
+                            <h4>Emergency Response</h4>
+                            <div class="setting-item">
+                                <label>Response Time Multiplier:</label>
+                                <input type="number" id="response-time" value="1.0" min="0.1" max="3.0" step="0.1">
+                                <span>x</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Ambulance Speed Bonus:</label>
+                                <input type="number" id="ambulance-speed" value="15" min="0" max="50" step="5">
+                                <span>%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Auto-Dispatch Threshold:</label>
+                                <input type="range" id="auto-dispatch" min="1" max="10" value="5">
+                                <span id="auto-dispatch-value">5 calls</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h4>Treatment Settings</h4>
+                            <div class="setting-item">
+                                <label>Healing Rate:</label>
+                                <input type="range" id="healing-rate" min="50" max="200" value="100">
+                                <span id="healing-rate-value">100%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Surgery Success Rate:</label>
+                                <input type="number" id="surgery-success" value="95" min="50" max="100" step="1">
+                                <span>%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>Recovery Time:</label>
+                                <input type="number" id="recovery-time" value="30" min="10" max="120" step="5">
+                                <span>minutes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h4>System Features</h4>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="injury-system" checked>
+                                <label for="injury-system">Realistic Injury System</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="medical-bills" checked>
+                                <label for="medical-bills">Medical Billing System</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="insurance-system">
+                                <label for="insurance-system">Health Insurance</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="prescription-system" checked>
+                                <label for="prescription-system">Prescription System</label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-actions">
+                            <button class="action-btn" onclick="saveSettings()">Save Settings</button>
+                            <button class="action-btn" onclick="resetSettings()">Reset to Default</button>
+                            <button class="action-btn danger" onclick="emergencyReset()">Emergency Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 15px; background: #0a0a0a; color: #666; border-top: 1px solid #333;">
+        <p>&copy; 2025 Los Scotia Emergency Medical Services</p>
+        <p><strong>Created by Millz902Games</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

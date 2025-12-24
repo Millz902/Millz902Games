@@ -1,0 +1,255 @@
+:root {
+    --primary-color: #1a1a1a;
+    --secondary-color: #2a2a2a;
+    --accent-color: #e60000;
+    --text-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --progress-color: #e60000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100vh;
+    background-color: transparent;
+}
+
+.music-player-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    z-index: 10000;
+}
+
+.music-player {
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.player-header {
+    padding: 15px;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.red-text {
+    color: #e60000;
+}
+
+.white-text {
+    color: #ffffff;
+}
+
+.player-controls-top {
+    display: flex;
+    gap: 10px;
+}
+
+.player-content {
+    padding: 15px;
+    max-height: 280px;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+
+.player-content.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.album-art {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.album-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-details {
+    flex: 1;
+}
+
+.track-title {
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.track-artist {
+    color: #aaa;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.progress-time {
+    font-size: 12px;
+    color: #aaa;
+    width: 40px;
+    text-align: center;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background-color: #444;
+    border-radius: 2px;
+    margin: 0 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background-color: var(--progress-color);
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.1s linear;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-button.play {
+    background-color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+}
+
+.control-button.play:hover {
+    transform: scale(1.05);
+    background-color: #ff1a1a;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #aaa;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    width: 80px;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+    outline: none;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    border: none;
+}
+
+/* Animation for album art */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.album-art.playing img {
+    animation: rotate 20s linear infinite;
+    border-radius: 50%;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .music-player-container {
+        width: 280px;
+    }
+    
+    .player-content {
+        padding: 12px;
+    }
+    
+    .album-art {
+        width: 50px;
+        height: 50px;
+    }
+}

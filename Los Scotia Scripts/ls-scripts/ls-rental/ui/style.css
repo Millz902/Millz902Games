@@ -1,0 +1,221 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: transparent;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#rental-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 750px;
+    max-height: 80vh;
+    background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    color: white;
+    overflow: hidden;
+}
+
+.rental-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rental-header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+#close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+#close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.rental-content {
+    padding: 30px;
+    max-height: calc(80vh - 100px);
+    overflow-y: auto;
+}
+
+.vehicle-selection {
+    margin-bottom: 30px;
+}
+
+.vehicle-selection h2 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.vehicle-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.vehicle-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.vehicle-card.selected {
+    border-color: #f1c40f;
+    background: rgba(241, 196, 15, 0.2);
+}
+
+.vehicle-image {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.vehicle-info h3 {
+    margin: 10px 0 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.vehicle-price {
+    color: #f1c40f;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.vehicle-type {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 5px 0 0 0;
+}
+
+.rental-options {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.rental-options h3 {
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    text-align: center;
+}
+
+.option-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.option-group label {
+    min-width: 120px;
+    font-weight: bold;
+}
+
+.option-group select {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+}
+
+.option-group select option {
+    background: #2c3e50;
+    color: white;
+}
+
+.option-group input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.total-cost {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.total-cost h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #f1c40f;
+}
+
+.rental-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.rental-actions button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#rent-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+}
+
+#rent-btn:enabled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+#rent-btn:disabled {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#return-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+}
+
+#return-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}

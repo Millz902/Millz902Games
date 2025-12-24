@@ -1,0 +1,70 @@
+local Translations = {
+    error = {
+        no_permission = 'You do not have permission to access this business',
+        insufficient_funds = 'Insufficient funds',
+        business_not_found = 'Business not found',
+        employee_not_found = 'Employee not found',
+        already_employee = 'This person is already an employee',
+        business_closed = 'This business is currently closed',
+        max_employees = 'Maximum employee limit reached',
+        not_owner = 'You are not the owner of this business',
+        invalid_amount = 'Invalid amount entered',
+    },
+    success = {
+        business_created = 'Business successfully created',
+        employee_hired = 'Employee successfully hired',
+        employee_fired = 'Employee successfully fired',
+        employee_promoted = 'Employee successfully promoted',
+        settings_saved = 'Business settings saved',
+        payment_made = 'Payment successfully made',
+        business_sold = 'Business successfully sold',
+        business_purchased = 'Business successfully purchased',
+    },
+    info = {
+        business_open = 'Business is now open',
+        business_closed_info = 'Business is now closed',
+        new_employee = 'New employee has joined the business',
+        employee_left = 'Employee has left the business',
+        funds_deposited = 'Funds deposited to business account',
+        funds_withdrawn = 'Funds withdrawn from business account',
+    },
+    menu = {
+        business_management = 'Business Management',
+        overview = 'Overview',
+        employees = 'Employees',
+        finances = 'Finances',
+        settings = 'Settings',
+        hire_employee = 'Hire Employee',
+        fire_employee = 'Fire Employee',
+        promote_employee = 'Promote Employee',
+        save_settings = 'Save Settings',
+        business_hours = 'Business Hours',
+        tax_rate = 'Tax Rate',
+        daily_revenue = 'Daily Revenue',
+        monthly_profit = 'Monthly Profit',
+        total_balance = 'Total Balance',
+        business_name = 'Business Name',
+        business_owner = 'Business Owner',
+        business_type = 'Business Type',
+        business_status = 'Business Status',
+        open = 'Open',
+        closed = 'Closed',
+    },
+    commands = {
+        business = 'Open business management panel',
+        business_create = 'Create a new business',
+        business_delete = 'Delete a business',
+        business_setowner = 'Set business owner',
+    },
+    notifications = {
+        employee_hired_title = 'Employee Hired',
+        employee_fired_title = 'Employee Fired',
+        settings_saved_title = 'Settings Saved',
+        business_created_title = 'Business Created',
+    }
+}
+
+Lang = Locale:new({
+    phrases = Translations,
+    warnOnMissing = true
+})

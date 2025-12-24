@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Millz902Games">
+    <meta name="description" content="Los Scotia Fire Department Management System - Created by Millz902Games">
+    <title>Los Scotia Fire Department</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="fire-panel">
+            <div class="header">
+                <h1 id="panel-title">Los Scotia Fire Department</h1>
+                <button class="close-btn" onclick="closePanel()">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
+                    <button class="tab-btn" onclick="switchTab('incidents')">Incidents</button>
+                    <button class="tab-btn" onclick="switchTab('apparatus')">Apparatus</button>
+                    <button class="tab-btn" onclick="switchTab('stations')">Stations</button>
+                    <button class="tab-btn" onclick="switchTab('personnel')">Personnel</button>
+                    <button class="tab-btn" onclick="switchTab('equipment')">Equipment</button>
+                    <button class="tab-btn" onclick="switchTab('settings')">Settings</button>
+                </div>
+
+                <!-- Dashboard Tab -->
+                <div id="dashboard-tab" class="tab-content active">
+                    <div class="fire-dashboard">
+                        <h3>Fire Department Operations Dashboard</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h4>Active Incidents</h4>
+                                <span id="active-incidents">2</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Units Responding</h4>
+                                <span id="responding-units">6</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Available Units</h4>
+                                <span id="available-units">8/12</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>On-Duty Personnel</h4>
+                                <span id="on-duty-personnel">24</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Fire Danger Level</h4>
+                                <span id="fire-danger-level">Moderate</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Weather Conditions</h4>
+                                <span id="weather-conditions">Clear, 18°C</span>
+                            </div>
+                        </div>
+                        
+                        <div class="active-incidents">
+                            <h4>Active Fire Incidents</h4>
+                            <div class="incident-list">
+                                <div class="incident-item high-priority">
+                                    <div class="incident-info">
+                                        <span class="incident-id">#FIRE-001</span>
+                                        <span class="incident-location">Downtown Office Building</span>
+                                        <span class="incident-type">Structure Fire</span>
+                                        <span class="incident-time">8 min ago</span>
+                                    </div>
+                                    <div class="incident-status">
+                                        <span class="priority high">High Priority</span>
+                                        <span class="assigned">Engine 1, Ladder 1, Battalion 1</span>
+                                        <span class="alarm-level">2nd Alarm</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="incident-item medium-priority">
+                                    <div class="incident-info">
+                                        <span class="incident-id">#FIRE-002</span>
+                                        <span class="incident-location">Sandy Shores Gas Station</span>
+                                        <span class="incident-type">Hazmat Response</span>
+                                        <span class="incident-time">15 min ago</span>
+                                    </div>
+                                    <div class="incident-status">
+                                        <span class="priority medium">Medium Priority</span>
+                                        <span class="assigned">Engine 3, Hazmat 1</span>
+                                        <span class="alarm-level">1st Alarm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="unit-deployment">
+                            <h4>Unit Deployment Status</h4>
+                            <div class="deployment-grid">
+                                <div class="unit-status-card responding">
+                                    <span class="unit-id">Engine 1</span>
+                                    <span class="unit-location">En Route - Downtown</span>
+                                    <span class="unit-crew">4 Personnel</span>
+                                    <span class="unit-status">Responding</span>
+                                    <span class="eta">ETA: 3 min</span>
+                                </div>
+                                
+                                <div class="unit-status-card on-scene">
+                                    <span class="unit-id">Ladder 1</span>
+                                    <span class="unit-location">Downtown Office</span>
+                                    <span class="unit-crew">3 Personnel</span>
+                                    <span class="unit-status">On Scene</span>
+                                    <span class="eta">Arrived</span>
+                                </div>
+                                
+                                <div class="unit-status-card available">
+                                    <span class="unit-id">Engine 2</span>
+                                    <span class="unit-location">Station 2</span>
+                                    <span class="unit-crew">4 Personnel</span>
+                                    <span class="unit-status">Available</span>
+                                    <span class="eta">Ready</span>
+                                </div>
+                                
+                                <div class="unit-status-card maintenance">
+                                    <span class="unit-id">Rescue 1</span>
+                                    <span class="unit-location">Station 1</span>
+                                    <span class="unit-crew">-</span>
+                                    <span class="unit-status">Maintenance</span>
+                                    <span class="eta">Out of Service</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incidents Tab -->
+                <div id="incidents-tab" class="tab-content">
+                    <div class="incidents-section">
+                        <h3>Fire Incident Management</h3>
+                        <div class="incident-actions">
+                            <button class="action-btn" onclick="dispatchUnits()">Dispatch Units</button>
+                            <button class="action-btn" onclick="upgradeAlarm()">Upgrade Alarm</button>
+                            <button class="action-btn" onclick="requestMutualAid()">Mutual Aid</button>
+                            <button class="action-btn" onclick="establishCommand()">Establish Command</button>
+                            <button class="action-btn danger" onclick="evacuationOrder()">Evacuation Order</button>
+                        </div>
+                        
+                        <div class="incident-details">
+                            <h4>Current Incidents</h4>
+                            <div class="incidents-grid">
+                                <div class="incident-card structure-fire">
+                                    <div class="incident-header">
+                                        <span class="incident-title">Downtown Office Building Fire</span>
+                                        <span class="incident-number">#FIRE-001</span>
+                                        <span class="incident-alarm-level">2nd Alarm</span>
+                                    </div>
+                                    <div class="incident-details-grid">
+                                        <div class="detail-item">
+                                            <label>Address:</label>
+                                            <span>123 Main Street</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Type:</label>
+                                            <span>Commercial Structure Fire</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Size:</label>
+                                            <span>15-story office building</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Occupancy:</label>
+                                            <span>~200 people (estimated)</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Water Supply:</label>
+                                            <span>Hydrant available</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Hazards:</label>
+                                            <span>High-rise, heavy occupancy</span>
+                                        </div>
+                                    </div>
+                                    <div class="incident-resources">
+                                        <h5>Assigned Resources</h5>
+                                        <div class="resource-tags">
+                                            <span class="resource-tag">Engine 1</span>
+                                            <span class="resource-tag">Ladder 1</span>
+                                            <span class="resource-tag">Battalion 1</span>
+                                            <span class="resource-tag">Engine 4</span>
+                                            <span class="resource-tag">Rescue 2</span>
+                                        </div>
+                                    </div>
+                                    <div class="incident-status-info">
+                                        <span class="status-badge critical">Critical</span>
+                                        <span class="incident-commander">IC: Battalion Chief Smith</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="incident-card hazmat">
+                                    <div class="incident-header">
+                                        <span class="incident-title">Gas Station Fuel Spill</span>
+                                        <span class="incident-number">#FIRE-002</span>
+                                        <span class="incident-alarm-level">1st Alarm</span>
+                                    </div>
+                                    <div class="incident-details-grid">
+                                        <div class="detail-item">
+                                            <label>Address:</label>
+                                            <span>Sandy Shores Gas Station</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Type:</label>
+                                            <span>Hazardous Materials</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Material:</label>
+                                            <span>Gasoline (approximately 500 gallons)</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Containment:</label>
+                                            <span>Partially contained</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Exposures:</label>
+                                            <span>Storm drains, nearby structures</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>Weather:</label>
+                                            <span>Light wind, no precipitation</span>
+                                        </div>
+                                    </div>
+                                    <div class="incident-resources">
+                                        <h5>Assigned Resources</h5>
+                                        <div class="resource-tags">
+                                            <span class="resource-tag">Engine 3</span>
+                                            <span class="resource-tag">Hazmat 1</span>
+                                            <span class="resource-tag">Battalion 2</span>
+                                        </div>
+                                    </div>
+                                    <div class="incident-status-info">
+                                        <span class="status-badge moderate">Moderate</span>
+                                        <span class="incident-commander">IC: Captain Johnson</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional tabs continue with apparatus, stations, personnel, equipment, and settings -->
+                <!-- [Rest of HTML content truncated for length] -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Gang Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="gang-panel">
+            <div class="header">
+                <h1>Los Scotia Gang Management</h1>
+                <button id="close-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="members">Members</button>
+                    <button class="tab-btn" data-tab="territory">Territory</button>
+                    <button class="tab-btn" data-tab="activities">Activities</button>
+                </div>
+                
+                <div id="overview" class="tab-content active">
+                    <div class="gang-info">
+                        <h3>Gang Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Gang Name:</label>
+                                <span id="gang-name">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Leader:</label>
+                                <span id="gang-leader">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Members:</label>
+                                <span id="member-count">0</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Reputation:</label>
+                                <span id="gang-reputation" class="rep-high">High</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Territory Control:</label>
+                                <span id="territory-control">0%</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Gang Funds:</label>
+                                <span id="gang-funds">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="members" class="tab-content">
+                    <div class="members-section">
+                        <h3>Gang Members</h3>
+                        <div class="member-list">
+                            <!-- Member list will be populated by JavaScript -->
+                        </div>
+                        <div class="member-actions">
+                            <button id="invite-btn" class="action-btn">Invite Member</button>
+                            <button id="promote-btn" class="action-btn secondary">Promote Member</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="territory" class="tab-content">
+                    <div class="territory-section">
+                        <h3>Territory Control</h3>
+                        <div class="territory-map">
+                            <div class="territory-stats">
+                                <div class="stat-card">
+                                    <h4>Controlled Areas</h4>
+                                    <span id="controlled-areas">0</span>
+                                </div>
+                                <div class="stat-card">
+                                    <h4>Income per Hour</h4>
+                                    <span id="territory-income">$0</span>
+                                </div>
+                                <div class="stat-card">
+                                    <h4>Turf Wars Won</h4>
+                                    <span id="wars-won">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="expand-territory" class="action-btn">Expand Territory</button>
+                    </div>
+                </div>
+                
+                <div id="activities" class="tab-content">
+                    <div class="activities-section">
+                        <h3>Gang Activities</h3>
+                        <div class="activity-grid">
+                            <div class="activity-card">
+                                <h4>Drug Operations</h4>
+                                <p>Manage drug production and distribution</p>
+                                <button class="activity-btn">Manage</button>
+                            </div>
+                            <div class="activity-card">
+                                <h4>Territory Wars</h4>
+                                <p>Engage in battles for territory control</p>
+                                <button class="activity-btn">Battle</button>
+                            </div>
+                            <div class="activity-card">
+                                <h4>Gang Missions</h4>
+                                <p>Special missions for gang advancement</p>
+                                <button class="activity-btn">Missions</button>
+                            </div>
+                            <div class="activity-card">
+                                <h4>Recruitment</h4>
+                                <p>Find and recruit new gang members</p>
+                                <button class="activity-btn">Recruit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="racing-panel">
+            <div class="panel-header">
+                <h2>Racing Management</h2>
+                <button id="close-btn" class="close-button">&times;</button>
+            </div>
+            
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="races">Races</button>
+                <button class="tab-btn" data-tab="leaderboard">Leaderboard</button>
+                <button class="tab-btn" data-tab="garage">Garage</button>
+            </div>
+            
+            <div class="tab-content active" id="overview">
+                <div class="overview-stats">
+                    <div class="stat-card">
+                        <h3>Races Won</h3>
+                        <span class="stat-value" id="races-won">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Races</h3>
+                        <span class="stat-value" id="total-races">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Best Time</h3>
+                        <span class="stat-value" id="best-time">--:--</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Credits</h3>
+                        <span class="stat-value" id="racing-credits">$0</span>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list">
+                        <!-- Activity items will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="races">
+                <div class="race-actions">
+                    <button id="create-race" class="action-btn primary">Create Race</button>
+                    <button id="join-race" class="action-btn secondary">Join Race</button>
+                    <button id="quick-race" class="action-btn">Quick Race</button>
+                </div>
+                
+                <div class="race-filters">
+                    <select id="race-type-filter">
+                        <option value="all">All Types</option>
+                        <option value="circuit">Circuit</option>
+                        <option value="sprint">Sprint</option>
+                        <option value="drag">Drag</option>
+                        <option value="time-trial">Time Trial</option>
+                    </select>
+                    <select id="difficulty-filter">
+                        <option value="all">All Difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+                
+                <div class="race-list">
+                    <!-- Race items will be populated here -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="leaderboard">
+                <div class="leaderboard-filters">
+                    <select id="leaderboard-type">
+                        <option value="overall">Overall</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="track-specific">Track Specific</option>
+                    </select>
+                    <select id="track-select" class="hidden">
+                        <option value="">Select Track</option>
+                        <!-- Track options will be populated -->
+                    </select>
+                </div>
+                
+                <div class="leaderboard-table">
+                    <div class="table-header">
+                        <span>Rank</span>
+                        <span>Racer</span>
+                        <span>Time</span>
+                        <span>Vehicle</span>
+                        <span>Points</span>
+                    </div>
+                    <div class="table-body">
+                        <!-- Leaderboard entries will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="garage">
+                <div class="garage-actions">
+                    <button id="tune-vehicle" class="action-btn primary">Tune Vehicle</button>
+                    <button id="customize-vehicle" class="action-btn secondary">Customize</button>
+                    <button id="vehicle-stats" class="action-btn">View Stats</button>
+                </div>
+                
+                <div class="vehicle-grid">
+                    <!-- Vehicle cards will be populated here -->
+                </div>
+                
+                <div class="tuning-stats">
+                    <h3>Current Vehicle Stats</h3>
+                    <div class="stat-bars">
+                        <div class="stat-bar">
+                            <label>Speed</label>
+                            <div class="bar">
+                                <div class="fill" id="speed-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="speed-value">0</span>
+                        </div>
+                        <div class="stat-bar">
+                            <label>Acceleration</label>
+                            <div class="bar">
+                                <div class="fill" id="acceleration-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="acceleration-value">0</span>
+                        </div>
+                        <div class="stat-bar">
+                            <label>Handling</label>
+                            <div class="bar">
+                                <div class="fill" id="handling-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="handling-value">0</span>
+                        </div>
+                        <div class="stat-bar">
+                            <label>Braking</label>
+                            <div class="bar">
+                                <div class="fill" id="braking-bar" style="width: 0%"></div>
+                            </div>
+                            <span id="braking-value">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

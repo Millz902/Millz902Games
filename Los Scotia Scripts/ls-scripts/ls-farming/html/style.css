@@ -1,0 +1,779 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: transparent;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.farming-panel {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: 2px solid #4ade80;
+    border-radius: 15px;
+    width: 1100px;
+    height: 750px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.content {
+    padding: 20px;
+    height: calc(100% - 80px);
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn.active {
+    color: white;
+    border-bottom-color: #4ade80;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-content {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.farming-overview,
+.crops-section,
+.livestock-section,
+.weather-section,
+.market-section,
+.settings-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.farming-overview h3,
+.crops-section h3,
+.livestock-section h3,
+.weather-section h3,
+.market-section h3,
+.settings-section h3 {
+    margin-bottom: 20px;
+    color: white;
+    font-size: 18px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    background: rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.stat-card h4 {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-card span {
+    color: #4ade80;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.seasonal-info,
+.recent-activity {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.seasonal-info h4,
+.recent-activity h4 {
+    margin-bottom: 15px;
+    color: white;
+    font-size: 16px;
+}
+
+.season-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.season-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.season-item label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.season-item span {
+    color: white;
+    font-weight: bold;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    gap: 15px;
+}
+
+.activity-item .time {
+    color: #4ade80;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.activity-item .activity {
+    color: rgba(255, 255, 255, 0.9);
+    flex: 1;
+}
+
+.crop-actions,
+.livestock-actions,
+.weather-controls,
+.market-actions,
+.setting-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.action-btn.danger {
+    background: rgba(239, 68, 68, 0.3);
+    border-color: #ef4444;
+}
+
+.action-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.5);
+}
+
+.crop-types,
+.livestock-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.crop-category,
+.animal-category {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.crop-category h4,
+.animal-category h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.crop-list,
+.animal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.crop-item,
+.animal-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    gap: 15px;
+}
+
+.crop-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(74, 222, 128, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crop-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.crop-name,
+.animal-type {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.crop-status,
+.animal-health {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.crop-status.ready,
+.animal-health.healthy {
+    background: rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.crop-status.growing {
+    background: rgba(245, 158, 11, 0.3);
+    color: #f59e0b;
+}
+
+.crop-status.planted,
+.animal-health.warning {
+    background: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.crop-quantity,
+.animal-count,
+.animal-production {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+}
+
+.crop-progress {
+    width: 150px;
+}
+
+.progress-bar,
+.water-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill,
+.water-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    transition: width 0.5s;
+}
+
+.current-weather {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.weather-display {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.weather-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.temperature {
+    font-size: 36px;
+    font-weight: bold;
+    color: #4ade80;
+}
+
+.condition {
+    color: white;
+    font-size: 16px;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    flex: 1;
+}
+
+.weather-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.weather-detail label {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.weather-detail span {
+    color: white;
+    font-weight: bold;
+}
+
+.weather-forecast,
+.irrigation-system {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.forecast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.forecast-day {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    gap: 15px;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.forecast-day .day {
+    color: white;
+    font-weight: bold;
+}
+
+.forecast-day .condition {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.forecast-day .temp-high {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.forecast-day .temp-low {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.forecast-day .rain-chance {
+    color: #60a5fa;
+    font-weight: bold;
+}
+
+.irrigation-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-group label {
+    min-width: 150px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+.water-level {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.water-level span {
+    color: white;
+    font-weight: bold;
+    min-width: 40px;
+}
+
+.market-prices {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.price-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.price-category h5 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-item .product {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.price-item .price {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.price-item .change {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.price-item .change.positive {
+    color: #22c55e;
+}
+
+.price-item .change.negative {
+    color: #ef4444;
+}
+
+.price-item .change.neutral {
+    color: #9ca3af;
+}
+
+.sales-summary {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.sales-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sales-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sales-item .product-sold {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.sales-item .revenue {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.sales-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    margin-top: 10px;
+}
+
+.sales-total .total-label {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.sales-total .total-amount {
+    color: #4ade80;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.setting-group {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.setting-group h4 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.setting-item label {
+    min-width: 180px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+.setting-item input[type="number"] {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    width: 80px;
+}
+
+.setting-item input[type="range"] {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    outline: none;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #4ade80;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.setting-item.checkbox {
+    align-items: center;
+}
+
+.setting-item.checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4ade80;
+}
+
+.animal-care {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.care-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.care-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.care-time {
+    color: #4ade80;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.care-task {
+    color: white;
+    flex: 1;
+    margin-left: 15px;
+}
+
+.care-status {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.care-status.completed {
+    background: rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.care-status.pending {
+    background: rgba(245, 158, 11, 0.3);
+    color: #f59e0b;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.farming-panel {
+    animation: fadeIn 0.3s ease;
+}

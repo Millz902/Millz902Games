@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Social</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="social-container" class="hidden">
+        <div class="social-header">
+            <h1>Los Scotia Social Network</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="social-content">
+            <div class="social-tabs">
+                <button class="tab-btn active" data-tab="feed">News Feed</button>
+                <button class="tab-btn" data-tab="profile">Profile</button>
+                <button class="tab-btn" data-tab="friends">Friends</button>
+                <button class="tab-btn" data-tab="messages">Messages</button>
+            </div>
+            
+            <div class="tab-content active" id="feed-tab">
+                <div class="post-composer">
+                    <textarea id="post-text" placeholder="What's on your mind?"></textarea>
+                    <div class="composer-actions">
+                        <button id="post-btn">Post</button>
+                    </div>
+                </div>
+                <div class="feed" id="news-feed">
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="user-avatar">👤</div>
+                            <div class="user-info">
+                                <h4>John Doe</h4>
+                                <span class="post-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Welcome to Los Scotia! Great to be part of this community.
+                        </div>
+                        <div class="post-actions">
+                            <button class="like-btn">👍 Like</button>
+                            <button class="comment-btn">💬 Comment</button>
+                            <button class="share-btn">🔄 Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="profile-tab">
+                <div class="profile-info">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-details">
+                        <h2 id="profile-name">Your Name</h2>
+                        <p id="profile-bio">Add a bio...</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number" id="friends-count">0</span>
+                                <span class="stat-label">Friends</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="posts-count">0</span>
+                                <span class="stat-label">Posts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button id="edit-profile-btn">Edit Profile</button>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="friends-tab">
+                <div class="friends-search">
+                    <input type="text" id="friend-search" placeholder="Search for friends...">
+                    <button id="search-btn">Search</button>
+                </div>
+                <div class="friends-list" id="friends-list">
+                    <div class="friend-item">
+                        <div class="friend-avatar">👤</div>
+                        <div class="friend-info">
+                            <h4>Jane Smith</h4>
+                            <p>Online</p>
+                        </div>
+                        <div class="friend-actions">
+                            <button class="message-friend-btn">Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="messages-tab">
+                <div class="conversations-list" id="conversations">
+                    <div class="conversation-item">
+                        <div class="conv-avatar">👤</div>
+                        <div class="conv-info">
+                            <h4>Jane Smith</h4>
+                            <p class="last-message">Hey, how are you?</p>
+                        </div>
+                        <div class="conv-time">5 min ago</div>
+                    </div>
+                </div>
+                <div class="message-area" id="message-area">
+                    <div class="messages" id="messages">
+                        <div class="message received">
+                            <p>Hey, how are you?</p>
+                            <span class="message-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-input">
+                        <input type="text" id="message-text" placeholder="Type a message...">
+                        <button id="send-message-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

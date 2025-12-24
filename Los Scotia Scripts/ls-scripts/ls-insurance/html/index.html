@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Insurance Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="insurance-panel">
+            <div class="header">
+                <h1>Los Scotia Insurance Services</h1>
+                <button id="close-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="policies">Policies</button>
+                    <button class="tab-btn" data-tab="claims">Claims</button>
+                    <button class="tab-btn" data-tab="purchase">Purchase</button>
+                </div>
+                
+                <div id="overview" class="tab-content active">
+                    <div class="insurance-overview">
+                        <h3>Your Insurance Summary</h3>
+                        <div class="overview-stats">
+                            <div class="stat-card">
+                                <h4>Active Policies</h4>
+                                <span id="active-policies">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Total Coverage</h4>
+                                <span id="total-coverage">$0</span>
+                            </div>
+                            <div class="stat-card">
+                                <h4>Monthly Premium</h4>
+                                <span id="monthly-premium">$0</span>
+                            </div>
+                        </div>
+                        <div class="coverage-breakdown">
+                            <h4>Coverage Breakdown</h4>
+                            <div class="coverage-list" id="coverage-list">
+                                <div class="coverage-item">
+                                    <span class="coverage-type">No active policies</span>
+                                    <span class="coverage-amount">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="policies" class="tab-content">
+                    <div class="policies-section">
+                        <h3>Your Insurance Policies</h3>
+                        <div class="policies-list" id="policies-list">
+                            <!-- Policies will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="claims" class="tab-content">
+                    <div class="claims-section">
+                        <h3>Insurance Claims</h3>
+                        <div class="claim-form">
+                            <h4>File New Claim</h4>
+                            <div class="form-group">
+                                <label for="claim-type">Claim Type:</label>
+                                <select id="claim-type">
+                                    <option value="vehicle">Vehicle Damage</option>
+                                    <option value="property">Property Damage</option>
+                                    <option value="medical">Medical Bills</option>
+                                    <option value="theft">Theft</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="claim-amount">Claim Amount ($):</label>
+                                <input type="number" id="claim-amount" min="0" placeholder="Enter amount">
+                            </div>
+                            <div class="form-group">
+                                <label for="claim-description">Description:</label>
+                                <textarea id="claim-description" placeholder="Describe the incident..."></textarea>
+                            </div>
+                            <button id="file-claim-btn" class="action-btn">File Claim</button>
+                        </div>
+                        <div class="claims-history">
+                            <h4>Claim History</h4>
+                            <div class="claims-list" id="claims-list">
+                                <!-- Claims history will be populated -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="purchase" class="tab-content">
+                    <div class="purchase-section">
+                        <h3>Purchase Insurance</h3>
+                        <div class="insurance-packages">
+                            <div class="package-card" data-package="basic">
+                                <h4>Basic Coverage</h4>
+                                <div class="package-price">$200/month</div>
+                                <ul class="package-features">
+                                    <li>Vehicle Collision: $25,000</li>
+                                    <li>Property Damage: $10,000</li>
+                                    <li>Medical Bills: $5,000</li>
+                                </ul>
+                                <button class="purchase-btn" data-package="basic">Purchase</button>
+                            </div>
+                            <div class="package-card premium" data-package="premium">
+                                <h4>Premium Coverage</h4>
+                                <div class="package-price">$500/month</div>
+                                <ul class="package-features">
+                                    <li>Vehicle Collision: $100,000</li>
+                                    <li>Property Damage: $50,000</li>
+                                    <li>Medical Bills: $25,000</li>
+                                    <li>Theft Protection: $15,000</li>
+                                </ul>
+                                <button class="purchase-btn" data-package="premium">Purchase</button>
+                            </div>
+                            <div class="package-card" data-package="platinum">
+                                <h4>Platinum Coverage</h4>
+                                <div class="package-price">$1,000/month</div>
+                                <ul class="package-features">
+                                    <li>Vehicle Collision: $500,000</li>
+                                    <li>Property Damage: $250,000</li>
+                                    <li>Medical Bills: $100,000</li>
+                                    <li>Theft Protection: $75,000</li>
+                                    <li>Business Coverage: $50,000</li>
+                                </ul>
+                                <button class="purchase-btn" data-package="platinum">Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

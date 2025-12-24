@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Weather System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="main-container">
+            <div class="header">
+                <h1>Los Scotia Weather Control</h1>
+                <button id="closeBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="current">Current Weather</button>
+                    <button class="tab-btn" data-tab="forecast">Forecast</button>
+                    <button class="tab-btn" data-tab="control">Weather Control</button>
+                    <button class="tab-btn" data-tab="alerts">Weather Alerts</button>
+                </div>
+                
+                <!-- Current Weather Tab -->
+                <div id="current" class="tab-content active">
+                    <div class="current-weather">
+                        <div class="weather-main">
+                            <div class="temperature-display">
+                                <div class="temp-value" id="currentTemp">22°C</div>
+                                <div class="weather-icon" id="weatherIcon">☀️</div>
+                            </div>
+                            <div class="weather-details">
+                                <h2 id="weatherCondition">Sunny</h2>
+                                <p id="weatherDescription">Clear skies with plenty of sunshine</p>
+                                <div class="location">
+                                    <span class="location-icon">📍</span>
+                                    <span id="currentLocation">Los Scotia</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="weather-stats">
+                            <div class="stat-grid">
+                                <div class="stat-item">
+                                    <div class="stat-icon">💨</div>
+                                    <div class="stat-info">
+                                        <div class="stat-label">Wind Speed</div>
+                                        <div class="stat-value" id="windSpeed">12 km/h</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">🧭</div>
+                                    <div class="stat-info">
+                                        <div class="stat-label">Wind Direction</div>
+                                        <div class="stat-value" id="windDirection">NE</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">💧</div>
+                                    <div class="stat-info">
+                                        <div class="stat-label">Humidity</div>
+                                        <div class="stat-value" id="humidity">65%</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">👁️</div>
+                                    <div class="stat-info">
+                                        <div class="stat-label">Visibility</div>
+                                        <div class="stat-value" id="visibility">10 km</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">📊</div>
+                                    <div class="stat-info">
+                                        <div class="stat-label">Pressure</div>
+                                        <div class="stat-value" id="pressure">1013 hPa</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">🌡️</div>
+                                    <div class="stat-info">
+                                        <div class="stat-label">Feels Like</div>
+                                        <div class="stat-value" id="feelsLike">24°C</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sun-info">
+                            <div class="sun-times">
+                                <div class="sun-time">
+                                    <div class="sun-icon">🌅</div>
+                                    <div class="sun-details">
+                                        <div class="sun-label">Sunrise</div>
+                                        <div class="sun-value" id="sunrise">06:24 AM</div>
+                                    </div>
+                                </div>
+                                <div class="sun-time">
+                                    <div class="sun-icon">🌇</div>
+                                    <div class="sun-details">
+                                        <div class="sun-label">Sunset</div>
+                                        <div class="sun-value" id="sunset">19:47 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Forecast Tab -->
+                <div id="forecast" class="tab-content">
+                    <div class="forecast-section">
+                        <div class="forecast-controls">
+                            <button class="forecast-btn active" data-period="hourly">Hourly</button>
+                            <button class="forecast-btn" data-period="daily">7-Day</button>
+                            <button class="forecast-btn" data-period="extended">Extended</button>
+                        </div>
+                        
+                        <div class="forecast-display">
+                            <div id="hourlyForecast" class="forecast-content active">
+                                <div class="hourly-grid">
+                                    <div class="hour-item">
+                                        <div class="hour-time">Now</div>
+                                        <div class="hour-icon">☀️</div>
+                                        <div class="hour-temp">22°</div>
+                                        <div class="hour-rain">0%</div>
+                                    </div>
+                                    <div class="hour-item">
+                                        <div class="hour-time">15:00</div>
+                                        <div class="hour-icon">☀️</div>
+                                        <div class="hour-temp">24°</div>
+                                        <div class="hour-rain">5%</div>
+                                    </div>
+                                    <div class="hour-item">
+                                        <div class="hour-time">16:00</div>
+                                        <div class="hour-icon">⛅</div>
+                                        <div class="hour-temp">23°</div>
+                                        <div class="hour-rain">10%</div>
+                                    </div>
+                                    <div class="hour-item">
+                                        <div class="hour-time">17:00</div>
+                                        <div class="hour-icon">⛅</div>
+                                        <div class="hour-temp">21°</div>
+                                        <div class="hour-rain">15%</div>
+                                    </div>
+                                    <div class="hour-item">
+                                        <div class="hour-time">18:00</div>
+                                        <div class="hour-icon">🌧️</div>
+                                        <div class="hour-temp">19°</div>
+                                        <div class="hour-rain">80%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="dailyForecast" class="forecast-content">
+                                <div class="daily-grid">
+                                    <div class="day-item">
+                                        <div class="day-name">Today</div>
+                                        <div class="day-icon">☀️</div>
+                                        <div class="day-temps">
+                                            <span class="day-high">24°</span>
+                                            <span class="day-low">16°</span>
+                                        </div>
+                                        <div class="day-condition">Sunny</div>
+                                    </div>
+                                    <div class="day-item">
+                                        <div class="day-name">Tomorrow</div>
+                                        <div class="day-icon">🌧️</div>
+                                        <div class="day-temps">
+                                            <span class="day-high">18°</span>
+                                            <span class="day-low">12°</span>
+                                        </div>
+                                        <div class="day-condition">Rainy</div>
+                                    </div>
+                                    <div class="day-item">
+                                        <div class="day-name">Wednesday</div>
+                                        <div class="day-icon">⛅</div>
+                                        <div class="day-temps">
+                                            <span class="day-high">20°</span>
+                                            <span class="day-low">14°</span>
+                                        </div>
+                                        <div class="day-condition">Cloudy</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Weather Control Tab -->
+                <div id="control" class="tab-content">
+                    <div class="control-section">
+                        <div class="control-panel">
+                            <h3>Weather Control Panel</h3>
+                            <div class="control-warning">
+                                ⚠️ Administrative access required for weather manipulation
+                            </div>
+                            
+                            <div class="weather-controls">
+                                <div class="control-group">
+                                    <label>Weather Type:</label>
+                                    <select id="weatherType">
+                                        <option value="clear">Clear/Sunny</option>
+                                        <option value="cloudy">Cloudy</option>
+                                        <option value="overcast">Overcast</option>
+                                        <option value="rain">Rain</option>
+                                        <option value="drizzle">Drizzle</option>
+                                        <option value="thunder">Thunderstorm</option>
+                                        <option value="clearing">Clearing</option>
+                                        <option value="neutral">Neutral</option>
+                                        <option value="smog">Smog</option>
+                                        <option value="foggy">Foggy</option>
+                                        <option value="clouds">Clouds</option>
+                                        <option value="blizzard">Blizzard</option>
+                                        <option value="snow">Snow</option>
+                                        <option value="snowlight">Light Snow</option>
+                                        <option value="xmas">Christmas</option>
+                                        <option value="halloween">Halloween</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label>Transition Duration:</label>
+                                    <select id="transitionTime">
+                                        <option value="0">Instant</option>
+                                        <option value="30">30 seconds</option>
+                                        <option value="60">1 minute</option>
+                                        <option value="120">2 minutes</option>
+                                        <option value="300">5 minutes</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label>Wind Speed:</label>
+                                    <input type="range" id="windSpeedControl" min="0" max="100" value="25">
+                                    <span id="windSpeedDisplay">25 km/h</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label>Wind Direction:</label>
+                                    <select id="windDirectionControl">
+                                        <option value="N">North</option>
+                                        <option value="NE">Northeast</option>
+                                        <option value="E">East</option>
+                                        <option value="SE">Southeast</option>
+                                        <option value="S">South</option>
+                                        <option value="SW">Southwest</option>
+                                        <option value="W">West</option>
+                                        <option value="NW">Northwest</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-buttons">
+                                    <button id="applyWeatherBtn" class="control-btn primary">Apply Weather</button>
+                                    <button id="resetWeatherBtn" class="control-btn secondary">Reset to Natural</button>
+                                    <button id="savePresetBtn" class="control-btn">Save Preset</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="weather-presets">
+                            <h3>Weather Presets</h3>
+                            <div class="preset-grid">
+                                <div class="preset-item" data-preset="sunny">
+                                    <div class="preset-icon">☀️</div>
+                                    <div class="preset-name">Perfect Day</div>
+                                    <button class="preset-btn">Apply</button>
+                                </div>
+                                <div class="preset-item" data-preset="storm">
+                                    <div class="preset-icon">⛈️</div>
+                                    <div class="preset-name">Thunderstorm</div>
+                                    <button class="preset-btn">Apply</button>
+                                </div>
+                                <div class="preset-item" data-preset="winter">
+                                    <div class="preset-icon">❄️</div>
+                                    <div class="preset-name">Winter Storm</div>
+                                    <button class="preset-btn">Apply</button>
+                                </div>
+                                <div class="preset-item" data-preset="fog">
+                                    <div class="preset-icon">🌫️</div>
+                                    <div class="preset-name">Dense Fog</div>
+                                    <button class="preset-btn">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="schedule-weather">
+                            <h3>Scheduled Weather Events</h3>
+                            <div class="schedule-list">
+                                <div class="schedule-item">
+                                    <div class="schedule-time">18:00 - 20:00</div>
+                                    <div class="schedule-weather">Rain</div>
+                                    <div class="schedule-actions">
+                                        <button class="schedule-btn">Edit</button>
+                                        <button class="schedule-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="addScheduleBtn" class="control-btn">Add Scheduled Event</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Weather Alerts Tab -->
+                <div id="alerts" class="tab-content">
+                    <div class="alerts-section">
+                        <div class="alerts-header">
+                            <h3>Weather Alerts & Warnings</h3>
+                            <button id="createAlertBtn" class="control-btn">Create Alert</button>
+                        </div>
+                        
+                        <div class="active-alerts">
+                            <h4>Active Alerts</h4>
+                            <div class="alert-list" id="activeAlerts">
+                                <div class="alert-item severe">
+                                    <div class="alert-icon">⚠️</div>
+                                    <div class="alert-info">
+                                        <div class="alert-title">Thunderstorm Warning</div>
+                                        <div class="alert-description">Severe thunderstorms expected from 6:00 PM to 9:00 PM</div>
+                                        <div class="alert-time">Active until 21:00</div>
+                                    </div>
+                                    <div class="alert-actions">
+                                        <button class="alert-btn">Edit</button>
+                                        <button class="alert-btn">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert-history">
+                            <h4>Recent Alerts</h4>
+                            <div class="history-list">
+                                <div class="history-item">
+                                    <div class="history-date">Yesterday 14:30</div>
+                                    <div class="history-title">Wind Advisory</div>
+                                    <div class="history-status expired">Expired</div>
+                                </div>
+                                <div class="history-item">
+                                    <div class="history-date">2 days ago 08:15</div>
+                                    <div class="history-title">Fog Warning</div>
+                                    <div class="history-status expired">Expired</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert-settings">
+                            <h4>Alert Settings</h4>
+                            <div class="settings-grid">
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" checked> Enable automatic severe weather alerts
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" checked> Send notifications to emergency services
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox"> Auto-broadcast weather alerts on radio
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" checked> Display alerts in-game
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Server Scanner</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        
+        .scanner-window {
+            background-color: #0c0c0c;
+            border: 1px solid #3c3c3c;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .window-title {
+            background-color: #2a2a2a;
+            padding: 8px 12px;
+            border-radius: 3px 3px 0 0;
+            font-weight: bold;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .window-title .title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .window-title .icon {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            background-color: #4c8eda;
+            border-radius: 50%;
+        }
+        
+        .window-title .controls {
+            display: flex;
+        }
+        
+        .window-title .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        
+        .window-title .minimize {
+            background-color: #ffbd2e;
+        }
+        
+        .window-title .maximize {
+            background-color: #28c941;
+        }
+        
+        .window-title .close {
+            background-color: #ff5f57;
+        }
+        
+        .scanner-content {
+            padding: 10px;
+            overflow-y: auto;
+            height: 400px;
+            background-color: #1a1a1a;
+            border-radius: 0 0 3px 3px;
+        }
+        
+        .log-line {
+            margin: 0;
+            padding: 3px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        
+        .timestamp {
+            color: #7a7a7a;
+        }
+        
+        .info {
+            color: #4c8eda;
+        }
+        
+        .success {
+            color: #28c941;
+        }
+        
+        .warning {
+            color: #ffbd2e;
+        }
+        
+        .error {
+            color: #ff5f57;
+        }
+        
+        .scanner-menu {
+            background-color: #2a2a2a;
+            border: 1px solid #3c3c3c;
+            border-radius: 5px;
+            width: 300px;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-150px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .menu-header {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-bottom: 1px solid #3c3c3c;
+        }
+        
+        .menu-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-item:hover {
+            background-color: #3a3a3a;
+        }
+        
+        .menu-item:not(:last-child) {
+            border-bottom: 1px solid #383838;
+        }
+        
+        .menu-item .item-text {
+            font-size: 14px;
+        }
+        
+        .menu-item .item-description {
+            font-size: 12px;
+            color: #888888;
+            margin-top: 3px;
+        }
+        
+        .menu-item .arrow {
+            color: #888888;
+        }
+        
+        .scanner-notification {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2a2a2a;
+            border-left: 4px solid #4c8eda;
+            padding: 12px 15px;
+            border-radius: 3px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            animation: fadeIn 0.3s;
+        }
+        
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .notification-message {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanner-window">
+        <div class="window-title">
+            <div class="title">
+                <div class="icon"></div>
+                <span>Los Scotia Server Scanner</span>
+            </div>
+            <div class="controls">
+                <div class="control minimize"></div>
+                <div class="control maximize"></div>
+                <div class="control close"></div>
+            </div>
+        </div>
+        <div class="scanner-content">
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:10]</span> <span class="success">[LS-SCANNER] Los Scotia Server Scanner initialized</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:15]</span> <span class="info">[LS-SCANNER] Starting Los Scotia server scan...</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:15]</span> <span class="info">[LS-SCANNER] Beginning server scan</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:16]</span> <span class="info">[LS-SCANNER] Found 254 total resources (231 started, 23 stopped/missing)</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:16]</span> <span class="info">[LS-SCANNER] Checking for duplicate resources...</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:18]</span> <span class="warning">[LS-SCANNER] Found known conflict: qb-banking and ls-bank-advanced</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:18]</span> <span class="warning">[LS-SCANNER] Potential duplicate banking system: qb-banking, ls-bank-advanced</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:20]</span> <span class="info">[LS-SCANNER] Checking for missing dependencies...</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:22]</span> <span class="error">[LS-SCANNER] Missing dependency: uj_cayoLoader_fixed requires cayo_perico_metadata</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:24]</span> <span class="info">[LS-SCANNER] Checking for SQL errors...</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:26]</span> <span class="warning">[LS-SCANNER] SQL warning in rcore_spray/database.sql: Potentially dangerous commands found</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:28]</span> <span class="info">[LS-SCANNER] Checking for webhook issues...</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:30]</span> <span class="warning">[LS-SCANNER] Webhook conflict found: https://discord.com/api/webhooks/123456789/abcdef used by webhook_fix, ls-discord-webhooks</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:32]</span> <span class="info">[LS-SCANNER] Validating core system functionality...</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:32]</span> <span class="error">[LS-SCANNER] Multiple banking systems are active (qb-banking, ls-bank-advanced). This will cause conflicts.</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:32]</span> <span class="info">[LS-SCANNER] Phone system check passed. One system active.</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:32]</span> <span class="info">[LS-SCANNER] Inventory system check passed. One system active.</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="success">[LS-SCANNER] Los Scotia server scan complete!</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="warning">[LS-SCANNER] Total issues found: 5</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="warning">[LS-SCANNER] Resource conflicts: 2</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="info">[LS-SCANNER] Missing required resources: 0</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="warning">[LS-SCANNER] Missing dependencies: 1</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="warning">[LS-SCANNER] Webhook issues: 1</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="warning">[LS-SCANNER] SQL issues: 1</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="info">[LS-SCANNER] Scan completed in 19.45 seconds</span></p>
+            <p class="log-line"><span class="timestamp">[2023-07-14 15:32:34]</span> <span class="success">[LS-SCANNER] Results saved to server_scan_results.txt</span></p>
+        </div>
+    </div>
+    
+    <div class="scanner-menu">
+        <div class="menu-header">Los Scotia Server Scanner</div>
+        <div class="menu-item">
+            <div>
+                <div class="item-text">Run Full Server Scan</div>
+                <div class="item-description">Check for conflicts, issues, and missing dependencies</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        <div class="menu-item">
+            <div>
+                <div class="item-text">Scan for Conflicts Only</div>
+                <div class="item-description">Check for resource conflicts and duplicates</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        <div class="menu-item">
+            <div>
+                <div class="item-text">Check SQL Integrity</div>
+                <div class="item-description">Validate SQL files and database structure</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+        <div class="menu-item">
+            <div>
+                <div class="item-text">Close Menu</div>
+            </div>
+            <div class="arrow">›</div>
+        </div>
+    </div>
+    
+    <div class="scanner-notification">
+        <div class="notification-title">Los Scotia Server Scanner</div>
+        <div class="notification-message">Scan complete! Found 5 issues.</div>
+    </div>
+</body>
+</html>

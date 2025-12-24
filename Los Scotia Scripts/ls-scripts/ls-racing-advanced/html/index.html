@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Racing Advanced</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="racing-panel">
+            <div class="header">
+                <h1>Los Scotia Racing Championship</h1>
+                <button id="closeBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="nav-tabs">
+                    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="races">Active Races</button>
+                    <button class="tab-btn" data-tab="tournaments">Tournaments</button>
+                    <button class="tab-btn" data-tab="garage">Garage</button>
+                </div>
+                
+                <!-- Dashboard Tab -->
+                <div id="dashboardTab" class="tab-content active">
+                    <div class="dashboard-section">
+                        <h3>Racing Dashboard</h3>
+                        <div class="dashboard-stats">
+                            <div class="stat-card premium">
+                                <div class="stat-icon">🏆</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="championshipPoints">0</div>
+                                    <div class="stat-label">Championship Points</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">🏁</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="totalRaces">0</div>
+                                    <div class="stat-label">Total Races</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">🥇</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="wins">0</div>
+                                    <div class="stat-label">Victories</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">⏱️</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="bestLap">--:--</div>
+                                    <div class="stat-label">Best Lap Time</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recent-activity">
+                            <h4>Recent Activity</h4>
+                            <div id="activityList" class="activity-list">
+                                <!-- Activity items will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="leaderboard-section">
+                        <h3>Global Leaderboard</h3>
+                        <div id="globalLeaderboard" class="leaderboard">
+                            <!-- Leaderboard will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Races Tab -->
+                <div id="racesTab" class="tab-content">
+                    <div class="races-section">
+                        <h3>Active Racing Events</h3>
+                        <div class="race-filters">
+                            <select id="raceTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="circuit">Circuit</option>
+                                <option value="sprint">Sprint</option>
+                                <option value="drag">Drag Race</option>
+                                <option value="drift">Drift Contest</option>
+                                <option value="rally">Rally</option>
+                            </select>
+                            <select id="difficultyFilter">
+                                <option value="">All Difficulties</option>
+                                <option value="amateur">Amateur</option>
+                                <option value="professional">Professional</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                            <button id="refreshRaces" class="filter-btn">Refresh</button>
+                        </div>
+                        
+                        <div id="activeRacesList" class="races-grid">
+                            <!-- Races will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="create-race-section organizer-only">
+                        <h3>Create Racing Event</h3>
+                        <div class="creation-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventName">Event Name</label>
+                                    <input type="text" id="eventName" placeholder="Enter event name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventType">Race Type</label>
+                                    <select id="eventType">
+                                        <option value="circuit">Circuit Race</option>
+                                        <option value="sprint">Sprint Race</option>
+                                        <option value="drag">Drag Race</option>
+                                        <option value="drift">Drift Contest</option>
+                                        <option value="rally">Rally Race</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="maxParticipants">Max Participants</label>
+                                    <input type="number" id="maxParticipants" min="2" max="32" value="16">
+                                </div>
+                                <div class="form-group">
+                                    <label for="entryFee">Entry Fee ($)</label>
+                                    <input type="number" id="entryFee" min="0" value="1000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="prizeMoney">Prize Pool ($)</label>
+                                    <input type="number" id="prizeMoney" min="0" value="5000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="difficulty">Difficulty</label>
+                                    <select id="difficulty">
+                                        <option value="amateur">Amateur</option>
+                                        <option value="professional">Professional</option>
+                                        <option value="expert">Expert</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button id="createEventBtn" class="action-btn">Create Event</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tournaments Tab -->
+                <div id="tournamentsTab" class="tab-content">
+                    <div class="tournaments-section">
+                        <h3>Racing Tournaments</h3>
+                        <div id="tournamentsList" class="tournaments-grid">
+                            <!-- Tournaments will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tournament-bracket">
+                        <h4>Current Tournament Bracket</h4>
+                        <div id="bracketView" class="bracket-view">
+                            <p style="color: #a0a0a0; text-align: center; padding: 40px;">No active tournament</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Garage Tab -->
+                <div id="garageTab" class="tab-content">
+                    <div class="garage-section">
+                        <h3>Racing Garage</h3>
+                        <div id="vehiclesList" class="vehicles-grid">
+                            <!-- Vehicles will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tuning-section">
+                        <h4>Vehicle Tuning</h4>
+                        <div id="tuningPanel" class="tuning-panel">
+                            <p style="color: #a0a0a0; text-align: center; padding: 40px;">Select a vehicle to tune</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

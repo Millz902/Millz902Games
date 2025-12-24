@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Police MDT</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="mdt-container" class="hidden">
+        <div class="mdt-header">
+            <div class="mdt-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Los Scotia Police Department</span>
+            </div>
+            <div class="mdt-user">
+                <span id="officer-name">Officer Name</span>
+                <span id="officer-badge">Badge #1234</span>
+            </div>
+            <button id="close-mdt" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="mdt-navigation">
+            <button class="nav-btn active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </button>
+            <button class="nav-btn" data-section="citizens">
+                <i class="fas fa-users"></i>
+                Citizens
+            </button>
+            <button class="nav-btn" data-section="vehicles">
+                <i class="fas fa-car"></i>
+                Vehicles
+            </button>
+            <button class="nav-btn" data-section="reports">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </button>
+            <button class="nav-btn" data-section="bolos">
+                <i class="fas fa-exclamation-triangle"></i>
+                BOLOs
+            </button>
+            <button class="nav-btn" data-section="evidence">
+                <i class="fas fa-search"></i>
+                Evidence
+            </button>
+            <button class="nav-btn" data-section="warrants">
+                <i class="fas fa-gavel"></i>
+                Warrants
+            </button>
+        </div>
+
+        <div class="mdt-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="content-section active">
+                <div class="dashboard-widgets">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="fas fa-users"></i>
+                            <h3>On Duty Officers</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div id="duty-officers-list" class="officer-list">
+                                <!-- Officers will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="fas fa-bell"></i>
+                            <h3>Active Alerts</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div id="active-alerts-list" class="alerts-list">
+                                <!-- Alerts will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="widget-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Statistics</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="total-arrests">0</span>
+                                    <span class="stat-label">Total Arrests</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="total-reports">0</span>
+                                    <span class="stat-label">Reports Filed</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="active-bolos">0</span>
+                                    <span class="stat-label">Active BOLOs</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="evidence-count">0</span>
+                                    <span class="stat-label">Evidence Items</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Citizens Section -->
+            <div id="citizens-section" class="content-section">
+                <div class="section-header">
+                    <h2>Citizen Database</h2>
+                    <div class="search-container">
+                        <input type="text" id="citizen-search" placeholder="Search by name or citizen ID...">
+                        <button id="search-citizen-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="citizen-results" class="results-container">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+
+            <!-- Vehicles Section -->
+            <div id="vehicles-section" class="content-section">
+                <div class="section-header">
+                    <h2>Vehicle Database</h2>
+                    <div class="search-container">
+                        <input type="text" id="vehicle-search" placeholder="Search by license plate...">
+                        <button id="search-vehicle-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="vehicle-results" class="results-container">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports-section" class="content-section">
+                <div class="section-header">
+                    <h2>Police Reports</h2>
+                    <button id="create-report-btn" class="primary-btn">
+                        <i class="fas fa-plus"></i>
+                        Create Report
+                    </button>
+                </div>
+                <div class="reports-filters">
+                    <select id="report-type-filter">
+                        <option value="">All Types</option>
+                        <option value="incident">Incident Report</option>
+                        <option value="arrest">Arrest Report</option>
+                        <option value="traffic">Traffic Stop</option>
+                        <option value="accident">Accident Report</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="date" id="report-date-from">
+                    <input type="date" id="report-date-to">
+                    <button id="filter-reports-btn">Filter</button>
+                </div>
+                <div id="reports-list" class="results-container">
+                    <!-- Reports will appear here -->
+                </div>
+            </div>
+
+            <!-- BOLOs Section -->
+            <div id="bolos-section" class="content-section">
+                <div class="section-header">
+                    <h2>Be On The Lookout (BOLO)</h2>
+                    <button id="create-bolo-btn" class="primary-btn">
+                        <i class="fas fa-plus"></i>
+                        Create BOLO
+                    </button>
+                </div>
+                <div id="bolos-list" class="results-container">
+                    <!-- BOLOs will appear here -->
+                </div>
+            </div>
+
+            <!-- Evidence Section -->
+            <div id="evidence-section" class="content-section">
+                <div class="section-header">
+                    <h2>Evidence Management</h2>
+                    <button id="evidence-filter-btn" class="secondary-btn">
+                        <i class="fas fa-filter"></i>
+                        Filter
+                    </button>
+                </div>
+                <div id="evidence-list" class="results-container">
+                    <!-- Evidence will appear here -->
+                </div>
+            </div>
+
+            <!-- Warrants Section -->
+            <div id="warrants-section" class="content-section">
+                <div class="section-header">
+                    <h2>Arrest Warrants</h2>
+                    <button id="create-warrant-btn" class="primary-btn">
+                        <i class="fas fa-plus"></i>
+                        Issue Warrant
+                    </button>
+                </div>
+                <div id="warrants-list" class="results-container">
+                    <!-- Warrants will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Containers -->
+    <div id="modal-backdrop" class="modal-backdrop hidden"></div>
+    
+    <!-- Report Creation Modal -->
+    <div id="report-modal" class="modal hidden">
+        <div class="modal-header">
+            <h3>Create New Report</h3>
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <form id="report-form">
+                <div class="form-group">
+                    <label for="report-title">Title:</label>
+                    <input type="text" id="report-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="report-type">Type:</label>
+                    <select id="report-type" required>
+                        <option value="">Select Type</option>
+                        <option value="incident">Incident Report</option>
+                        <option value="arrest">Arrest Report</option>
+                        <option value="traffic">Traffic Stop</option>
+                        <option value="accident">Accident Report</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="report-description">Description:</label>
+                    <textarea id="report-description" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="report-suspects">Suspects (JSON):</label>
+                    <textarea id="report-suspects" rows="3" placeholder='[{"name":"John Doe","id":"ABC123"}]'></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="report-evidence">Evidence (JSON):</label>
+                    <textarea id="report-evidence" rows="3" placeholder='[{"id":"evidence_123","type":"photo"}]'></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="report-vehicle">Vehicle Plate:</label>
+                    <input type="text" id="report-vehicle" placeholder="ABC123">
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="primary-btn">Create Report</button>
+                    <button type="button" class="secondary-btn modal-close">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- BOLO Creation Modal -->
+    <div id="bolo-modal" class="modal hidden">
+        <div class="modal-header">
+            <h3>Create BOLO</h3>
+            <button class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <form id="bolo-form">
+                <div class="form-group">
+                    <label for="bolo-type">Type:</label>
+                    <select id="bolo-type" required>
+                        <option value="">Select Type</option>
+                        <option value="person">Person</option>
+                        <option value="vehicle">Vehicle</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bolo-title">Title:</label>
+                    <input type="text" id="bolo-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="bolo-description">Description:</label>
+                    <textarea id="bolo-description" rows="4" required></textarea>
+                </div>
+                <div class="form-group" id="bolo-plate-group" style="display:none;">
+                    <label for="bolo-plate">Vehicle Plate:</label>
+                    <input type="text" id="bolo-plate">
+                </div>
+                <div class="form-group" id="bolo-person-group" style="display:none;">
+                    <label for="bolo-person">Person ID:</label>
+                    <input type="text" id="bolo-person">
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="primary-btn">Create BOLO</button>
+                    <button type="button" class="secondary-btn modal-close">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

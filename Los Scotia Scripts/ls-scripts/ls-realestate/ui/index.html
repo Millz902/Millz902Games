@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Scotia Real Estate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="realestate-panel">
+            <div class="header">
+                <h1>Los Scotia Real Estate</h1>
+                <button id="closeBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="content">
+                <div class="property-search">
+                    <h3>Property Search</h3>
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label for="propertyType">Property Type</label>
+                            <select id="propertyType">
+                                <option value="">All Types</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="mansion">Mansion</option>
+                                <option value="business">Business</option>
+                                <option value="warehouse">Warehouse</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="priceRange">Price Range</label>
+                            <select id="priceRange">
+                                <option value="">All Prices</option>
+                                <option value="0-100000">$0 - $100,000</option>
+                                <option value="100000-500000">$100,000 - $500,000</option>
+                                <option value="500000-1000000">$500,000 - $1,000,000</option>
+                                <option value="1000000+">$1,000,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="location">Location</label>
+                            <select id="location">
+                                <option value="">All Areas</option>
+                                <option value="downtown">Downtown</option>
+                                <option value="vinewood">Vinewood</option>
+                                <option value="sandy">Sandy Shores</option>
+                                <option value="paleto">Paleto Bay</option>
+                            </select>
+                        </div>
+                        
+                        <button id="searchBtn" class="search-btn">Search</button>
+                    </div>
+                </div>
+                
+                <div class="properties-list">
+                    <h3>Available Properties</h3>
+                    <div id="propertiesList" class="properties-grid">
+                        <!-- Properties will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="property-details hidden" id="propertyDetails">
+                    <div class="details-header">
+                        <h3 id="propertyName">Property Name</h3>
+                        <button id="backToListBtn" class="back-btn">← Back to List</button>
+                    </div>
+                    
+                    <div class="details-content">
+                        <div class="property-image">
+                            <div id="propertyPreview" class="preview-box">
+                                <span>Property Preview</span>
+                            </div>
+                        </div>
+                        
+                        <div class="property-info">
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label>Price:</label>
+                                    <span id="propertyPrice" class="price">$0</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Type:</label>
+                                    <span id="propertyType">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Location:</label>
+                                    <span id="propertyLocation">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Size:</label>
+                                    <span id="propertySize">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Bedrooms:</label>
+                                    <span id="propertyBedrooms">-</span>
+                                </div>
+                                <div class="info-item">
+                                    <label>Bathrooms:</label>
+                                    <span id="propertyBathrooms">-</span>
+                                </div>
+                            </div>
+                            
+                            <div class="property-description">
+                                <h4>Description</h4>
+                                <p id="propertyDesc">No description available.</p>
+                            </div>
+                            
+                            <div class="property-actions">
+                                <button id="scheduleViewingBtn" class="action-btn secondary">Schedule Viewing</button>
+                                <button id="purchasePropertyBtn" class="action-btn primary">Purchase Property</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="my-properties">
+                    <h3>My Properties</h3>
+                    <div id="myPropertiesList" class="owned-properties">
+                        <!-- Owned properties will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

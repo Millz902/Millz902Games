@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Heists</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="heists-container" class="hidden">
+        <div class="heists-header">
+            <h1>Los Scotia Heists</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="heists-content">
+            <div class="heist-planning">
+                <h2>Heist Planning</h2>
+                <div class="heist-selector">
+                    <select id="heist-type">
+                        <option value="bank">Bank Robbery</option>
+                        <option value="jewelry">Jewelry Store</option>
+                        <option value="casino">Casino Heist</option>
+                        <option value="warehouse">Warehouse Job</option>
+                        <option value="armored">Armored Truck</option>
+                    </select>
+                </div>
+                <div class="heist-info" id="heist-info">
+                    <div class="info-item">
+                        <span class="info-label">Difficulty</span>
+                        <span class="info-value" id="heist-difficulty">Medium</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Payout</span>
+                        <span class="info-value" id="heist-payout">$50,000</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Required Players</span>
+                        <span class="info-value" id="required-players">2-4</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Cooldown</span>
+                        <span class="info-value" id="heist-cooldown">30 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="crew-management">
+                <h3>Crew Members</h3>
+                <div class="crew-list" id="crew-list">
+                    <div class="crew-member">
+                        <span class="member-name">You (Leader)</span>
+                        <span class="member-role">Mastermind</span>
+                    </div>
+                </div>
+                <div class="crew-actions">
+                    <button id="invite-btn">Invite Player</button>
+                    <button id="ready-btn">Ready Up</button>
+                </div>
+            </div>
+            <div class="heist-actions">
+                <button id="start-heist-btn" class="start-btn">Start Heist</button>
+                <button id="cancel-heist-btn" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

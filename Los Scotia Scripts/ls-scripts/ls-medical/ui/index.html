@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Medical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="medical-container" class="hidden">
+        <div class="medical-header">
+            <h1>Los Scotia Medical Center</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="medical-content">
+            <div class="patient-info">
+                <h2>Patient Information</h2>
+                <div class="patient-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Patient Name</span>
+                        <span class="detail-value" id="patient-name">Unknown</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Health Status</span>
+                        <div class="health-bar">
+                            <div class="health-fill" id="health-bar"></div>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Injuries</span>
+                        <span class="detail-value" id="injury-list">None</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Blood Type</span>
+                        <span class="detail-value" id="blood-type">O+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="medical-actions">
+                <div class="action-group">
+                    <h3>Treatment</h3>
+                    <button id="bandage-btn">Apply Bandage</button>
+                    <button id="painkiller-btn">Give Painkillers</button>
+                    <button id="surgery-btn">Perform Surgery</button>
+                    <button id="revive-btn">Revive Patient</button>
+                </div>
+                <div class="action-group">
+                    <h3>Diagnostics</h3>
+                    <button id="checkup-btn">General Checkup</button>
+                    <button id="xray-btn">X-Ray Scan</button>
+                    <button id="bloodtest-btn">Blood Test</button>
+                    <button id="mri-btn">MRI Scan</button>
+                </div>
+            </div>
+            <div class="medical-supplies">
+                <h3>Medical Supplies</h3>
+                <div class="supplies-grid">
+                    <div class="supply-item">
+                        <span class="supply-name">Bandages</span>
+                        <span class="supply-count" id="bandages-count">25</span>
+                    </div>
+                    <div class="supply-item">
+                        <span class="supply-name">Painkillers</span>
+                        <span class="supply-count" id="painkillers-count">15</span>
+                    </div>
+                    <div class="supply-item">
+                        <span class="supply-name">Morphine</span>
+                        <span class="supply-count" id="morphine-count">8</span>
+                    </div>
+                    <div class="supply-item">
+                        <span class="supply-name">Adrenaline</span>
+                        <span class="supply-count" id="adrenaline-count">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

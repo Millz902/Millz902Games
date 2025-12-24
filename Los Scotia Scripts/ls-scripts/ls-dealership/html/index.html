@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Santos Dealership</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="dealership-container" class="hidden">
+        <div class="dealership-header">
+            <div class="dealership-logo">
+                <i class="fas fa-car"></i>
+                <h1 id="dealership-name">Premium Auto Sales</h1>
+            </div>
+            <div class="close-btn" onclick="closeDealership()">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+
+        <div class="dealership-content">
+            <div class="sidebar">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="showTab('browse')">
+                        <i class="fas fa-car"></i>
+                        Browse Vehicles
+                    </button>
+                    <button class="tab-btn" onclick="showTab('finance')">
+                        <i class="fas fa-calculator"></i>
+                        Financing
+                    </button>
+                    <button class="tab-btn" onclick="showTab('tradein')">
+                        <i class="fas fa-exchange-alt"></i>
+                        Trade-In
+                    </button>
+                </div>
+
+                <div class="player-info">
+                    <div class="money-display">
+                        <div class="money-item">
+                            <i class="fas fa-wallet"></i>
+                            <span>Cash: $<span id="player-cash">0</span></span>
+                        </div>
+                        <div class="money-item">
+                            <i class="fas fa-university"></i>
+                            <span>Bank: $<span id="player-bank">0</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- Browse Tab -->
+                <div id="browse-tab" class="tab-content active">
+                    <div class="filters">
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="sports">Sports</option>
+                            <option value="super">Super</option>
+                            <option value="muscle">Muscle</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                        <select id="price-filter">
+                            <option value="">All Prices</option>
+                            <option value="0-100000">Under $100k</option>
+                            <option value="100000-500000">$100k - $500k</option>
+                            <option value="500000-1000000">$500k - $1M</option>
+                            <option value="1000000-999999999">Over $1M</option>
+                        </select>
+                    </div>
+
+                    <div class="vehicles-grid" id="vehicles-grid">
+                        <!-- Vehicles will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Finance Tab -->
+                <div id="finance-tab" class="tab-content">
+                    <div class="finance-calculator">
+                        <h3>Finance Calculator</h3>
+                        <div class="form-group">
+                            <label>Vehicle Price:</label>
+                            <input type="number" id="finance-price" placeholder="Enter vehicle price">
+                        </div>
+                        <div class="form-group">
+                            <label>Down Payment:</label>
+                            <input type="number" id="finance-down" placeholder="Minimum 10%">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Term:</label>
+                            <select id="finance-term">
+                                <option value="12">12 months</option>
+                                <option value="24">24 months</option>
+                                <option value="36">36 months</option>
+                                <option value="48">48 months</option>
+                                <option value="60">60 months</option>
+                                <option value="72">72 months</option>
+                            </select>
+                        </div>
+                        <button onclick="calculateFinance()">Calculate Payment</button>
+                        
+                        <div id="finance-results" class="finance-results hidden">
+                            <div class="result-item">
+                                <span>Monthly Payment:</span>
+                                <span id="monthly-payment">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Total Cost:</span>
+                                <span id="total-cost">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Interest Rate:</span>
+                                <span id="interest-rate">0%</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Credit Score:</span>
+                                <span id="credit-score">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trade-In Tab -->
+                <div id="tradein-tab" class="tab-content">
+                    <div class="tradein-form">
+                        <h3>Vehicle Trade-In</h3>
+                        <div class="form-group">
+                            <label>Vehicle Plate:</label>
+                            <input type="text" id="tradein-plate" placeholder="Enter license plate">
+                        </div>
+                        <button onclick="getTradeInValue()">Get Trade-In Value</button>
+                        
+                        <div id="tradein-results" class="tradein-results hidden">
+                            <div class="result-item">
+                                <span>Trade-In Value:</span>
+                                <span id="tradein-value">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehicle Details Modal -->
+    <div id="vehicle-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-vehicle-name">Vehicle Name</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="vehicle-info">
+                    <div class="info-item">
+                        <span>Price:</span>
+                        <span id="modal-vehicle-price">$0</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Category:</span>
+                        <span id="modal-vehicle-category">Unknown</span>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="test-drive-btn" onclick="startTestDrive()">
+                        <i class="fas fa-key"></i>
+                        Test Drive
+                    </button>
+                    <button class="purchase-btn" onclick="showPurchaseOptions()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Purchase
+                    </button>
+                </div>
+
+                <div id="purchase-options" class="purchase-options hidden">
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods">
+                        <button onclick="purchaseVehicle('cash')">
+                            <i class="fas fa-money-bill"></i>
+                            Cash
+                        </button>
+                        <button onclick="purchaseVehicle('bank')">
+                            <i class="fas fa-university"></i>
+                            Bank Transfer
+                        </button>
+                        <button onclick="purchaseVehicle('finance')">
+                            <i class="fas fa-calculator"></i>
+                            Finance
+                        </button>
+                    </div>
+                    
+                    <div class="tradein-option">
+                        <label>
+                            <input type="checkbox" id="use-tradein">
+                            Apply Trade-In Value
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

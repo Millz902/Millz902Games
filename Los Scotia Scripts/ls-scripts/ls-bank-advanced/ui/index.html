@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Banking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="banking-container" class="hidden">
+        <div class="banking-header">
+            <h1>Los Scotia Banking</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="banking-content">
+            <div class="account-info">
+                <h2>Account Balance</h2>
+                <div class="balance" id="bank-balance">$0</div>
+            </div>
+            <div class="banking-actions">
+                <div class="action-group">
+                    <h3>Withdraw</h3>
+                    <input type="number" id="withdraw-amount" placeholder="Amount">
+                    <button id="withdraw-btn">Withdraw</button>
+                </div>
+                <div class="action-group">
+                    <h3>Deposit</h3>
+                    <input type="number" id="deposit-amount" placeholder="Amount">
+                    <button id="deposit-btn">Deposit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

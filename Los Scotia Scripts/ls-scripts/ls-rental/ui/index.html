@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Vehicle Rental</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="rental-container" class="hidden">
+        <div class="rental-header">
+            <h1>Los Scotia Vehicle Rental</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="rental-content">
+            <div class="vehicle-selection">
+                <h2>Available Vehicles</h2>
+                <div class="vehicle-grid" id="vehicle-grid">
+                    <div class="vehicle-card" data-vehicle="blista">
+                        <div class="vehicle-image">🚗</div>
+                        <div class="vehicle-info">
+                            <h3>Blista Compact</h3>
+                            <p class="vehicle-price">$50/hour</p>
+                            <p class="vehicle-type">Economy</p>
+                        </div>
+                    </div>
+                    <div class="vehicle-card" data-vehicle="sultan">
+                        <div class="vehicle-image">🚙</div>
+                        <div class="vehicle-info">
+                            <h3>Sultan</h3>
+                            <p class="vehicle-price">$75/hour</p>
+                            <p class="vehicle-type">Sports</p>
+                        </div>
+                    </div>
+                    <div class="vehicle-card" data-vehicle="rumpo">
+                        <div class="vehicle-image">🚐</div>
+                        <div class="vehicle-info">
+                            <h3>Rumpo Van</h3>
+                            <p class="vehicle-price">$100/hour</p>
+                            <p class="vehicle-type">Commercial</p>
+                        </div>
+                    </div>
+                    <div class="vehicle-card" data-vehicle="sanchez">
+                        <div class="vehicle-image">🏍️</div>
+                        <div class="vehicle-info">
+                            <h3>Sanchez</h3>
+                            <p class="vehicle-price">$30/hour</p>
+                            <p class="vehicle-type">Motorcycle</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rental-options">
+                <h3>Rental Options</h3>
+                <div class="option-group">
+                    <label for="rental-duration">Duration (hours):</label>
+                    <select id="rental-duration">
+                        <option value="1">1 Hour</option>
+                        <option value="3">3 Hours</option>
+                        <option value="6">6 Hours</option>
+                        <option value="12">12 Hours</option>
+                        <option value="24">24 Hours</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label for="insurance-option">Insurance:</label>
+                    <input type="checkbox" id="insurance-option">
+                    <span>Full Coverage (+$20/hour)</span>
+                </div>
+                <div class="total-cost">
+                    <h3>Total Cost: <span id="total-cost">$0</span></h3>
+                </div>
+            </div>
+            <div class="rental-actions">
+                <button id="rent-btn" disabled>Rent Vehicle</button>
+                <button id="return-btn">Return Vehicle</button>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

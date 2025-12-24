@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Fire Department</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="fire-container" class="hidden">
+        <div class="fire-header">
+            <h1>Los Scotia Fire Department</h1>
+            <button id="close-btn">&times;</button>
+        </div>
+        <div class="fire-content">
+            <div class="fire-info">
+                <h2>Active Incidents</h2>
+                <div class="incidents-list" id="incidents-list">
+                    <div class="incident-item">
+                        <span class="incident-type">No Active Incidents</span>
+                        <span class="incident-status">All Clear</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fire-actions">
+                <div class="action-group">
+                    <h3>Emergency Response</h3>
+                    <button id="fire-call-btn">Respond to Fire</button>
+                    <button id="medical-call-btn">Medical Emergency</button>
+                    <button id="rescue-call-btn">Rescue Operation</button>
+                </div>
+                <div class="action-group">
+                    <h3>Equipment</h3>
+                    <button id="equipment-check-btn">Equipment Check</button>
+                    <button id="maintenance-btn">Vehicle Maintenance</button>
+                    <button id="inventory-btn">Supply Inventory</button>
+                </div>
+            </div>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">On Duty</span>
+                    <span class="status-value" id="on-duty-count">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Available Units</span>
+                    <span class="status-value" id="available-units">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Response Time</span>
+                    <span class="status-value" id="response-time">0 min</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

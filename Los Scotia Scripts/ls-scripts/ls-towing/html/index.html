@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS Towing & Recovery - Dispatch Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="towing-dispatch" class="towing-container">
+        <!-- Header -->
+        <header class="towing-header">
+            <div class="header-content">
+                <div class="company-logo">
+                    <i class="fas fa-truck"></i>
+                    <h1>LS Towing & Recovery</h1>
+                </div>
+                <div class="header-info">
+                    <div class="shift-status" id="shift-status">
+                        <span class="status-indicator online"></span>
+                        <span>Online</span>
+                    </div>
+                    <div class="current-time" id="current-time"></div>
+                    <div class="dispatcher-info">
+                        <span id="dispatcher-name">Dispatcher</span>
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="towing-main">
+            <!-- Navigation Tabs -->
+            <nav class="towing-nav">
+                <button class="nav-tab active" data-tab="dispatch" onclick="showTab('dispatch')">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Dispatch</span>
+                </button>
+                <button class="nav-tab" data-tab="tow-trucks" onclick="showTab('tow-trucks')">
+                    <i class="fas fa-truck"></i>
+                    <span>Tow Trucks</span>
+                </button>
+                <button class="nav-tab" data-tab="drivers" onclick="showTab('drivers')">
+                    <i class="fas fa-users"></i>
+                    <span>Drivers</span>
+                </button>
+                <button class="nav-tab" data-tab="impound" onclick="showTab('impound')">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Impound Lot</span>
+                </button>
+                <button class="nav-tab" data-tab="jobs" onclick="showTab('jobs')">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Jobs</span>
+                </button>
+                <button class="nav-tab" data-tab="billing" onclick="showTab('billing')">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Billing</span>
+                </button>
+                <button class="nav-tab" data-tab="settings" onclick="showTab('settings')">
+                    <i class="fas fa-cogs"></i>
+                    <span>Settings</span>
+                </button>
+            </nav>
+
+            <!-- Content Areas -->
+            <div class="content-wrapper">
+                <!-- Dispatch Tab -->
+                <div id="dispatch-tab" class="tab-content active">
+                    <div class="dispatch-header">
+                        <h2><i class="fas fa-phone-alt"></i> Towing Dispatch</h2>
+                        <div class="dispatch-stats">
+                            <div class="stat-card">
+                                <div class="stat-value" id="active-jobs">8</div>
+                                <div class="stat-label">Active Jobs</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="available-trucks">5</div>
+                                <div class="stat-label">Available Trucks</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="avg-response-time">12.5</div>
+                                <div class="stat-label">Avg Response (min)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dispatch-layout">
+                        <!-- Live Map -->
+                        <div class="map-section">
+                            <div class="map-header">
+                                <h3><i class="fas fa-map"></i> Live Fleet Tracking</h3>
+                                <div class="map-controls">
+                                    <button class="map-btn" onclick="centerMap()">
+                                        <i class="fas fa-crosshairs"></i> Center
+                                    </button>
+                                    <button class="map-btn" onclick="refreshMap()">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                    <button class="map-btn" onclick="toggleTraffic()">
+                                        <i class="fas fa-road"></i> Traffic
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="map-container">
+                                <div class="map-placeholder">
+                                    <div class="map-overlay">
+                                        <div class="truck-marker available" style="top: 25%; left: 30%;">
+                                            <i class="fas fa-truck"></i>
+                                            <span class="truck-info">Tow-01</span>
+                                        </div>
+                                        <div class="truck-marker busy" style="top: 60%; left: 70%;">
+                                            <i class="fas fa-truck"></i>
+                                            <span class="truck-info">Tow-03</span>
+                                        </div>
+                                        <div class="incident-marker" style="top: 45%; left: 55%;">
+                                            <i class="fas fa-car-crash"></i>
+                                            <span class="incident-info">Breakdown</span>
+                                        </div>
+                                        <div class="impound-marker" style="top: 80%; left: 20%;">
+                                            <i class="fas fa-warehouse"></i>
+                                            <span class="impound-info">Impound Lot</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="map-legend">
+                                <div class="legend-item">
+                                    <span class="legend-marker available"></span>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker busy"></span>
+                                    <span>On Job</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker maintenance"></span>
+                                    <span>Maintenance</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-marker incident"></span>
+                                    <span>Incident</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Queue -->
+                        <div class="job-section">
+                            <div class="job-header">
+                                <h3><i class="fas fa-list"></i> Job Queue</h3>
+                                <button class="action-btn primary" onclick="newTowingJob()">
+                                    <i class="fas fa-plus"></i> New Job
+                                </button>
+                            </div>
+                            <div class="job-queue" id="job-queue">
+                                <div class="job-item urgent">
+                                    <div class="job-priority">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <span>URGENT</span>
+                                    </div>
+                                    <div class="job-details">
+                                        <div class="job-type">Vehicle Breakdown</div>
+                                        <div class="job-location">Highway 15, Mile Marker 23</div>
+                                        <div class="job-time">Requested: 14:45</div>
+                                        <div class="job-customer">AAA Insurance</div>
+                                        <div class="job-vehicle">2020 Honda Accord (Plate: ABC123)</div>
+                                    </div>
+                                    <div class="job-actions">
+                                        <button class="assign-btn" onclick="assignTruck('JOB-001')">
+                                            <i class="fas fa-truck"></i> Assign
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="job-item normal">
+                                    <div class="job-priority">
+                                        <i class="fas fa-clock"></i>
+                                        <span>NORMAL</span>
+                                    </div>
+                                    <div class="job-details">
+                                        <div class="job-type">Parking Violation</div>
+                                        <div class="job-location">Main Street & 2nd Ave</div>
+                                        <div class="job-time">Requested: 14:50</div>
+                                        <div class="job-customer">LSPD</div>
+                                        <div class="job-vehicle">2018 Ford Focus (Plate: XYZ789)</div>
+                                    </div>
+                                    <div class="job-actions">
+                                        <button class="assign-btn" onclick="assignTruck('JOB-002')">
+                                            <i class="fas fa-truck"></i> Assign
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="job-item scheduled">
+                                    <div class="job-priority">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>SCHEDULED</span>
+                                    </div>
+                                    <div class="job-details">
+                                        <div class="job-type">Repo Recovery</div>
+                                        <div class="job-location">456 Oak Street</div>
+                                        <div class="job-time">Scheduled: 16:00</div>
+                                        <div class="job-customer">City Bank</div>
+                                        <div class="job-vehicle">2019 Chevrolet Malibu (Plate: DEF456)</div>
+                                    </div>
+                                    <div class="job-actions">
+                                        <button class="assign-btn" onclick="assignTruck('JOB-003')">
+                                            <i class="fas fa-calendar-plus"></i> Schedule
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="job-item emergency">
+                                    <div class="job-priority">
+                                        <i class="fas fa-ambulance"></i>
+                                        <span>EMERGENCY</span>
+                                    </div>
+                                    <div class="job-details">
+                                        <div class="job-type">Accident Recovery</div>
+                                        <div class="job-location">Interstate 5, Exit 42</div>
+                                        <div class="job-time">Requested: 14:52</div>
+                                        <div class="job-customer">Emergency Services</div>
+                                        <div class="job-vehicle">Multi-vehicle accident</div>
+                                    </div>
+                                    <div class="job-actions">
+                                        <button class="assign-btn emergency" onclick="emergencyDispatch('JOB-004')">
+                                            <i class="fas fa-exclamation-circle"></i> Emergency
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tow Trucks Tab -->
+                <div id="tow-trucks-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-truck"></i> Fleet Management</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="addTruck()">
+                                <i class="fas fa-plus"></i> Add Truck
+                            </button>
+                            <button class="action-btn secondary" onclick="maintenanceSchedule()">
+                                <i class="fas fa-wrench"></i> Maintenance
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="trucks-content">
+                        <!-- Truck Stats -->
+                        <div class="truck-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">12</div>
+                                    <div class="stat-label">Total Fleet</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-road"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">8</div>
+                                    <div class="stat-label">In Service</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">Maintenance</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">Out of Service</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Truck Grid -->
+                        <div class="trucks-grid" id="trucks-grid">
+                            <div class="truck-card available">
+                                <div class="truck-header">
+                                    <div class="truck-image">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="truck-info">
+                                        <h4>Tow Truck #01</h4>
+                                        <span class="truck-id">TOW-001</span>
+                                        <span class="truck-type">Heavy Duty</span>
+                                    </div>
+                                    <div class="truck-status available">
+                                        <i class="fas fa-circle"></i>
+                                        <span>Available</span>
+                                    </div>
+                                </div>
+                                <div class="truck-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Driver:</span>
+                                        <span class="detail-value">Mike Johnson</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Capacity:</span>
+                                        <span class="detail-value">15,000 lbs</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Location:</span>
+                                        <span class="detail-value">Downtown Depot</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Today's Jobs:</span>
+                                        <span class="detail-value">4</span>
+                                    </div>
+                                </div>
+                                <div class="truck-actions">
+                                    <button class="action-btn small" onclick="viewTruck('TOW-001')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="action-btn small" onclick="trackTruck('TOW-001')">
+                                        <i class="fas fa-map-marker-alt"></i> Track
+                                    </button>
+                                    <button class="action-btn small" onclick="contactDriver('TOW-001')">
+                                        <i class="fas fa-phone"></i> Call
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="truck-card busy">
+                                <div class="truck-header">
+                                    <div class="truck-image">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="truck-info">
+                                        <h4>Tow Truck #03</h4>
+                                        <span class="truck-id">TOW-003</span>
+                                        <span class="truck-type">Medium Duty</span>
+                                    </div>
+                                    <div class="truck-status busy">
+                                        <i class="fas fa-circle"></i>
+                                        <span>On Job</span>
+                                    </div>
+                                </div>
+                                <div class="truck-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Driver:</span>
+                                        <span class="detail-value">Sarah Wilson</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Capacity:</span>
+                                        <span class="detail-value">8,000 lbs</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Current Job:</span>
+                                        <span class="detail-value">Highway Breakdown</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">ETA:</span>
+                                        <span class="detail-value">15 min</span>
+                                    </div>
+                                </div>
+                                <div class="truck-actions">
+                                    <button class="action-btn small" onclick="viewTruck('TOW-003')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="action-btn small" onclick="trackJob('TOW-003')">
+                                        <i class="fas fa-route"></i> Track Job
+                                    </button>
+                                    <button class="action-btn small danger" onclick="emergencyContact('TOW-003')">
+                                        <i class="fas fa-exclamation-triangle"></i> Emergency
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="truck-card maintenance">
+                                <div class="truck-header">
+                                    <div class="truck-image">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="truck-info">
+                                        <h4>Tow Truck #05</h4>
+                                        <span class="truck-id">TOW-005</span>
+                                        <span class="truck-type">Light Duty</span>
+                                    </div>
+                                    <div class="truck-status maintenance">
+                                        <i class="fas fa-circle"></i>
+                                        <span>Maintenance</span>
+                                    </div>
+                                </div>
+                                <div class="truck-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Driver:</span>
+                                        <span class="detail-value">Unassigned</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Capacity:</span>
+                                        <span class="detail-value">5,000 lbs</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Service Type:</span>
+                                        <span class="detail-value">Engine Repair</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Est. Completion:</span>
+                                        <span class="detail-value">Tomorrow</span>
+                                    </div>
+                                </div>
+                                <div class="truck-actions">
+                                    <button class="action-btn small" onclick="viewTruck('TOW-005')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="action-btn small" onclick="maintenanceStatus('TOW-005')">
+                                        <i class="fas fa-wrench"></i> Status
+                                    </button>
+                                    <button class="action-btn small" onclick="scheduleService('TOW-005')">
+                                        <i class="fas fa-calendar"></i> Schedule
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drivers Tab -->
+                <div id="drivers-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Driver Management</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="addDriver()">
+                                <i class="fas fa-user-plus"></i> Add Driver
+                            </button>
+                            <button class="action-btn secondary" onclick="driverSchedule()">
+                                <i class="fas fa-calendar"></i> Schedule
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="drivers-content">
+                        <!-- Driver Filters -->
+                        <div class="filter-section">
+                            <div class="filter-group">
+                                <label for="driver-status-filter">Status:</label>
+                                <select id="driver-status-filter" onchange="filterDrivers()">
+                                    <option value="all">All Drivers</option>
+                                    <option value="online">Online</option>
+                                    <option value="offline">Offline</option>
+                                    <option value="busy">On Job</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="license-filter">License Type:</label>
+                                <select id="license-filter" onchange="filterDrivers()">
+                                    <option value="all">All Licenses</option>
+                                    <option value="cdl-a">CDL Class A</option>
+                                    <option value="cdl-b">CDL Class B</option>
+                                    <option value="regular">Regular</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <input type="text" id="driver-search" placeholder="Search drivers..." onkeyup="searchDrivers()">
+                            </div>
+                        </div>
+
+                        <!-- Drivers Table -->
+                        <div class="drivers-table-container">
+                            <table class="drivers-table">
+                                <thead>
+                                    <tr>
+                                        <th>Driver</th>
+                                        <th>Status</th>
+                                        <th>Truck</th>
+                                        <th>License Type</th>
+                                        <th>Today's Jobs</th>
+                                        <th>Earnings</th>
+                                        <th>Rating</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="drivers-tbody">
+                                    <tr>
+                                        <td>
+                                            <div class="driver-info">
+                                                <i class="fas fa-user-circle driver-avatar"></i>
+                                                <div>
+                                                    <strong>Mike Johnson</strong>
+                                                    <small>ID: DRV-001</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge online">Online</span></td>
+                                        <td>Tow Truck #01</td>
+                                        <td>CDL Class A</td>
+                                        <td>4</td>
+                                        <td>$380.00</td>
+                                        <td>4.8 ⭐</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewDriver('DRV-001')">View</button>
+                                            <button class="action-btn small" onclick="contactDriver('DRV-001')">Call</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="driver-info">
+                                                <i class="fas fa-user-circle driver-avatar"></i>
+                                                <div>
+                                                    <strong>Sarah Wilson</strong>
+                                                    <small>ID: DRV-003</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge busy">On Job</span></td>
+                                        <td>Tow Truck #03</td>
+                                        <td>CDL Class B</td>
+                                        <td>3</td>
+                                        <td>$295.00</td>
+                                        <td>4.9 ⭐</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewDriver('DRV-003')">View</button>
+                                            <button class="action-btn small" onclick="trackDriver('DRV-003')">Track</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="driver-info">
+                                                <i class="fas fa-user-circle driver-avatar"></i>
+                                                <div>
+                                                    <strong>David Martinez</strong>
+                                                    <small>ID: DRV-005</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge offline">Offline</span></td>
+                                        <td>Tow Truck #05</td>
+                                        <td>CDL Class A</td>
+                                        <td>0</td>
+                                        <td>$0.00</td>
+                                        <td>4.7 ⭐</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewDriver('DRV-005')">View</button>
+                                            <button class="action-btn small" onclick="contactDriver('DRV-005')">Call</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impound Lot Tab -->
+                <div id="impound-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-warehouse"></i> Impound Lot Management</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="addImpoundVehicle()">
+                                <i class="fas fa-car"></i> Add Vehicle
+                            </button>
+                            <button class="action-btn secondary" onclick="generateImpoundReport()">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="impound-content">
+                        <!-- Impound Stats -->
+                        <div class="impound-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">47</div>
+                                    <div class="stat-label">Total Vehicles</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar-day"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">8</div>
+                                    <div class="stat-label">Today's Intake</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">$12,450</div>
+                                    <div class="stat-label">Daily Revenue</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">3</div>
+                                    <div class="stat-label">Overdue</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Search and Filters -->
+                        <div class="impound-filters">
+                            <div class="filter-group">
+                                <input type="text" id="impound-search" placeholder="Search by plate, make, model..." onkeyup="searchImpoundVehicles()">
+                            </div>
+                            <div class="filter-group">
+                                <select id="impound-status-filter" onchange="filterImpoundVehicles()">
+                                    <option value="all">All Status</option>
+                                    <option value="impounded">Impounded</option>
+                                    <option value="released">Released</option>
+                                    <option value="auction">For Auction</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <select id="impound-reason-filter" onchange="filterImpoundVehicles()">
+                                    <option value="all">All Reasons</option>
+                                    <option value="parking">Parking Violation</option>
+                                    <option value="abandoned">Abandoned</option>
+                                    <option value="accident">Accident</option>
+                                    <option value="repo">Repossession</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Impounded Vehicles Table -->
+                        <div class="impound-table-container">
+                            <table class="impound-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle Info</th>
+                                        <th>License Plate</th>
+                                        <th>Owner</th>
+                                        <th>Reason</th>
+                                        <th>Impound Date</th>
+                                        <th>Fees</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="impound-tbody">
+                                    <tr>
+                                        <td>
+                                            <div class="vehicle-info">
+                                                <strong>2020 Honda Accord</strong>
+                                                <small>Silver | VIN: 1HGCV1F3XLA123456</small>
+                                            </div>
+                                        </td>
+                                        <td>ABC123</td>
+                                        <td>John Smith</td>
+                                        <td>Parking Violation</td>
+                                        <td>2025-09-20</td>
+                                        <td>$185.00</td>
+                                        <td><span class="status-badge impounded">Impounded</span></td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewImpoundVehicle('IMP-001')">View</button>
+                                            <button class="action-btn small success" onclick="releaseVehicle('IMP-001')">Release</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="vehicle-info">
+                                                <strong>2018 Ford Focus</strong>
+                                                <small>Blue | VIN: 1FADP3F2XJL123456</small>
+                                            </div>
+                                        </td>
+                                        <td>XYZ789</td>
+                                        <td>Jane Doe</td>
+                                        <td>Abandoned</td>
+                                        <td>2025-09-18</td>
+                                        <td>$350.00</td>
+                                        <td><span class="status-badge impounded">Impounded</span></td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewImpoundVehicle('IMP-002')">View</button>
+                                            <button class="action-btn small warning" onclick="markForAuction('IMP-002')">Auction</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="vehicle-info">
+                                                <strong>2019 Chevrolet Malibu</strong>
+                                                <small>Black | VIN: 1G1ZD5ST8KF123456</small>
+                                            </div>
+                                        </td>
+                                        <td>DEF456</td>
+                                        <td>City Bank</td>
+                                        <td>Repossession</td>
+                                        <td>2025-09-21</td>
+                                        <td>$0.00</td>
+                                        <td><span class="status-badge auction">For Auction</span></td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewImpoundVehicle('IMP-003')">View</button>
+                                            <button class="action-btn small" onclick="auctionVehicle('IMP-003')">Auction</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jobs Tab -->
+                <div id="jobs-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-clipboard-list"></i> Job History & Analytics</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="exportJobs()">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            <button class="action-btn secondary" onclick="generateJobReport()">
+                                <i class="fas fa-chart-bar"></i> Generate Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="jobs-content">
+                        <!-- Job Filters -->
+                        <div class="job-filters">
+                            <div class="filter-group">
+                                <label for="job-date-from">From:</label>
+                                <input type="date" id="job-date-from" onchange="filterJobs()">
+                            </div>
+                            <div class="filter-group">
+                                <label for="job-date-to">To:</label>
+                                <input type="date" id="job-date-to" onchange="filterJobs()">
+                            </div>
+                            <div class="filter-group">
+                                <label for="job-status-filter">Status:</label>
+                                <select id="job-status-filter" onchange="filterJobs()">
+                                    <option value="all">All Jobs</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="in-progress">In Progress</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <input type="text" id="job-search" placeholder="Search jobs..." onkeyup="searchJobs()">
+                            </div>
+                        </div>
+
+                        <!-- Job Statistics -->
+                        <div class="job-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">23</div>
+                                    <div class="stat-label">Jobs Today</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">$4,680</div>
+                                    <div class="stat-label">Revenue Today</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">12.5</div>
+                                    <div class="stat-label">Avg Response Time</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-value">96%</div>
+                                    <div class="stat-label">Success Rate</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Jobs History Table -->
+                        <div class="jobs-table-container">
+                            <table class="jobs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Job ID</th>
+                                        <th>Type</th>
+                                        <th>Customer</th>
+                                        <th>Driver</th>
+                                        <th>Location</th>
+                                        <th>Vehicle</th>
+                                        <th>Fee</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="jobs-tbody">
+                                    <tr>
+                                        <td>JOB-240921-001</td>
+                                        <td>Breakdown</td>
+                                        <td>AAA Insurance</td>
+                                        <td>Mike Johnson</td>
+                                        <td>Highway 15</td>
+                                        <td>Honda Accord</td>
+                                        <td>$125.00</td>
+                                        <td><span class="status-badge completed">Completed</span></td>
+                                        <td>14:45 - 15:30</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewJob('JOB-240921-001')">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>JOB-240921-002</td>
+                                        <td>Parking</td>
+                                        <td>LSPD</td>
+                                        <td>Sarah Wilson</td>
+                                        <td>Main Street</td>
+                                        <td>Ford Focus</td>
+                                        <td>$85.00</td>
+                                        <td><span class="status-badge in-progress">In Progress</span></td>
+                                        <td>15:20 - </td>
+                                        <td>
+                                            <button class="action-btn small" onclick="trackJob('JOB-240921-002')">Track</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>JOB-240921-003</td>
+                                        <td>Accident</td>
+                                        <td>Emergency Services</td>
+                                        <td>David Martinez</td>
+                                        <td>Interstate 5</td>
+                                        <td>Multiple</td>
+                                        <td>$450.00</td>
+                                        <td><span class="status-badge completed">Completed</span></td>
+                                        <td>13:15 - 16:00</td>
+                                        <td>
+                                            <button class="action-btn small" onclick="viewJob('JOB-240921-003')">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Tab -->
+                <div id="billing-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-dollar-sign"></i> Financial Management</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="generateInvoice()">
+                                <i class="fas fa-file-invoice"></i> New Invoice
+                            </button>
+                            <button class="action-btn secondary" onclick="processPayments()">
+                                <i class="fas fa-credit-card"></i> Process Payments
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="billing-content">
+                        <!-- Financial Summary -->
+                        <div class="financial-summary">
+                            <div class="summary-card revenue">
+                                <div class="summary-header">
+                                    <h3>Today's Revenue</h3>
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="summary-amount">$4,680.00</div>
+                                <div class="summary-change positive">+18.5% from yesterday</div>
+                            </div>
+                            <div class="summary-card expenses">
+                                <div class="summary-header">
+                                    <h3>Operating Costs</h3>
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <div class="summary-amount">$1,240.00</div>
+                                <div class="summary-change negative">+5.2% from yesterday</div>
+                            </div>
+                            <div class="summary-card profit">
+                                <div class="summary-header">
+                                    <h3>Net Profit</h3>
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="summary-amount">$3,440.00</div>
+                                <div class="summary-change positive">+22.1% from yesterday</div>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Chart -->
+                        <div class="revenue-chart">
+                            <h3><i class="fas fa-chart-bar"></i> Revenue Trend (Last 7 Days)</h3>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <div class="chart-bars">
+                                        <div class="chart-bar" style="height: 60%;">
+                                            <div class="bar-value">$3,245</div>
+                                            <div class="bar-label">Mon</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 75%;">
+                                            <div class="bar-value">$4,120</div>
+                                            <div class="bar-label">Tue</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 55%;">
+                                            <div class="bar-value">$2,890</div>
+                                            <div class="bar-label">Wed</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 80%;">
+                                            <div class="bar-value">$4,560</div>
+                                            <div class="bar-label">Thu</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 90%;">
+                                            <div class="bar-value">$5,125</div>
+                                            <div class="bar-label">Fri</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 85%;">
+                                            <div class="bar-value">$4,780</div>
+                                            <div class="bar-label">Sat</div>
+                                        </div>
+                                        <div class="chart-bar" style="height: 82%;">
+                                            <div class="bar-value">$4,680</div>
+                                            <div class="bar-label">Sun</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Outstanding Invoices -->
+                        <div class="outstanding-invoices">
+                            <h3><i class="fas fa-file-invoice-dollar"></i> Outstanding Invoices</h3>
+                            <div class="invoices-table-container">
+                                <table class="invoices-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice #</th>
+                                            <th>Customer</th>
+                                            <th>Service</th>
+                                            <th>Amount</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>INV-240920-001</td>
+                                            <td>AAA Insurance</td>
+                                            <td>Highway Breakdown</td>
+                                            <td>$125.00</td>
+                                            <td>2025-10-05</td>
+                                            <td><span class="status-badge pending">Pending</span></td>
+                                            <td>
+                                                <button class="action-btn small" onclick="viewInvoice('INV-240920-001')">View</button>
+                                                <button class="action-btn small success" onclick="markPaid('INV-240920-001')">Mark Paid</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>INV-240920-002</td>
+                                            <td>LSPD</td>
+                                            <td>Parking Violation Tow</td>
+                                            <td>$85.00</td>
+                                            <td>2025-09-25</td>
+                                            <td><span class="status-badge overdue">Overdue</span></td>
+                                            <td>
+                                                <button class="action-btn small" onclick="viewInvoice('INV-240920-002')">View</button>
+                                                <button class="action-btn small warning" onclick="sendReminder('INV-240920-002')">Remind</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cogs"></i> System Settings</h2>
+                        <div class="section-actions">
+                            <button class="action-btn primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                            <button class="action-btn secondary" onclick="resetSettings()">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-content">
+                        <div class="settings-sections">
+                            <!-- Dispatch Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-phone-alt"></i> Dispatch Settings</h3>
+                                <div class="setting-group">
+                                    <label for="auto-assign-trucks">Auto-assign trucks:</label>
+                                    <input type="checkbox" id="auto-assign-trucks" checked>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="max-response-time">Max response time (minutes):</label>
+                                    <input type="number" id="max-response-time" value="20" min="5" max="60">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="emergency-contacts">Emergency contacts:</label>
+                                    <textarea id="emergency-contacts" placeholder="Police: 911, Fire: 911, Medical: 911"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Pricing Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-dollar-sign"></i> Pricing Settings</h3>
+                                <div class="setting-group">
+                                    <label for="base-tow-fee">Base tow fee:</label>
+                                    <input type="number" id="base-tow-fee" value="85.00" step="5.00" min="0">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="per-mile-rate">Per mile rate:</label>
+                                    <input type="number" id="per-mile-rate" value="3.50" step="0.25" min="0">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="storage-daily-fee">Daily storage fee:</label>
+                                    <input type="number" id="storage-daily-fee" value="25.00" step="5.00" min="0">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="heavy-duty-multiplier">Heavy duty multiplier:</label>
+                                    <input type="number" id="heavy-duty-multiplier" value="1.5" step="0.1" min="1">
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                                <div class="setting-group">
+                                    <label for="sms-notifications">SMS notifications:</label>
+                                    <input type="checkbox" id="sms-notifications" checked>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="email-reports">Email reports:</label>
+                                    <input type="checkbox" id="email-reports" checked>
+                                </div>
+                                <div class="setting-group">
+                                    <label for="driver-alerts">Driver alerts:</label>
+                                    <input type="checkbox" id="driver-alerts" checked>
+                                </div>
+                            </div>
+
+                            <!-- System Settings -->
+                            <div class="settings-section">
+                                <h3><i class="fas fa-server"></i> System Settings</h3>
+                                <div class="setting-group">
+                                    <label for="backup-frequency">Backup frequency (hours):</label>
+                                    <input type="number" id="backup-frequency" value="12" min="1" max="24">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="log-retention">Log retention (days):</label>
+                                    <input type="number" id="log-retention" value="90" min="7" max="365">
+                                </div>
+                                <div class="setting-group">
+                                    <label for="gps-update-interval">GPS update interval (seconds):</label>
+                                    <input type="number" id="gps-update-interval" value="30" min="10" max="300">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="towing-footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 LS Towing & Recovery. All rights reserved.</p>
+                    <p>Dispatch Management System v2.8</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" onclick="showHelp()">Help</a>
+                    <a href="#" onclick="showAbout()">About</a>
+                    <a href="#" onclick="contactSupport()">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                Modal content goes here
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn primary" id="modal-confirm" onclick="confirmModal()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
