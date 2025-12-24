@@ -1,0 +1,38 @@
+﻿# Keep text files consistent in git (LF), even on Windows
+* text=auto eol=lf
+
+# Explicit text types
+*.lua  text eol=lf
+*.js   text eol=lf
+*.ts   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.cfg  text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.html text eol=lf
+*.css  text eol=lf
+*.scss text eol=lf
+*.xml  text eol=lf
+
+# Treat common game/binary assets as binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.svg  binary
+*.mp3  binary
+*.ogg  binary
+*.wav  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.gfx  binary
+*.ytd  binary
+*.ydd  binary
+*.yft  binary
+*.awc  binary
+*.rpf  binary

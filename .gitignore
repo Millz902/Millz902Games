@@ -1,0 +1,24 @@
+﻿# OS / editor junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# Node / tooling (keep built assets that ship with resources)
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files (avoid accidental secrets)
+.env
+.env.*
+
+# Temp
+*.tmp
+*.temp
